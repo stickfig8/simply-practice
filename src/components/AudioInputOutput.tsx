@@ -14,9 +14,21 @@ export default function AudioInputOutput() {
         setDevices(list);
     }
 
-    async function updateDevices() {
-        const list
+    async function handleDeviceChange() {
+        const updatedList = await navigator.mediaDevices.enumerateDevices();
+        setDevices(updatedList);
+
+        const inputStillValid = updatedList.some(
+            (device) => device.kind === "audioinput" && device.deviceId === inputId
+        );
+
+        if(!inputStillValid) {
+            setInputId(null);
+            setChannel(0);
+            setChannelCount(1);
+        }
     }
+    
     function cleanup() {
         if(audioCtxRef.current) {
             audioCtxRef.current.close();
@@ -68,6 +80,12 @@ export default function AudioInputOutput() {
             setChannel(0);
             connectAudio(inputId, 0);
         }
+        
+        navigator.mediaDevices.addEventListener("devicechange", handleDeviceChange);
+        return () => {
+            navigator.mediaDevices.removeEventListener("devicechange", handleDeviceChange);
+        }
+
     }, [inputId]);
 
     useEffect(() => { // 채널 바뀌면
