@@ -8,6 +8,8 @@ export default function AudioInputOutput() {
 
     const audioCtxRef = useRef<AudioContext | null>(null);
     const streamRef = useRef<MediaStream | null>(null);
+    const gainRef = useRef<GainNode | null>(null);
+    const mergerRef = useRef<ChannelMergerNode | null>(null);
 
     async function getDevices() {
         const list = await navigator.mediaDevices.enumerateDevices();
@@ -28,7 +30,7 @@ export default function AudioInputOutput() {
             setChannelCount(1);
         }
     }
-    
+
     function cleanup() {
         if(audioCtxRef.current) {
             audioCtxRef.current.close();
@@ -61,13 +63,21 @@ export default function AudioInputOutput() {
         const newChannelCount = source.channelCount;
         setChannelCount(newChannelCount);
 
+        const gainNode = ctx.createGain();
         const splitter = ctx.createChannelSplitter(newChannelCount);
         const merger = ctx.createChannelMerger(2);
+        mergerRef.current = merger;
 
         source.connect(splitter);
+        
+        gainNode.gain.value = 0.5;
+        gainRef.current = gainNode;
 
-        splitter.connect(merger, channel, 0);
-        splitter.connect(merger, channel, 1);
+        splitter.connect(gainNode, channel);
+        
+
+        gainNode.connect(merger, 0, 0);
+        gainNode.connect(merger, 0, 1);
         merger.connect(ctx.destination);
     }
 
@@ -93,56 +103,6 @@ export default function AudioInputOutput() {
             connectAudio(inputId, channel);
         }
     }, [channel]);
-
-    // const audioCtx = new AudioContext({
-    //         latencyHint: "interactive",
-    //         sampleRate: 48000,
-    // });
-
-    // async function createStream() : Promise<MediaStream> {
-    //     const stream = await navigator.mediaDevices.getUserMedia({audio : { // 기본 디바이스
-    //             echoCancellation: false,
-    //             autoGainControl: false,
-    //             noiseSuppression: false,}
-    //     });
-    //     streamRef.current = stream;
-
-    //     const list = await navigator.mediaDevices.enumerateDevices();
-    //     setDevices(list);
-    //     return stream;
-    // }
-
-    // async function initContext() {
-    //     const stream = await createStream();
-    //     if(audioCtx.state === 'suspended') {
-    //         await audioCtx.resume();
-    //     }
-
-    //     const source = audioCtx.createMediaStreamSource(stream);
-    //     sourceRef.current = source;
-
-    //     setChannelCount(source.channelCount);
-
-    //     const splitter = audioCtx.createChannelSplitter(channelCount);
-    //     const merger = audioCtx.createChannelMerger(2);
-
-    //     source.connect(splitter);
-
-    //     splitter.connect(merger, channel, 0);
-    //     splitter.connect(merger, channel, 1);
-        
-    //     merger.connect(audioCtx.destination);
-    // }
-
-    // useEffect(() => { // 권한요청 + 장치목록 불러오기
-    //     createStream();
-    //     initContext();
-    // }, []);
-
-    
-    // useEffect(() => { // 장치나 채널 변경
-        
-    // }, [inputId, channel])
 
     const inputDevices = devices.filter((device) => device.kind === "audioinput");
 
@@ -172,10 +132,24 @@ export default function AudioInputOutput() {
                 </select>
             </div>
 
+            <input
+                type="range"
+                min="0"
+                max="1.2"
+                step="0.01"
+                defaultValue="0.5"
+                onChange={(e) => {
+                    const value = parseFloat(e.target.value);
+                    if (gainRef.current) {
+                        gainRef.current.gain.setTargetAtTime(value, audioCtxRef.current!.currentTime, 0.01);
+                    }
+                }}
+            />
             <p className="text-sm text-gray-500">
                 input & output select test
             </p>
         </div>
+
     );
 
     
