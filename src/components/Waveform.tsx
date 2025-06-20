@@ -1,9 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import WaveSurfer from "wavesurfer.js";
-import MusicTempo from "music-tempo";
-//import { EssentiaWASM } from 'essentia.js/dist/essentia-wasm.es.js';
-//import { Essentia } from 'essentia.js/dist/essentia.js-core.es.js';
-
+import { analyze } from "web-audio-beat-detector";
 
 export default function Waveform() {
     const containerRef = useRef<HTMLDivElement | null>(null);
@@ -31,43 +28,10 @@ export default function Waveform() {
 
     async function analyzeBPM(file:File) {
         const arrayBuffer = await file.arrayBuffer();
-        const ctx = new OfflineAudioContext(1, 44100 * 40, 44100);
-        const audioBuffer = await ctx.decodeAudioData(arrayBuffer);
-
-        const rawData = audioBuffer.getChannelData(0);
-        const samples = [];
-
-        const interval = 1024;
-
-        for(let i = 0; i < rawData.length; i += interval) {
-            let sum = 0;
-            for(let j = 0; j < interval; j++) {
-                sum += Math.abs(rawData[i + j] || 0);
-            }
-            samples.push(sum);
-        }
-
-        const mt = new MusicTempo(samples);
-        
-        setBpm(mt.tempo);
-        
-        
-        // const wasm = await EssentiaWASM();
-        // const essentia = new Essentia(wasm);
-
-        // const arrayBuffer = await file.arrayBuffer();
-        // const audioCtx = new AudioContext();
-        // const audioBuffer = await audioCtx.decodeAudioData(arrayBuffer);
-
-        // const channelData = audioBuffer.getChannelData(0);
-        // const audioVector = essentia.arrayToVector(channelData);
-
-        // const result = essentia.RhythmExtractor2013(audioVector, audioBuffer.sampleRate);
-        // console.log("test: ", result);
-        // const bpm = result.bpm;
-        
-        // setBpm(bpm);
-
+        const audioContext = new AudioContext();
+        const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+        const tempo = await analyze(audioBuffer);
+        setBpm(tempo);
     }
 
     function handleFileChange(e:React.ChangeEvent<HTMLInputElement>) {

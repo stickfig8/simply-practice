@@ -11,9 +11,21 @@ export default function AudioInputOutput() {
     const gainRef = useRef<GainNode | null>(null);
     const mergerRef = useRef<ChannelMergerNode | null>(null);
 
+
     async function getDevices() {
-        const list = await navigator.mediaDevices.enumerateDevices();
-        setDevices(list);
+        await navigator.mediaDevices.getUserMedia({audio: true});
+
+        const devices = await navigator.mediaDevices.enumerateDevices();
+        const inputDevices = devices.filter((device) => {return device.kind === 'audioinput'});
+        setDevices(inputDevices);
+
+        const defaultDevice = devices.find((device) => {return device.deviceId === 'default'});
+        
+        if(defaultDevice) {
+            setInputId(defaultDevice.deviceId);
+        } else if (inputDevices.length > 0){
+            setInputId(inputDevices[0].deviceId);
+        }
     }
 
     async function handleDeviceChange() {
@@ -75,14 +87,13 @@ export default function AudioInputOutput() {
 
         splitter.connect(gainNode, channel);
         
-
         gainNode.connect(merger, 0, 0);
         gainNode.connect(merger, 0, 1);
         merger.connect(ctx.destination);
     }
 
     useEffect(() => {
-        navigator.mediaDevices.getUserMedia({audio: true}).then(getDevices);
+        getDevices();
     }, []);
 
     useEffect(() => { // 인풋 바뀌면
