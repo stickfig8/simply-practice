@@ -13,6 +13,7 @@
     "@tailwindcss/vite": "^4.1.10",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "tone": "^15.1.22",
     "wavesurfer.js": "^7.9.5",
     "web-audio-beat-detector": "^8.2.29"
   },

@@ -123,7 +123,7 @@ export default function AudioInputOutput() {
 
             <div>
                 <label>input : </label>
-                <select onChange={(e) => setInputId(e.target.value)} className="ml-2">
+                <select value={inputId ?? ""} onChange={(e) => setInputId(e.target.value)} className="ml-2">
                     <option value={""}>장치 선택</option>
                     {inputDevices.map((device) => (
                         <option key={device.deviceId} value={device.deviceId}>

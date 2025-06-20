@@ -44,7 +44,7 @@ export default function Waveform() {
 
         analyzeBPM(file);
     };
-    
+
     function togglePlay() {
         if(!waveSurferRef.current) return;
         waveSurferRef.current.playPause();
@@ -74,6 +74,7 @@ export default function Waveform() {
             >
                 {isPlaying ? "정지" : "재생"}
             </button>
+
             {bpm && <p className="text-sm text-gray-600">추정 BPM: {Math.round(bpm)}</p>}
             <input
                 id="volume"
