@@ -1,16 +1,14 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import * as Tone from 'tone';
+import { useMetronomeStore } from "../stores/metronomeStore";
 
 export default function Metronome() {
-    const [bpm, setBpm] = useState(120);
-    const [beatsPerMeasure, setBeatsPerMeasure] = useState(4); // 몇박
-    const [note, setNote] = useState(4); // 음표
-    const [subdivision, setSubdivision] = useState(1) // 서브디비전
-    const [noteDuration, setNoteDuration] = useState('4n'); // 최종 노트길이
+    const {bpm, beatsPerMeasure, note, subdivision, volume, setBpm, setBeatsPerMeasure, setNote, setSubdivision, setVolume } = useMetronomeStore();
 
-    const [volume, setVolume] = useState(0.5);
     const [isPlaying, setIsPlaying] = useState(false);
     const [currentBeat, setCurrentBeat] = useState(0);
+
+    const noteDuration = useMemo(() => {return `${note * subdivision}n`}, [note, subdivision]);
 
     const indexRef = useRef(0);
     const loopRef = useRef<Tone.Loop | null>(null);
@@ -43,11 +41,9 @@ export default function Metronome() {
         
     }, [note, bpm, beatsPerMeasure]);
 
-    useEffect(() => {
-        const newDuration = `${note * subdivision}n`;
-        setNoteDuration(newDuration);
-        setLoop(newDuration);
-    }, [note, subdivision, beatsPerMeasure])
+    useEffect(() => { // noteDuration 설정
+        setLoop(noteDuration);
+    }, [noteDuration, beatsPerMeasure]);
 
     function setLoop(noteDuration:string) {
         if(!samplerRef.current) return;

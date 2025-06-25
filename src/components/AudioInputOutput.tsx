@@ -1,16 +1,13 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
+import { useAudioInputStore } from "../stores/audioInputStore";
 
 export default function AudioInputOutput() {
-    const [devices, setDevices] = useState<MediaDeviceInfo[]>([]);
-    const [inputId, setInputId] = useState<string | null>(null);
-    const [channel, setChannel] = useState<number>(0);
-    const [channelCount, setChannelCount] = useState<number>(1);
+    const {devices, inputId, channel, channelCount, volume, setDevices, setInputId, setChannel, setChannelCount, setVolume} = useAudioInputStore();
 
     const audioCtxRef = useRef<AudioContext | null>(null);
     const streamRef = useRef<MediaStream | null>(null);
     const gainRef = useRef<GainNode | null>(null);
     const mergerRef = useRef<ChannelMergerNode | null>(null);
-
 
     async function getDevices() {
         await navigator.mediaDevices.getUserMedia({audio: true});
@@ -21,10 +18,12 @@ export default function AudioInputOutput() {
 
         const defaultDevice = devices.find((device) => {return device.deviceId === 'default'});
         
-        if(defaultDevice) {
-            setInputId(defaultDevice.deviceId);
-        } else if (inputDevices.length > 0){
-            setInputId(inputDevices[0].deviceId);
+        if(!inputId) {
+            if(defaultDevice) {
+                setInputId(defaultDevice.deviceId);
+            } else if (inputDevices.length > 0){
+                setInputId(inputDevices[0].deviceId);
+            }
         }
     }
 
@@ -82,7 +81,7 @@ export default function AudioInputOutput() {
 
         source.connect(splitter);
         
-        gainNode.gain.value = 0.5;
+        gainNode.gain.value = volume;
         gainRef.current = gainNode;
 
         splitter.connect(gainNode, channel);
@@ -91,6 +90,12 @@ export default function AudioInputOutput() {
         gainNode.connect(merger, 0, 1);
         merger.connect(ctx.destination);
     }
+
+    useEffect(() => { // volume 컨트롤
+        if (gainRef.current) {
+            gainRef.current.gain.setTargetAtTime(volume, audioCtxRef.current!.currentTime, 0.01);
+        }
+    }, [volume])
 
     useEffect(() => {
         getDevices();
@@ -110,10 +115,11 @@ export default function AudioInputOutput() {
     }, [inputId]);
 
     useEffect(() => { // 채널 바뀌면
-        if (inputId) {
-            connectAudio(inputId, channel);
-        }
+        if (!inputId) return;
+        connectAudio(inputId, channel);
+        
     }, [channel]);
+
 
     const inputDevices = devices.filter((device) => device.kind === "audioinput");
 
@@ -148,13 +154,8 @@ export default function AudioInputOutput() {
                 min="0"
                 max="1.2"
                 step="0.01"
-                defaultValue="0.5"
-                onChange={(e) => {
-                    const value = parseFloat(e.target.value);
-                    if (gainRef.current) {
-                        gainRef.current.gain.setTargetAtTime(value, audioCtxRef.current!.currentTime, 0.01);
-                    }
-                }}
+                defaultValue={volume}
+                onChange={(e) => { setVolume(parseFloat(e.target.value)); }}
             />
             <p className="text-sm text-gray-500">
                 input & output select test
