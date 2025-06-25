@@ -3,8 +3,12 @@ import * as Tone from 'tone';
 
 export default function Metronome() {
     const [bpm, setBpm] = useState(120);
-    const [beatsPerMeasure, setBeatsPerMeasure] = useState(4);
-    const [note, setNote] = useState(4);
+    const [beatsPerMeasure, setBeatsPerMeasure] = useState(4); // 몇박
+    const [note, setNote] = useState(4); // 음표
+    const [subdivision, setSubdivision] = useState(1) // 서브디비전
+    const [noteDuration, setNoteDuration] = useState('4n'); // 최종 노트길이
+
+    const [volume, setVolume] = useState(0.5);
     const [isPlaying, setIsPlaying] = useState(false);
     const [currentBeat, setCurrentBeat] = useState(0);
 
@@ -13,26 +17,47 @@ export default function Metronome() {
 
     const samplerRef = useRef<Tone.Sampler | null>(null);
 
-    useEffect(() => {
+    const masterGain = useRef(new Tone.Gain(0.5).toDestination());
+
+    useEffect(() => { // 샘플러 설정(초기 가동)
         samplerRef.current = new Tone.Sampler({
             urls: {
                 G3: "/samples/click_high.wav", 
                 D3: "/samples/click_low.wav", 
             },
-        }).toDestination();
+            onload() {
+                masterGain.current.gain.value = volume;
+            },
+        }).connect(masterGain.current);
         
         return () => {samplerRef.current?.dispose();};
     }, []);
 
+    useEffect(() => { // 볼륨 설정
+        masterGain.current.gain.value = volume;
+    }, [volume]); 
+
     useEffect(() => { // 기본 설정
-        Tone.Transport.bpm.value = bpm;
-        Tone.Transport.timeSignature = beatsPerMeasure;
-    }, [bpm, beatsPerMeasure]);
+        Tone.getTransport().bpm.value = bpm;
+        Tone.getTransport().timeSignature = [beatsPerMeasure, note];
+        
+    }, [note, bpm, beatsPerMeasure]);
 
-    function startMetronome() {
-        if(loopRef.current || !samplerRef.current) return;
+    useEffect(() => {
+        const newDuration = `${note * subdivision}n`;
+        setNoteDuration(newDuration);
+        setLoop(newDuration);
+    }, [note, subdivision, beatsPerMeasure])
 
-     
+    function setLoop(noteDuration:string) {
+        if(!samplerRef.current) return;
+
+        if (loopRef.current) {
+            loopRef.current.stop();
+            loopRef.current.dispose();
+            loopRef.current = null;
+        }
+
         loopRef.current = new Tone.Loop((time) => {
             const isDownbeat = indexRef.current % beatsPerMeasure === 0;
             const note = isDownbeat ? "G3" : "D3";
@@ -42,9 +67,19 @@ export default function Metronome() {
             setCurrentBeat((indexRef.current % beatsPerMeasure) + 1);
             indexRef.current++;
 
-        }, "4n");
+        }, noteDuration);
 
-        loopRef.current.start(0);
+        if (isPlaying) {
+            loopRef.current.start(0);
+        }
+    }
+
+    function startMetronome() {
+        if(!samplerRef.current) return;
+
+        setLoop(noteDuration);
+     
+        loopRef.current!.start(0);
         Tone.Transport.start();
         setIsPlaying(true);
     };
@@ -85,6 +120,38 @@ export default function Metronome() {
           className="border px-2 py-1 rounded w-24"
         />
       </div>
+
+      <div className="flex items-center gap-2">
+        <label>note:</label>
+        <input
+          type="number"
+          value={note}
+          onChange={(e) => setNote(parseInt(e.target.value))}
+          className="border px-2 py-1 rounded w-24"
+        />
+      </div>
+
+      <div className="flex items-center gap-2">
+        <label>subdivision:</label>
+        <input
+          type="number"
+          value={subdivision}
+          onChange={(e) => setSubdivision(parseInt(e.target.value))}
+          className="border px-2 py-1 rounded w-24"
+        />
+      </div>
+      
+
+      <input
+        id="volume"
+        type="range"
+        min="0"
+        max="1"
+        step="0.01"
+        value={volume}
+        onChange={(e) => setVolume(parseFloat(e.target.value))}
+        className="w-40"
+    />
 
       <button
         onClick={isPlaying ? stopMetronome : startMetronome}
