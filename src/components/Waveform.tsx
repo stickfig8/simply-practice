@@ -1,16 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 import WaveSurfer from "wavesurfer.js";
 import { analyze } from "web-audio-beat-detector";
+import { useWaveformStore } from "../stores/waveformStore";
 
 export default function Waveform() {
+    const {bpm, volume, setBpm, setVolume} = useWaveformStore();
     const containerRef = useRef<HTMLDivElement | null>(null);
     const waveSurferRef = useRef<WaveSurfer | null>(null);
     const [isPlaying, setIsPlaying] = useState(false);
-    const [volume, setVolume] = useState(0.5);
-    const [bpm, setBpm] = useState<number | null>(null);
 
     useEffect(() => {
-        if(!containerRef) return;
+        if(!containerRef.current) return;
 
         const wavesurfer = WaveSurfer.create({
             container: containerRef.current!,
@@ -40,6 +40,7 @@ export default function Waveform() {
         
         const url = URL.createObjectURL(file);
         waveSurferRef.current.load(url);
+        waveSurferRef.current.setVolume(volume);
         setIsPlaying(false);
 
         analyzeBPM(file);

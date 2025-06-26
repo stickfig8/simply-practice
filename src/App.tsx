@@ -2,6 +2,7 @@ import './App.css'
 import AudioInputOutput from './components/AudioInputOutput';
 import Metronome from './components/Metronome';
 import Waveform from './components/Waveform';
+import Tuner from './components/Tuner';
 
 function App() {
   
@@ -10,6 +11,7 @@ function App() {
       <Waveform />
       <AudioInputOutput />
       <Metronome />
+      <Tuner />
     </>
   )
 }

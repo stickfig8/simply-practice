@@ -2,9 +2,9 @@ import { useEffect, useRef } from "react";
 import { useAudioInputStore } from "../stores/audioInputStore";
 
 export default function AudioInputOutput() {
-    const {devices, inputId, channel, channelCount, volume, setDevices, setInputId, setChannel, setChannelCount, setVolume} = useAudioInputStore();
+    const {devices, inputId, channel, channelCount, volume, audioCtx, 
+        setDevices, setInputId, setChannel, setChannelCount, setVolume, setAudioCtx, setSource, setIsAudioReady} = useAudioInputStore();
 
-    const audioCtxRef = useRef<AudioContext | null>(null);
     const streamRef = useRef<MediaStream | null>(null);
     const gainRef = useRef<GainNode | null>(null);
     const mergerRef = useRef<ChannelMergerNode | null>(null);
@@ -27,7 +27,7 @@ export default function AudioInputOutput() {
         }
     }
 
-    async function handleDeviceChange() {
+    async function handleDeviceListChange() {
         const updatedList = await navigator.mediaDevices.enumerateDevices();
         setDevices(updatedList);
 
@@ -43,21 +43,23 @@ export default function AudioInputOutput() {
     }
 
     function cleanup() {
-        if(audioCtxRef.current) {
-            audioCtxRef.current.close();
-            audioCtxRef.current = null;
+        if(audioCtx instanceof AudioContext && audioCtx.state !== 'closed') {
+            audioCtx.close();
+            setAudioCtx(null);
         }
         if(streamRef.current) {
             streamRef.current.getTracks().forEach((track) => track.stop());
             streamRef.current = null;
         }
+        setSource(null);
+        setIsAudioReady(false);
     }
 
     async function connectAudio(deviceId:string, channel: number) {
         cleanup();
 
         const ctx = await new AudioContext({latencyHint: "interactive", sampleRate: 48000,});
-        audioCtxRef.current = ctx;
+        setAudioCtx(ctx);
 
         const stream = await navigator.mediaDevices.getUserMedia({
             audio: {
@@ -71,6 +73,8 @@ export default function AudioInputOutput() {
         streamRef.current = stream;
 
         const source = ctx.createMediaStreamSource(stream);
+        setSource(source);
+
         const newChannelCount = source.channelCount;
         setChannelCount(newChannelCount);
 
@@ -89,36 +93,37 @@ export default function AudioInputOutput() {
         gainNode.connect(merger, 0, 0);
         gainNode.connect(merger, 0, 1);
         merger.connect(ctx.destination);
+
+        setIsAudioReady(true);
     }
 
     useEffect(() => { // volume 컨트롤
-        if (gainRef.current) {
-            gainRef.current.gain.setTargetAtTime(volume, audioCtxRef.current!.currentTime, 0.01);
+        if (gainRef.current && audioCtx) {
+            gainRef.current.gain.setTargetAtTime(volume, audioCtx.currentTime, 0.01);
         }
     }, [volume])
 
     useEffect(() => {
         getDevices();
+
+        navigator.mediaDevices.addEventListener("devicechange", handleDeviceListChange);
+        return () => {
+            navigator.mediaDevices.removeEventListener("devicechange", handleDeviceListChange);
+        }
     }, []);
 
-    useEffect(() => { // 인풋 바뀌면
-        if(inputId) {
-            setChannel(0);
-            connectAudio(inputId, 0);
-        }
-        
-        navigator.mediaDevices.addEventListener("devicechange", handleDeviceChange);
-        return () => {
-            navigator.mediaDevices.removeEventListener("devicechange", handleDeviceChange);
-        }
-
-    }, [inputId]);
-
-    useEffect(() => { // 채널 바뀌면
+    useEffect(() => { // 인풋 장비, 채널, 채널 갯수 바뀌면
         if (!inputId) return;
-        connectAudio(inputId, channel);
         
-    }, [channel]);
+        const maxChannel = channelCount - 1;
+        const adjustChannel = channel < maxChannel ? channel : 0;
+        if(adjustChannel !== channel) { 
+            setChannel(adjustChannel);
+        }
+
+        connectAudio(inputId, adjustChannel);
+        
+    }, [inputId, channel, channelCount]);
 
 
     const inputDevices = devices.filter((device) => device.kind === "audioinput");
@@ -154,7 +159,7 @@ export default function AudioInputOutput() {
                 min="0"
                 max="1.2"
                 step="0.01"
-                defaultValue={volume}
+                value={volume}
                 onChange={(e) => { setVolume(parseFloat(e.target.value)); }}
             />
             <p className="text-sm text-gray-500">
@@ -163,6 +168,4 @@ export default function AudioInputOutput() {
         </div>
 
     );
-
-    
 }
