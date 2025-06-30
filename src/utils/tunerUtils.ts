@@ -13,7 +13,7 @@ export async function setUpTuner({
     streamRef,
     onPitchDetected,
 }: SetupTunerParams) {
-    
+
     const ctx = new AudioContext();
     await ctx.audioWorklet.addModule("/worklets/PitchProcessor.js");
     await ctx.resume();
@@ -29,6 +29,8 @@ export async function setUpTuner({
         },
     });
 
+    streamRef.current = stream;
+    
     const source = ctx.createMediaStreamSource(stream);
     const splitter = ctx.createChannelSplitter(source.channelCount);
     source.connect(splitter);
