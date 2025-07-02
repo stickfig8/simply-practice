@@ -10,13 +10,9 @@ export default function Waveform() {
     const containerRef = useRef<HTMLDivElement | null>(null);
     const waveSurferRef = useRef<WaveSurfer | null>(null);
     const regionsRef = useRef<RegionsPlugin | null>(null);
-    //const isLoopingRef = useRef(false);
+    const [zoomLevel, setZoomLevel] = useState(1);
 
     const [isPlaying, setIsPlaying] = useState(false);
-
-    const [test, setTest] = useState(false);
-    const [test2, setTest2] = useState(0);
-    const [test3, setTest3] = useState("");
     
     useEffect(() => {
         if(!containerRef.current) return;
@@ -27,13 +23,18 @@ export default function Waveform() {
             container: containerRef.current!,
             waveColor: "#999",
             progressColor: "#4f46e5",
-            height: 'auto',
+            height: 100,
             plugins: [regions]
         });
 
         waveSurferRef.current = wavesurfer;
 
         regions.enableDragSelection({color: 'rgba(255, 0, 0, 0.1)'});
+
+        wavesurfer.on('finish', ()=> {
+            wavesurfer.setTime(0);
+            setIsPlaying(false);
+        })
 
         regions.on('region-created', (newRegion) => { // 새 리전 생성 시 기존 리전 삭제
             if(!regionsRef.current) return;
@@ -53,10 +54,20 @@ export default function Waveform() {
             }
         })
 
+        window.addEventListener("keydown", handleKeyDown);
+
         return() => {
             wavesurfer.destroy();
+            window.removeEventListener("keydown", handleKeyDown);
         }
     }, []);
+
+    useEffect(() => {
+        const wavesurfer = waveSurferRef.current;
+        if (wavesurfer && wavesurfer.getDecodedData()) {
+            wavesurfer.zoom(zoomLevel);
+        }
+    }, [zoomLevel]);
 
     async function analyzeBPM(file:File) {
         const arrayBuffer = await file.arrayBuffer();
@@ -66,20 +77,8 @@ export default function Waveform() {
         setBpm(tempo);
     }
     
-    function handleFileChange(e:React.ChangeEvent<HTMLInputElement>) {
+    async function handleFileChange(e:React.ChangeEvent<HTMLInputElement>) {
         if(!waveSurferRef.current) return;
-
-        if(regionsRef.current){ // 새 오디오 로드 시 기존 리전 삭제
-            regionsRef.current.clearRegions();
-        }
-
-        waveSurferRef.current.on('decode', () => {
-            regionsRef.current?.addRegion({
-                start: 0,
-                end: 10,
-                color: 'rgba(255, 0, 0, 0.1)',
-            })
-        })
 
         setIsPlaying(false);
         setIsLooping(false);
@@ -95,6 +94,18 @@ export default function Waveform() {
         waveSurferRef.current.setTime(0);
         const name = file.name.replace(/\.[^/.]+$/, "");
         setTitle(name); // zustand에 저장
+
+        if(regionsRef.current){ // 새 오디오 로드 시 기존 리전 삭제
+            await regionsRef.current.clearRegions();
+        }
+
+        waveSurferRef.current.on('decode', () => {
+            regionsRef.current?.addRegion({
+                start: 0,
+                end: 10,
+                color: 'rgba(255, 0, 0, 0.1)',
+            })
+        })
 
         analyzeBPM(file);
     };
@@ -121,8 +132,15 @@ export default function Waveform() {
         waveSurferRef.current?.setVolume(vol);
     }
 
+    function handleKeyDown(e: KeyboardEvent) {
+        if(e.code === "Space") {
+            e.preventDefault();
+            togglePlay();
+        }
+    };
+
     return(
-        <div className="p-4 space-y-4">
+        <div className="p-4 space-y-4 item-center">
             <input
                 type="file"
                 accept="audio/*"
@@ -130,8 +148,8 @@ export default function Waveform() {
                 className="mb-2"
             />
 
-            <div ref={containerRef} className="w-full bg-gray-100 rounded" />
-            <p>{waveSurferRef.current?.getCurrentTime()}</p>
+            <div ref={containerRef} className="w-100 bg-gray-100 rounded" />
+            <input id="zoom" type="range" min={1} max={500} value={zoomLevel} onChange={e => {setZoomLevel(Number(e.target.value))}} />
 
             <input type="checkbox" checked={useWaveformStore.getState().isLooping} onChange={(e) => setIsLooping(e.target.checked)}/>
             <label>loop</label>
