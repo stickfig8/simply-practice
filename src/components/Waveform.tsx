@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Label } from "./ui/label";
 
 export default function Waveform() {
-    const { bpm, zoomLevel, title, isLooping, isPlaying, setZoomLevel, setIsLooping } = useWaveformStore();
+    const { bpm, zoomLevel, title, isLooping, isPlaying, loopStart, loopEnd, setZoomLevel, setIsLooping } = useWaveformStore();
     
     const {volume, setVolume} = useWaveformStore();
     const containerRef = useRef<HTMLDivElement | null>(null);
@@ -42,7 +42,7 @@ export default function Waveform() {
                 value={volume}
                 onChange={handleVolumeChange(setVolume)}
             />
-            <p>{isLooping ? "looping" : "no"}</p>
+            <p>{loopStart + " : " + loopEnd}</p>
         </div>
     )
 }

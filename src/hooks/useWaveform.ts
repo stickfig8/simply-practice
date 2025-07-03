@@ -110,6 +110,11 @@ export function useWaveform(containerRef: React.RefObject<HTMLDivElement | null>
             }
         })
 
+        regions.on("region-updated", (region) => {
+            setLoopStart(region.start);
+            setLoopEnd(region.end);
+        })
+
         window.addEventListener("keydown", spacebarToPlay);
 
         return() => {
