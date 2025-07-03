@@ -2,21 +2,14 @@ import { useEffect, useRef} from "react";
 import WaveSurfer from "wavesurfer.js";
 import RegionsPlugin from "wavesurfer.js/dist/plugins/regions.js";
 import { useWaveformStore } from "../stores/waveformStore";
-import { analyze } from "web-audio-beat-detector";
+import { analyzeBPM } from "@/utils/waveformHandlers";
+
 
 export function useWaveform(containerRef: React.RefObject<HTMLDivElement | null>) {
     const { volume, zoomLevel, isLooping, setLoopStart, setLoopEnd, setIsPlaying, setIsLooping, setTitle, setBpm } = useWaveformStore(); 
 
     const waveSurferRef = useRef<WaveSurfer | null>(null);
     const regionsRef = useRef<RegionsPlugin | null>(null);
-
-    async function analyzeBPM(file:File) { // 오디오 bpm분석
-        const arrayBuffer = await file.arrayBuffer();
-        const audioContext = new AudioContext();
-        const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
-        const tempo = await analyze(audioBuffer);
-        setBpm(tempo);    
-    }
 
     async function handleFileChange(e:React.ChangeEvent<HTMLInputElement>) { // 파일 변경 제어
         if(!waveSurferRef.current) return;
@@ -48,7 +41,7 @@ export function useWaveform(containerRef: React.RefObject<HTMLDivElement | null>
             })
         })
 
-        analyzeBPM(file);
+        setBpm(await analyzeBPM(file));
     };
 
     function togglePlay() { // 플레이 제어
@@ -84,7 +77,10 @@ export function useWaveform(containerRef: React.RefObject<HTMLDivElement | null>
             waveColor: "#999",
             progressColor: "#4f46e5",
             height: 100,
-            plugins: [regions]
+            plugins: [regions],
+            barWidth: 2,
+            barGap: 1,
+            barRadius: 2
         });
 
         waveSurferRef.current = wavesurfer;

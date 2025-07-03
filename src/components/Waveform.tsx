@@ -2,6 +2,8 @@ import { useRef } from "react";
 import { useWaveformStore } from "../stores/waveformStore";
 import { handleLoopingCheck, handleZoomLevelChange, handleVolumeChange} from "../utils/waveformHandlers";
 import { useWaveform } from "../hooks/useWaveform";
+import { Button } from "@/components/ui/button";
+import { Label } from "./ui/label";
 
 export default function Waveform() {
     const { bpm, zoomLevel, title, isLooping, isPlaying, setZoomLevel, setIsLooping } = useWaveformStore();
@@ -14,10 +16,12 @@ export default function Waveform() {
         <div className="p-4 space-y-4 item-center">
             <input
                 type="file"
+                id="fileInput"
                 accept="audio/*"
                 onChange={handleFileChange}
-                className="mb-2"
+                className="mb-2 hidden"
             />
+            <Label htmlFor="fileInput">파일</Label>
 
             <div ref={containerRef} className="w-100 h-full bg-gray-100 rounded overflow-x-scroll " />
 
@@ -25,14 +29,8 @@ export default function Waveform() {
 
             <input type="checkbox" checked={isLooping} onChange={handleLoopingCheck(setIsLooping)}/>
             <label>loop</label>
-            
-            <button
-                onClick={togglePlay}
-                className="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700"
-            >
-                {isPlaying ? "정지" : "재생"}
-            </button>
 
+            <Button className="cursor-pointer" variant='outline' size='default' onClick={togglePlay}>{isPlaying ? "정지" : "재생"}</Button>
             {bpm && <p className="text-sm text-gray-600">추정 BPM: {Math.round(bpm)}</p>}
             {title && <p className="text-sm text-gray-600">제목: {title}</p>}
             <input

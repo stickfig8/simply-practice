@@ -1,3 +1,13 @@
+import { analyze } from "web-audio-beat-detector";
+
+export async function analyzeBPM(file:File) { // 오디오 bpm분석
+    const arrayBuffer = await file.arrayBuffer();
+    const audioContext = new AudioContext();
+    const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+    const tempo = await analyze(audioBuffer);
+    return tempo;   
+}
+
 export function handleVolumeChange(setVolume: (volume: number) => void ) {
     return function (e:React.ChangeEvent<HTMLInputElement>) {
         setVolume(Number(e.target.value));
