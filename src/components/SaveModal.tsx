@@ -7,14 +7,24 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrig
 import { getToday, readableSeconds } from "@/utils/saveModalUtils";
 import { useWaveformStore } from "@/stores/waveformStore";
 import { useMetronomeStore } from "@/stores/metronomeStore";
+import { Checkbox } from "./ui/checkbox";
+import { useState } from "react";
 
 
 export default function SaveModal() {
     const date = getToday();
-    const {title, loopStart, loopEnd} = useWaveformStore();
-    const {bpm} = useMetronomeStore();
+    const { title, loopStart, loopEnd } = useWaveformStore();
+    const { bpm } = useMetronomeStore();
 
     const insts = ['guitar', 'bass', 'drum', 'keyboard', 'vocal', 'etc'];
+
+    const [part, setPart] = useState('');
+    const [useRange, setUseRange] = useState(false);
+
+    function handleRangeChecked(checked : boolean) {
+        setUseRange(checked);
+        checked ? setPart(`${readableSeconds(loopStart)} ~ ${readableSeconds(loopEnd)}`) : setPart('');
+    }
 
     return(
         <Drawer>
@@ -27,15 +37,15 @@ export default function SaveModal() {
                         <DrawerTitle>오늘의 연습일지</DrawerTitle>
                         <DrawerDescription>{date}</DrawerDescription>
                     </DrawerHeader>
-                    <div className="flex">
-                        곡명 (zustand로 불러오기 & 수정 가능)
+                    <div className="flex-col mx-auto">
+
                         <Label className="text-lg">곡명</Label>
                         <Input defaultValue={title} placeholder="Song name"/>
 
-                        악기 (콤보박스 이용해도 낫배드)
+                        
                         <Label className="text-lg">악기</Label>
                         <Select>
-                            <SelectTrigger className="w-[180px]">
+                            <SelectTrigger className="w-[500px]">
                                 <SelectValue placeholder='Select a intrument'></SelectValue>
                             </SelectTrigger>
                             <SelectContent>
@@ -48,17 +58,20 @@ export default function SaveModal() {
                             </SelectContent>
                         </Select>
 
-                        파트 (이건 체크박스로 체크하면 시간 기록 or 사용자 인풋)
                         <Label className="text-lg">연습 파트</Label>
-                        <Input defaultValue={`${readableSeconds(loopStart)} ~ ${readableSeconds(loopEnd)}`} placeholder="ex) 1절 b파트"/>
-
+                        <div className="flex items-center gap-2">
+                            <Input value={part} onChange={(e) => setPart(e.target.value)} placeholder="ex) 1절 b파트 or 00:32 ~ 01:23"/>
+                            <div className="flex items-center space-x-2 shrink-0">
+                                <Label htmlFor="use-range" className="text-sm">구간</Label>
+                                <Checkbox id="use-range" checked={useRange} onCheckedChange={(e) => handleRangeChecked(Boolean(e))}/>
+                            </div>
+                        </div>
+                        
                         <Label className="text-lg">연습 BPM</Label>
                         <Input defaultValue={bpm} placeholder="bpm"/>
 
-                        태그 (chips input)
-
                         <Label className="text-lg">메모</Label>
-                        <Textarea placeholder="type practice memo" />
+                        <Textarea placeholder="type practice memo" className="resize-none" />
                     </div>
                     <DrawerFooter>
                         <Button>submit</Button>

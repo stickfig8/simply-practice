@@ -23,3 +23,9 @@ export function readableSeconds(seconds: number) {
     return `${addZero(mins)}:${addZero(secs)}`
 
 }
+
+export function handleRangeCheck(setIsLooping: (isLooping: boolean) => void ) {
+    return function (e:React.ChangeEvent<HTMLInputElement>) {
+        setIsLooping(e.target.checked);
+    }
+}
