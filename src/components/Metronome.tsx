@@ -3,12 +3,20 @@ import { useMetronome } from "../hooks/useMetronome";
 
 export default function Metronome() {
   const {
-    bpm, beatsPerMeasure, note, subdivision, volume,
-    setBpm, setBeatsPerMeasure, setNote, setSubdivision, setVolume
+    bpm,
+    beatsPerMeasure,
+    note,
+    subdivision,
+    volume,
+    setBpm,
+    setBeatsPerMeasure,
+    setNote,
+    setSubdivision,
+    setVolume,
   } = useMetronomeStore();
 
-  const {isPlaying, currentBeat, toggleMetronome } = useMetronome();
-    
+  const { isPlaying, currentBeat, toggleMetronome } = useMetronome();
+
   return (
     <div className="p-4 space-y-4">
       <h2 className="text-lg font-bold">Tone.js 메트로놈</h2>
@@ -52,7 +60,6 @@ export default function Metronome() {
           className="border px-2 py-1 rounded w-24"
         />
       </div>
-      
 
       <input
         id="volume"
@@ -63,7 +70,7 @@ export default function Metronome() {
         value={volume}
         onChange={(e) => setVolume(parseFloat(e.target.value))}
         className="w-40"
-    />
+      />
 
       <button
         onClick={toggleMetronome}
