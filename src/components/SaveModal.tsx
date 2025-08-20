@@ -48,7 +48,13 @@ export default function SaveModal() {
   }
 
   return (
-    <Drawer>
+    <Drawer
+      onOpenChange={(open) => {
+        if (!open) return;
+        setUseRange(false);
+        setPart("");
+      }}
+    >
       <DrawerTrigger asChild>
         <Button variant="outline">Save</Button>
       </DrawerTrigger>
@@ -99,7 +105,7 @@ export default function SaveModal() {
             </div>
 
             <Label className="text-lg">연습 BPM</Label>
-            <Input defaultValue={bpm} placeholder="bpm" />
+            <Input defaultValue={bpm} placeholder="bpm" type="number" />
 
             <Label className="text-lg">메모</Label>
             <Textarea

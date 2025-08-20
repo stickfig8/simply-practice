@@ -26,7 +26,15 @@ export default function Metronome() {
         <input
           type="number"
           value={bpm}
-          onChange={(e) => setBpm(parseInt(e.target.value))}
+          onChange={(e) => {
+            const value = e.target.value;
+            const num = parseInt(value);
+            if (!isNaN(num)) {
+              setBpm(num);
+            } else if (value === "") {
+              setBpm(150);
+            }
+          }}
           className="border px-2 py-1 rounded w-24"
         />
       </div>

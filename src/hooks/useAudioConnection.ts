@@ -43,7 +43,7 @@ export function useAudioConnection() {
     return () => {
       navigator.mediaDevices.removeEventListener(
         "devicechange",
-        handleDeviceChange,
+        handleDeviceChange
       );
     };
   }, []);
@@ -80,7 +80,7 @@ export function useAudioConnection() {
       gainRef.current.gain.setTargetAtTime(
         volume,
         audioCtxRef.current.currentTime,
-        0.01,
+        0.01
       );
     }
   }, [volume]);

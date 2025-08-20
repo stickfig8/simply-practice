@@ -5,7 +5,7 @@ import { useWaveformStore } from "../stores/waveformStore";
 import { analyzeBPM } from "@/utils/waveformHandlers";
 
 export function useWaveform(
-  containerRef: React.RefObject<HTMLDivElement | null>,
+  containerRef: React.RefObject<HTMLDivElement | null>
 ) {
   const {
     volume,
@@ -126,8 +126,8 @@ export function useWaveform(
     });
 
     regions.on("region-updated", (region) => {
-      setLoopStart(region.start);
-      setLoopEnd(region.end);
+      setLoopStart(Math.round(region.start));
+      setLoopEnd(Math.round(region.end));
     });
 
     window.addEventListener("keydown", spacebarToPlay);
