@@ -1,5 +1,12 @@
-import { useMetronomeStore } from "../stores/metronomeStore";
-import { useMetronome } from "../hooks/useMetronome";
+import { useMetronomeStore } from "../../stores/metronomeStore";
+import { useMetronome } from "../../hooks/useMetronome";
+
+import {
+  bpmConstants,
+  noteConstants,
+  subdivisionConstants,
+} from "@/configs/beatConstants";
+import BeatTiles from "./metronome/BeatTiles";
 
 export default function Metronome() {
   const {
@@ -17,9 +24,11 @@ export default function Metronome() {
 
   const { isPlaying, currentBeat, toggleMetronome } = useMetronome();
 
+  console.log(bpmConstants);
+
   return (
     <div className="p-4 space-y-4">
-      <h2 className="text-lg font-bold">Tone.js 메트로놈</h2>
+      <h2 className="text-lg font-bold">메트로놈</h2>
 
       <div className="flex items-center gap-2">
         <label>BPM:</label>
@@ -41,32 +50,47 @@ export default function Metronome() {
 
       <div className="flex items-center gap-2">
         <label>Beats / Measure:</label>
-        <input
-          type="number"
+        <select
           value={beatsPerMeasure}
           onChange={(e) => setBeatsPerMeasure(parseInt(e.target.value))}
           className="border px-2 py-1 rounded w-24"
-        />
+        >
+          {bpmConstants.map((val) => (
+            <option key={val} value={val}>
+              {val}
+            </option>
+          ))}
+        </select>
       </div>
 
       <div className="flex items-center gap-2">
         <label>note:</label>
-        <input
-          type="number"
+        <select
           value={note}
           onChange={(e) => setNote(parseInt(e.target.value))}
           className="border px-2 py-1 rounded w-24"
-        />
+        >
+          {noteConstants.map((val) => (
+            <option key={val} value={val}>
+              {val}
+            </option>
+          ))}
+        </select>
       </div>
 
       <div className="flex items-center gap-2">
         <label>subdivision:</label>
-        <input
-          type="number"
+        <select
           value={subdivision}
           onChange={(e) => setSubdivision(parseInt(e.target.value))}
           className="border px-2 py-1 rounded w-24"
-        />
+        >
+          {subdivisionConstants.map((val) => (
+            <option key={val} value={val}>
+              {val}
+            </option>
+          ))}
+        </select>
       </div>
 
       <input
@@ -87,9 +111,7 @@ export default function Metronome() {
         {isPlaying ? "Stop" : "Start"}
       </button>
 
-      <p className="text-sm text-gray-500">
-        Current Beat: {isPlaying ? currentBeat : "-"}
-      </p>
+      <BeatTiles currentBeat={currentBeat} beatsPerMeasure={beatsPerMeasure} />
     </div>
   );
 }

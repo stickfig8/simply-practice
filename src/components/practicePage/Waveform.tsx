@@ -1,13 +1,13 @@
 import { useRef } from "react";
-import { useWaveformStore } from "../stores/waveformStore";
+import { useWaveformStore } from "../../stores/waveformStore";
 import {
   handleLoopingCheck,
   handleZoomLevelChange,
   handleVolumeChange,
-} from "../utils/waveformHandlers";
-import { useWaveform } from "../hooks/useWaveform";
+} from "../../utils/waveformHandlers";
+import { useWaveform } from "../../hooks/useWaveform";
 import { Button } from "@/components/ui/button";
-import { Label } from "./ui/label";
+import { Label } from "../ui/label";
 
 export default function Waveform() {
   const {

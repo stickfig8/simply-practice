@@ -1,4 +1,18 @@
 #root {
-  margin: 0 auto;
-  padding: 2rem;
+}
+
+@keyframes flash {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.animation-flash {
+  animation: flash 0.3s ease-in-out;
 }

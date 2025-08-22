@@ -1,5 +1,5 @@
-import { useAudioInputStore } from "../stores/audioInputStore";
-import { useAudioConnection } from "../hooks/useAudioConnection";
+import { useAudioInputStore } from "../../stores/audioInputStore";
+import { useAudioConnection } from "../../hooks/useAudioConnection";
 
 export default function AudioInputOutput() {
   const {

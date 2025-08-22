@@ -1,19 +1,20 @@
 import "./App.css";
-import AudioInputOutput from "./components/AudioInputOutput";
-import Metronome from "./components/Metronome";
-import Waveform from "./components/Waveform";
-import Tuner from "./components/Tuner";
-import SaveModal from "./components/SaveModal";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import MainPage from "./pages/MainPage";
+import PracticePage from "./pages/PracticePage";
+import SideBar from "./components/common/SideBar";
 
 function App() {
   return (
-    <>
-      <SaveModal />
-      <Waveform />
-      <AudioInputOutput />
-      <Metronome />
-      <Tuner />
-    </>
+    <BrowserRouter>
+      <div className="App flex flex-row">
+        <SideBar />
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/practice" element={<PracticePage />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 

@@ -1,4 +1,4 @@
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import {
   Drawer,
   DrawerClose,
@@ -8,10 +8,10 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from "./ui/drawer";
-import { Label } from "./ui/label";
-import { Input } from "./ui/input";
-import { Textarea } from "./ui/textarea";
+} from "../ui/drawer";
+import { Label } from "../ui/label";
+import { Input } from "../ui/input";
+import { Textarea } from "../ui/textarea";
 import {
   Select,
   SelectContent,
@@ -20,8 +20,8 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "./ui/select";
-import { Checkbox } from "./ui/checkbox";
+} from "../ui/select";
+import { Checkbox } from "../ui/checkbox";
 
 import { getToday, readableSeconds } from "@/utils/saveModalUtils";
 import { useWaveformStore } from "@/stores/waveformStore";
@@ -58,19 +58,19 @@ export default function SaveModal() {
       <DrawerTrigger asChild>
         <Button variant="outline">Save</Button>
       </DrawerTrigger>
-      <div className="mx-auto w-full max-w-sm">
+      <div className="mx-auto w-fit">
         <DrawerContent>
           <DrawerHeader>
             <DrawerTitle>오늘의 연습일지</DrawerTitle>
             <DrawerDescription>{date}</DrawerDescription>
           </DrawerHeader>
-          <div className="flex-col mx-auto">
+          <div className="flex-col mx-auto w-125">
             <Label className="text-lg">곡명</Label>
             <Input defaultValue={title} placeholder="Song name" />
 
             <Label className="text-lg">악기</Label>
             <Select>
-              <SelectTrigger className="w-[500px]">
+              <SelectTrigger className="w-full">
                 <SelectValue placeholder="Select a intrument"></SelectValue>
               </SelectTrigger>
               <SelectContent>
@@ -113,7 +113,7 @@ export default function SaveModal() {
               className="resize-none"
             />
           </div>
-          <DrawerFooter>
+          <DrawerFooter className="w-125 mx-auto px-0">
             <Button>submit</Button>
             <DrawerClose asChild>
               <Button variant="outline">cancel</Button>
