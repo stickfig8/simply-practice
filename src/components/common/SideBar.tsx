@@ -1,5 +1,5 @@
 import { useSideBarStore } from "@/stores/sideBarStore";
-import { Link } from "react-router-dom";
+import SideBarButton from "./SideBarButton";
 
 export default function SideBar() {
   const { isOpen, setIsOpen } = useSideBarStore();
@@ -21,15 +21,9 @@ export default function SideBar() {
           isOpen ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-30"
         }`}
       >
-        <Link to="/" className="block hover:text-indigo-300">
-          Home
-        </Link>
-        <Link to="/practice" className="block hover:text-indigo-300">
-          Practice
-        </Link>
-        <Link to="/logs" className="block hover:text-indigo-300">
-          Logs
-        </Link>
+        <SideBarButton to="/" name="Home" />
+        <SideBarButton to="/practice" name="Practice" />
+        <SideBarButton to="/logs" name="Logs" />
       </nav>
     </aside>
   );

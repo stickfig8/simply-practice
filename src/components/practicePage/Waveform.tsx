@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import { useWaveformStore } from "../../stores/waveformStore";
 import {
   handleLoopingCheck,
@@ -18,16 +17,16 @@ export default function Waveform() {
     isPlaying,
     loopStart,
     loopEnd,
+    volume,
     setZoomLevel,
     setIsLooping,
+    setVolume,
   } = useWaveformStore();
 
-  const { volume, setVolume } = useWaveformStore();
-  const containerRef = useRef<HTMLDivElement | null>(null);
-  const { handleFileChange, togglePlay } = useWaveform(containerRef);
+  const { handleFileChange, togglePlay, containerRef } = useWaveform();
 
   return (
-    <div className="p-4 space-y-4 item-center">
+    <div className="space-y-4 item-center w-full">
       <input
         type="file"
         id="fileInput"
@@ -35,12 +34,16 @@ export default function Waveform() {
         onChange={handleFileChange}
         className="mb-2 hidden"
       />
-      <Label htmlFor="fileInput">파일</Label>
+      <Label
+        htmlFor="fileInput"
+        className="w-fit h-fit border-2 cursor-pointer"
+      >
+        파일
+      </Label>
 
-      <div
-        ref={containerRef}
-        className="w-100 h-full bg-gray-100 rounded overflow-x-scroll "
-      />
+      <div className="w-full h-29 border-1 overflow-hidden">
+        <div ref={containerRef} className="w-full bg-gray-100 rounded" />
+      </div>
 
       <input
         id="zoom"
@@ -63,13 +66,14 @@ export default function Waveform() {
         variant="outline"
         size="default"
         onClick={togglePlay}
+        disabled={title === ""}
       >
         {isPlaying ? "정지" : "재생"}
       </Button>
       {bpm && (
         <p className="text-sm text-gray-600">추정 BPM: {Math.round(bpm)}</p>
       )}
-      {title && <p className="text-sm text-gray-600">제목: {title}</p>}
+      <p className="text-sm text-gray-600">제목: {title}</p>
       <input
         id="volume"
         type="range"

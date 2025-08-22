@@ -24,8 +24,6 @@ export default function Metronome() {
 
   const { isPlaying, currentBeat, toggleMetronome } = useMetronome();
 
-  console.log(bpmConstants);
-
   return (
     <div className="p-4 space-y-4">
       <h2 className="text-lg font-bold">메트로놈</h2>

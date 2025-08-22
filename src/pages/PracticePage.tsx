@@ -8,9 +8,10 @@ import Waveform from "@/components/practicePage/Waveform";
 export default function PracticePage() {
   return (
     <MainContainer>
+      <Waveform />
       <SaveModal />
       <AudioInputOutput />
-      <Waveform />
+
       <Metronome />
       <Tuner />
     </MainContainer>

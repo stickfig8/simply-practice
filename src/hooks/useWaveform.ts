@@ -4,10 +4,9 @@ import RegionsPlugin from "wavesurfer.js/dist/plugins/regions.js";
 import { useWaveformStore } from "../stores/waveformStore";
 import { analyzeBPM } from "@/utils/waveformHandlers";
 
-export function useWaveform(
-  containerRef: React.RefObject<HTMLDivElement | null>
-) {
+export function useWaveform() {
   const {
+    title,
     volume,
     zoomLevel,
     isLooping,
@@ -19,8 +18,10 @@ export function useWaveform(
     setBpm,
   } = useWaveformStore();
 
+  const isLoopingRef = useRef<Boolean>(isLooping);
   const waveSurferRef = useRef<WaveSurfer | null>(null);
   const regionsRef = useRef<RegionsPlugin | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
 
   async function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
     // 파일 변경 제어
@@ -58,7 +59,7 @@ export function useWaveform(
 
   function togglePlay() {
     // 플레이 제어
-    if (!waveSurferRef.current || !regionsRef.current) return;
+    if (!waveSurferRef.current || !regionsRef.current || title === "") return;
 
     if (isLooping) {
       if (!waveSurferRef.current.isPlaying()) {
@@ -82,6 +83,7 @@ export function useWaveform(
   }
 
   useEffect(() => {
+    // 기본 세팅
     if (!containerRef.current) return;
     const regions = RegionsPlugin.create();
     regionsRef.current = regions;
@@ -97,13 +99,13 @@ export function useWaveform(
       barRadius: 2,
     });
 
-    waveSurferRef.current = wavesurfer;
-
     regions.enableDragSelection({ color: "rgba(255, 0, 0, 0.1)" });
 
     wavesurfer.on("finish", () => {
-      wavesurfer.setTime(0);
-      setIsPlaying(false);
+      if (!isLoopingRef.current) {
+        wavesurfer.setTime(0);
+        setIsPlaying(false);
+      }
     });
 
     regions.on("region-created", (newRegion) => {
@@ -120,17 +122,20 @@ export function useWaveform(
     });
 
     regions.on("region-out", (region) => {
-      if (isLooping) {
-        region.play();
-      }
+      if (!isLoopingRef.current) return;
+
+      region.play();
+      setIsPlaying(true);
     });
 
     regions.on("region-updated", (region) => {
-      setLoopStart(Math.round(region.start));
-      setLoopEnd(Math.round(region.end));
+      setLoopStart(region.start);
+      setLoopEnd(region.end);
     });
 
     window.addEventListener("keydown", spacebarToPlay);
+
+    waveSurferRef.current = wavesurfer;
 
     return () => {
       wavesurfer.destroy();
@@ -154,5 +159,10 @@ export function useWaveform(
     waveSurferRef.current.setVolume(volume);
   }, [volume]);
 
-  return { handleFileChange, togglePlay };
+  useEffect(() => {
+    // 루프상태 최신화
+    isLoopingRef.current = isLooping;
+  }, [isLooping]);
+
+  return { handleFileChange, togglePlay, containerRef };
 }

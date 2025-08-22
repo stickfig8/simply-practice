@@ -5,7 +5,7 @@ type Props = {
 
 export default function BeatTiles({ currentBeat, beatsPerMeasure }: Props) {
   return (
-    <div className="flex w-fit gap-2 justify-center items-center">
+    <div className="flex flex-wrap w-62 gap-2 justify-between">
       {Array.from({ length: beatsPerMeasure }).map((_, i) => {
         const isActive = currentBeat === i + 1;
 
