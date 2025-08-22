@@ -1,9 +1,4 @@
 import { useWaveformStore } from "../../stores/waveformStore";
-import {
-  handleLoopingCheck,
-  handleZoomLevelChange,
-  handleVolumeChange,
-} from "../../utils/waveformHandlers";
 import { useWaveform } from "../../hooks/useWaveform";
 import { Button } from "@/components/ui/button";
 import { Label } from "../ui/label";
@@ -18,9 +13,11 @@ export default function Waveform() {
     loopStart,
     loopEnd,
     volume,
+    playBackRate,
     setZoomLevel,
     setIsLooping,
     setVolume,
+    setPlayBackRate,
   } = useWaveformStore();
 
   const { handleFileChange, togglePlay, containerRef } = useWaveform();
@@ -51,13 +48,13 @@ export default function Waveform() {
         min={1}
         max={50}
         value={zoomLevel}
-        onChange={handleZoomLevelChange(setZoomLevel)}
+        onChange={(e) => setZoomLevel(Number(e.target.value))}
       />
 
       <input
         type="checkbox"
         checked={isLooping}
-        onChange={handleLoopingCheck(setIsLooping)}
+        onChange={(e) => setIsLooping(e.target.checked)}
       />
       <label>loop</label>
 
@@ -70,6 +67,16 @@ export default function Waveform() {
       >
         {isPlaying ? "정지" : "재생"}
       </Button>
+      <input
+        id="playbackrate"
+        type="range"
+        min={0.5}
+        max={1.5}
+        step="0.1"
+        value={playBackRate}
+        onChange={(e) => setPlayBackRate(Number(e.target.value))}
+      />
+      <p className="text-sm text-gray-600">배속: {playBackRate}X</p>
       {bpm && (
         <p className="text-sm text-gray-600">추정 BPM: {Math.round(bpm)}</p>
       )}
@@ -81,7 +88,7 @@ export default function Waveform() {
         max="1.0"
         step="0.01"
         value={volume}
-        onChange={handleVolumeChange(setVolume)}
+        onChange={(e) => setVolume(Number(e.target.value))}
       />
       <p>{loopStart + " : " + loopEnd}</p>
     </div>

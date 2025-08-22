@@ -8,6 +8,7 @@ export function useWaveform() {
   const {
     title,
     volume,
+    playBackRate,
     zoomLevel,
     isLooping,
     setLoopStart,
@@ -158,6 +159,12 @@ export function useWaveform() {
 
     waveSurferRef.current.setVolume(volume);
   }, [volume]);
+
+  useEffect(() => {
+    if (!waveSurferRef.current) return;
+
+    waveSurferRef.current.setPlaybackRate(playBackRate, true);
+  }, [playBackRate]);
 
   useEffect(() => {
     // 루프상태 최신화
