@@ -5,11 +5,11 @@ export default function SideBar() {
   const { isOpen, setIsOpen } = useSideBarStore();
   return (
     <aside
-      className={`fixed inset-0 h-screen bg-indigo-800 transition-all duration-300 ease-in-out  ${isOpen ? "w-30" : "w-0"}`}
+      className={`fixed inset-0 h-screen bg-indigo-800 transition-all duration-300 ease-in-out  ${isOpen ? "w-30" : "w-0"} z-15`}
     >
       <div className="flex items-center justify-between h-16 px-4">
         <button
-          className="text-xl font-bold"
+          className="text-xl font-bold cursor-pointer"
           onClick={() => setIsOpen(!isOpen)}
         >
           MyApp

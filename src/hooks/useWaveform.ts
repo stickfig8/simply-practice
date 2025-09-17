@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import WaveSurfer from "wavesurfer.js";
 import RegionsPlugin from "wavesurfer.js/dist/plugins/regions.js";
 import { useWaveformStore } from "../stores/waveformStore";
-import { analyzeBPM } from "@/utils/waveformHandlers";
+import { analyzeBPM } from "@/utils/waveformUtils";
 
 export function useWaveform() {
   const {
@@ -17,6 +17,9 @@ export function useWaveform() {
     setIsLooping,
     setTitle,
     setBpm,
+    setIsReady,
+    setPlayBackRate,
+    setZoomLevel,
   } = useWaveformStore();
 
   const isLoopingRef = useRef<Boolean>(isLooping);
@@ -32,6 +35,7 @@ export function useWaveform() {
     setIsLooping(false);
     setLoopStart(0);
     setLoopEnd(10);
+    setIsReady(false);
 
     const file = e.target.files?.[0];
     if (!file || !waveSurferRef.current) return;
@@ -56,6 +60,9 @@ export function useWaveform() {
     });
 
     setBpm(await analyzeBPM(file));
+    setIsReady(true);
+    setPlayBackRate(1.0);
+    setZoomLevel(1);
   }
 
   function togglePlay() {

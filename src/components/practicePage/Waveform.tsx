@@ -14,6 +14,7 @@ export default function Waveform() {
     loopEnd,
     volume,
     playBackRate,
+    isReady,
     setZoomLevel,
     setIsLooping,
     setVolume,
@@ -23,7 +24,7 @@ export default function Waveform() {
   const { handleFileChange, togglePlay, containerRef } = useWaveform();
 
   return (
-    <div className="space-y-4 item-center w-full">
+    <div className={`space-y-4 item-center `}>
       <input
         type="file"
         id="fileInput"
@@ -38,8 +39,11 @@ export default function Waveform() {
         파일
       </Label>
 
-      <div className="w-full h-29 border-1 overflow-hidden">
-        <div ref={containerRef} className="w-full bg-gray-100 rounded" />
+      <div className="relative w-full h-29 border-1 overflow-x-auto overflow-y-hidden">
+        <div
+          ref={containerRef}
+          className="absolute inset-0 bg-gray-100 rounded"
+        />
       </div>
 
       <input
@@ -49,12 +53,14 @@ export default function Waveform() {
         max={50}
         value={zoomLevel}
         onChange={(e) => setZoomLevel(Number(e.target.value))}
+        disabled={!isReady}
       />
 
       <input
         type="checkbox"
         checked={isLooping}
         onChange={(e) => setIsLooping(e.target.checked)}
+        disabled={!isReady}
       />
       <label>loop</label>
 
@@ -63,7 +69,7 @@ export default function Waveform() {
         variant="outline"
         size="default"
         onClick={togglePlay}
-        disabled={title === ""}
+        disabled={!isReady}
       >
         {isPlaying ? "정지" : "재생"}
       </Button>
@@ -75,6 +81,7 @@ export default function Waveform() {
         step="0.1"
         value={playBackRate}
         onChange={(e) => setPlayBackRate(Number(e.target.value))}
+        disabled={!isReady}
       />
       <p className="text-sm text-gray-600">배속: {playBackRate}X</p>
       {bpm && (
@@ -89,6 +96,7 @@ export default function Waveform() {
         step="0.01"
         value={volume}
         onChange={(e) => setVolume(Number(e.target.value))}
+        disabled={!isReady}
       />
       <p>{loopStart + " : " + loopEnd}</p>
     </div>

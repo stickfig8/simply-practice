@@ -13,6 +13,7 @@ export const useWaveformStore = create<WaveformStoreState>()(
     zoomLevel: 1,
     isLooping: false,
     isPlaying: false,
+    isReady: false,
 
     setTitle: (name: string) => set({ title: name }),
     setBpm: (bpm: number) => set({ bpm: bpm }),
@@ -23,5 +24,6 @@ export const useWaveformStore = create<WaveformStoreState>()(
     setZoomLevel: (level: number) => set({ zoomLevel: level }),
     setIsLooping: (loop: boolean) => set({ isLooping: loop }),
     setIsPlaying: (isPlaying: boolean) => set({ isPlaying: isPlaying }),
+    setIsReady: (isReady: boolean) => set({ isReady: isReady }),
   }))
 );

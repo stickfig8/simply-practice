@@ -8,6 +8,7 @@ export type WaveformStoreState = {
   zoomLevel: number;
   isLooping: boolean;
   isPlaying: boolean;
+  isReady: boolean;
 
   setTitle: (name: string) => void;
   setBpm: (bpm: number) => void;
@@ -18,4 +19,5 @@ export type WaveformStoreState = {
   setZoomLevel: (level: number) => void;
   setIsLooping: (loop: boolean) => void;
   setIsPlaying: (isPlaying: boolean) => void;
+  setIsReady: (isReady: boolean) => void;
 };
