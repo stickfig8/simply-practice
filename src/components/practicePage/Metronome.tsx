@@ -7,6 +7,7 @@ import {
   subdivisionConstants,
 } from "@/configs/beatConstants";
 import BeatTiles from "./metronome/BeatTiles";
+import CommonButton from "../common/CommonButton";
 
 export default function Metronome() {
   const {
@@ -22,7 +23,7 @@ export default function Metronome() {
     setVolume,
   } = useMetronomeStore();
 
-  const { isPlaying, currentBeat, toggleMetronome } = useMetronome();
+  const { isPlaying, currentBeat, toggleMetronome, tapTempo } = useMetronome();
 
   return (
     <div className="p-4 space-y-4">
@@ -108,6 +109,10 @@ export default function Metronome() {
       >
         {isPlaying ? "Stop" : "Start"}
       </button>
+
+      <CommonButton width="60px" height="40px" onClick={tapTempo}>
+        tap
+      </CommonButton>
 
       <BeatTiles currentBeat={currentBeat} beatsPerMeasure={beatsPerMeasure} />
     </div>

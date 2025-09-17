@@ -4,7 +4,7 @@ import * as Tone from "tone";
 import { setUpLoop } from "../utils/metronomeUtils";
 
 export function useMetronome() {
-  const { bpm, beatsPerMeasure, note, subdivision, volume } =
+  const { bpm, beatsPerMeasure, note, subdivision, volume, setBpm } =
     useMetronomeStore();
 
   const noteDuration = useMemo(() => {
@@ -20,6 +20,36 @@ export function useMetronome() {
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentBeat, setCurrentBeat] = useState(0);
+
+  const tapTimeRef = useRef<number[]>([]);
+  const lastTapRef = useRef<number | null>(null);
+
+  function tapTempo() {
+    const now = Date.now();
+    if (lastTapRef.current && now - lastTapRef.current > 3000) {
+      // 3초 이상 지나면 리셋
+      tapTimeRef.current = [];
+    }
+    lastTapRef.current = now;
+    tapTimeRef.current.push(now);
+
+    if (tapTimeRef.current.length > 4) {
+      tapTimeRef.current.shift();
+    }
+
+    if (tapTimeRef.current.length >= 2) {
+      const intervals = tapTimeRef.current
+        .slice(1)
+        .map((tap, i) => (tap - tapTimeRef.current[i]) / 1000); // 초 단위
+
+      const avgInterval =
+        intervals.reduce((sum, cur) => sum + cur, 0) / intervals.length;
+
+      const newBpm = Math.round(60 / avgInterval);
+
+      setBpm(newBpm);
+    }
+  }
 
   async function toggleMetronome() {
     if (!samplerRef.current) return;
@@ -92,5 +122,5 @@ export function useMetronome() {
     });
   }, [noteDuration, beatsPerMeasure]);
 
-  return { isPlaying, currentBeat, toggleMetronome };
+  return { isPlaying, currentBeat, toggleMetronome, tapTempo };
 }

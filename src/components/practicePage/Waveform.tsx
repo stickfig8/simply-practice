@@ -1,13 +1,15 @@
 import { useWaveformStore } from "../../stores/waveformStore";
 import { useWaveform } from "../../hooks/useWaveform";
-import { Button } from "@/components/ui/button";
 import { Label } from "../ui/label";
+import CommonButton from "../common/CommonButton";
+import { Slider } from "../ui/slider";
 
 export default function Waveform() {
   const {
     bpm,
     zoomLevel,
     title,
+    duration,
     isLooping,
     isPlaying,
     loopStart,
@@ -21,7 +23,13 @@ export default function Waveform() {
     setPlayBackRate,
   } = useWaveformStore();
 
-  const { handleFileChange, togglePlay, containerRef } = useWaveform();
+  const {
+    handleFileChange,
+    togglePlay,
+    setForward,
+    setBackward,
+    containerRef,
+  } = useWaveform();
 
   return (
     <div className={`space-y-4 item-center `}>
@@ -45,15 +53,25 @@ export default function Waveform() {
           className="absolute inset-0 bg-gray-100 rounded"
         />
       </div>
+      {/* <Slider
+        id="playPosition"
+        min={0}
+        max={duration}
+        step={0.01}
+        value={[zoomLevel]}
+        onValueChange={(val) => setZoomLevel(val[0])}
+        disabled={!isReady}
+      /> */}
 
-      <input
+      <Slider
         id="zoom"
-        type="range"
         min={1}
         max={50}
-        value={zoomLevel}
-        onChange={(e) => setZoomLevel(Number(e.target.value))}
+        step={1}
+        value={[zoomLevel]}
+        onValueChange={(val) => setZoomLevel(val[0])}
         disabled={!isReady}
+        className="w-50"
       />
 
       <input
@@ -64,7 +82,7 @@ export default function Waveform() {
       />
       <label>loop</label>
 
-      <Button
+      {/* <Button
         className="cursor-pointer"
         variant="outline"
         size="default"
@@ -72,7 +90,31 @@ export default function Waveform() {
         disabled={!isReady}
       >
         {isPlaying ? "정지" : "재생"}
-      </Button>
+      </Button> */}
+      <CommonButton
+        width="60px"
+        height="40px"
+        onClick={setBackward}
+        disabled={!isReady}
+      >
+        -10
+      </CommonButton>
+      <CommonButton
+        width="60px"
+        height="40px"
+        onClick={togglePlay}
+        disabled={!isReady}
+      >
+        {isPlaying ? "정지" : "재생"}
+      </CommonButton>
+      <CommonButton
+        width="60px"
+        height="40px"
+        onClick={setForward}
+        disabled={!isReady}
+      >
+        +10
+      </CommonButton>
       <input
         id="playbackrate"
         type="range"

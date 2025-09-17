@@ -11,6 +11,7 @@ export function useWaveform() {
     playBackRate,
     zoomLevel,
     isLooping,
+    isReady,
     setLoopStart,
     setLoopEnd,
     setIsPlaying,
@@ -20,6 +21,8 @@ export function useWaveform() {
     setIsReady,
     setPlayBackRate,
     setZoomLevel,
+    setDuration,
+    setPosition,
   } = useWaveformStore();
 
   const isLoopingRef = useRef<Boolean>(isLooping);
@@ -45,6 +48,7 @@ export function useWaveform() {
     waveSurferRef.current.setTime(0);
     const name = file.name.replace(/\.[^/.]+$/, "");
     setTitle(name); // zustand에 저장
+    setDuration(waveSurferRef.current.getDuration());
 
     if (regionsRef.current) {
       // 새 오디오 로드 시 기존 리전 삭제
@@ -80,6 +84,29 @@ export function useWaveform() {
     }
 
     setIsPlaying(waveSurferRef.current.isPlaying());
+  }
+
+  function setForward() {
+    if (!waveSurferRef.current) return;
+    if (
+      waveSurferRef.current.getCurrentTime() + 10 <
+      waveSurferRef.current.getDuration()
+    ) {
+      waveSurferRef.current.setTime(
+        waveSurferRef.current.getCurrentTime() + 10
+      );
+    }
+  }
+
+  function setBackward() {
+    if (!waveSurferRef.current) return;
+    if (waveSurferRef.current.getCurrentTime() - 10 > 0) {
+      waveSurferRef.current.setTime(
+        waveSurferRef.current.getCurrentTime() - 10
+      );
+    } else {
+      waveSurferRef.current.setTime(0);
+    }
   }
 
   function spacebarToPlay(e: KeyboardEvent) {
@@ -178,5 +205,12 @@ export function useWaveform() {
     isLoopingRef.current = isLooping;
   }, [isLooping]);
 
-  return { handleFileChange, togglePlay, containerRef };
+  return {
+    handleFileChange,
+    togglePlay,
+    setForward,
+    setBackward,
+    containerRef,
+    waveSurferRef,
+  };
 }
