@@ -11,7 +11,6 @@ export function useWaveform() {
     playBackRate,
     zoomLevel,
     isLooping,
-    isReady,
     setLoopStart,
     setLoopEnd,
     setIsPlaying,
@@ -48,7 +47,6 @@ export function useWaveform() {
     waveSurferRef.current.setTime(0);
     const name = file.name.replace(/\.[^/.]+$/, "");
     setTitle(name); // zustand에 저장
-    setDuration(waveSurferRef.current.getDuration());
 
     if (regionsRef.current) {
       // 새 오디오 로드 시 기존 리전 삭제
@@ -67,6 +65,11 @@ export function useWaveform() {
     setIsReady(true);
     setPlayBackRate(1.0);
     setZoomLevel(1);
+
+    // waveSurferRef.current.on("ready", (duration) => {
+    //   console.log(duration);
+    //   setDuration(duration);
+    // });
   }
 
   function togglePlay() {
@@ -141,6 +144,10 @@ export function useWaveform() {
         wavesurfer.setTime(0);
         setIsPlaying(false);
       }
+    });
+
+    wavesurfer.on("timeupdate", (time) => {
+      setPosition(time);
     });
 
     regions.on("region-created", (newRegion) => {

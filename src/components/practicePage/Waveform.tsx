@@ -10,6 +10,7 @@ export default function Waveform() {
     zoomLevel,
     title,
     duration,
+    position,
     isLooping,
     isPlaying,
     loopStart,
@@ -58,8 +59,7 @@ export default function Waveform() {
         min={0}
         max={duration}
         step={0.01}
-        value={[zoomLevel]}
-        onValueChange={(val) => setZoomLevel(val[0])}
+        value={[position]}
         disabled={!isReady}
       /> */}
 
