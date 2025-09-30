@@ -3,6 +3,7 @@ import { useWaveform } from "../../hooks/useWaveform";
 import { Label } from "../ui/label";
 import CommonButton from "../common/CommonButton";
 import { Slider } from "../ui/slider";
+import { formatPosition } from "@/utils/waveformUtils";
 
 export default function Waveform() {
   const {
@@ -55,6 +56,7 @@ export default function Waveform() {
           className="absolute inset-0 bg-gray-100 rounded"
         />
       </div>
+      <p className="text-lg">{formatPosition(position)}</p>
       <Slider
         id="playPosition"
         min={0}
@@ -142,7 +144,7 @@ export default function Waveform() {
         onChange={(e) => setVolume(Number(e.target.value))}
         disabled={!isReady}
       />
-      <p>{loopStart + " : " + loopEnd}</p>
+      <p>{formatPosition(loopStart) + " ~ " + formatPosition(loopEnd)}</p>
     </div>
   );
 }
