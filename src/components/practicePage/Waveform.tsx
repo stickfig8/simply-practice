@@ -29,6 +29,7 @@ export default function Waveform() {
     togglePlay,
     setForward,
     setBackward,
+    setTimeSlider,
     containerRef,
   } = useWaveform();
 
@@ -54,14 +55,15 @@ export default function Waveform() {
           className="absolute inset-0 bg-gray-100 rounded"
         />
       </div>
-      {/* <Slider
+      <Slider
         id="playPosition"
         min={0}
         max={duration}
         step={0.01}
         value={[position]}
         disabled={!isReady}
-      /> */}
+        onValueChange={(val) => setTimeSlider(val[0])}
+      />
 
       <Slider
         id="zoom"

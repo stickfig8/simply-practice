@@ -50,26 +50,28 @@ export function useWaveform() {
 
     if (regionsRef.current) {
       // 새 오디오 로드 시 기존 리전 삭제
-      regionsRef.current.clearRegions();
+      regionsRef.current?.clearRegions();
     }
 
-    waveSurferRef.current.on("decode", () => {
-      regionsRef.current?.addRegion({
-        start: 0,
-        end: 10,
-        color: "rgba(255, 0, 0, 0.1)",
-      });
+    // waveSurferRef.current.on("decode", () => {
+    //   regionsRef.current?.addRegion({
+    //     start: 0,
+    //     end: 10,
+    //     color: "rgba(255, 0, 0, 0.1)",
+    //   });
+    // });
+
+    waveSurferRef.current.once("decode", () => {
+      const duration = waveSurferRef.current?.getDuration();
+      if (duration) {
+        setDuration(duration);
+      }
     });
 
     setBpm(await analyzeBPM(file));
     setIsReady(true);
     setPlayBackRate(1.0);
     setZoomLevel(1);
-
-    // waveSurferRef.current.on("ready", (duration) => {
-    //   console.log(duration);
-    //   setDuration(duration);
-    // });
   }
 
   function togglePlay() {
@@ -110,6 +112,11 @@ export function useWaveform() {
     } else {
       waveSurferRef.current.setTime(0);
     }
+  }
+
+  function setTimeSlider(time: number) {
+    if (!waveSurferRef.current) return;
+    waveSurferRef.current.setTime(time);
   }
 
   function spacebarToPlay(e: KeyboardEvent) {
@@ -217,6 +224,7 @@ export function useWaveform() {
     togglePlay,
     setForward,
     setBackward,
+    setTimeSlider,
     containerRef,
     waveSurferRef,
   };
