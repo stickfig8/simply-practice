@@ -2,32 +2,56 @@ import { create } from "zustand";
 import type { WaveformStoreState } from "../types/WaveformStoreState";
 import { devtools } from "zustand/middleware";
 
-export const useWaveformStore = create<WaveformStoreState>()(
-  devtools((set) => ({
-    title: "",
-    bpm: 0,
-    volume: 0.5,
-    duration: 0,
-    position: 0,
-    playBackRate: 1.0,
-    loopStart: 0,
-    loopEnd: 0,
-    zoomLevel: 1,
-    isLooping: false,
-    isPlaying: false,
-    isReady: false,
+const initialState: Omit<WaveformStoreState, keyof WaveformStoreActions> = {
+  title: "",
+  bpm: 0,
+  volume: 0.5,
+  duration: 0,
+  position: 0,
+  playBackRate: 1.0,
+  loopStart: 0,
+  loopEnd: 0,
+  zoomLevel: 1,
+  isLooping: false,
+  isPlaying: false,
+  isReady: false,
+};
 
-    setTitle: (name: string) => set({ title: name }),
-    setBpm: (bpm: number) => set({ bpm: bpm }),
-    setVolume: (volume: number) => set({ volume: volume }),
-    setDuration: (duration: number) => set({ duration: duration }),
-    setPosition: (position: number) => set({ position: position }),
-    setPlayBackRate: (rate: number) => set({ playBackRate: rate }),
-    setLoopStart: (start: number) => set({ loopStart: start }),
-    setLoopEnd: (end: number) => set({ loopEnd: end }),
-    setZoomLevel: (level: number) => set({ zoomLevel: level }),
-    setIsLooping: (loop: boolean) => set({ isLooping: loop }),
-    setIsPlaying: (isPlaying: boolean) => set({ isPlaying: isPlaying }),
-    setIsReady: (isReady: boolean) => set({ isReady: isReady }),
+type WaveformStoreActions = {
+  setTitle: (name: string) => void;
+  setBpm: (bpm: number) => void;
+  setVolume: (volume: number) => void;
+  setDuration: (duration: number) => void;
+  setPosition: (position: number) => void;
+  setPlayBackRate: (rate: number) => void;
+  setLoopStart: (start: number) => void;
+  setLoopEnd: (end: number) => void;
+  setZoomLevel: (level: number) => void;
+  setIsLooping: (loop: boolean) => void;
+  setIsPlaying: (isPlaying: boolean) => void;
+  setIsReady: (isReady: boolean) => void;
+  reset: () => void;
+};
+
+export const useWaveformStore = create<
+  WaveformStoreState & WaveformStoreActions
+>()(
+  devtools((set) => ({
+    ...initialState,
+
+    setTitle: (title) => set({ title }),
+    setBpm: (bpm) => set({ bpm }),
+    setVolume: (volume) => set({ volume }),
+    setDuration: (duration) => set({ duration }),
+    setPosition: (position) => set({ position }),
+    setPlayBackRate: (rate) => set({ playBackRate: rate }),
+    setLoopStart: (start) => set({ loopStart: start }),
+    setLoopEnd: (end) => set({ loopEnd: end }),
+    setZoomLevel: (level) => set({ zoomLevel: level }),
+    setIsLooping: (loop) => set({ isLooping: loop }),
+    setIsPlaying: (isPlaying) => set({ isPlaying }),
+    setIsReady: (isReady) => set({ isReady }),
+
+    reset: () => set({ ...initialState }),
   }))
 );

@@ -22,6 +22,7 @@ export function useWaveform() {
     setZoomLevel,
     setDuration,
     setPosition,
+    reset,
   } = useWaveformStore();
 
   const isLoopingRef = useRef<Boolean>(isLooping);
@@ -189,7 +190,7 @@ export function useWaveform() {
     return () => {
       wavesurfer.destroy();
       window.removeEventListener("keydown", spacebarToPlay);
-      setIsPlaying(false);
+      reset();
     };
   }, []);
 
