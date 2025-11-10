@@ -61,12 +61,12 @@ export default function SaveModal() {
         </Button>
       </DrawerTrigger>
 
-      <DrawerContent className="px-3 w-full">
+      <DrawerContent className="px-5 w-full">
         <DrawerHeader>
           <DrawerTitle>오늘의 연습일지</DrawerTitle>
           <DrawerDescription>{date}</DrawerDescription>
         </DrawerHeader>
-        <div className="flex-col mx-auto w-full max-w-100">
+        <div className="flex-col mx-auto w-full max-w-120">
           <Label className="text-lg">곡명</Label>
           <Input defaultValue={title} placeholder="Song name" />
 

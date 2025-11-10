@@ -24,7 +24,7 @@ export function useAudioConnection() {
 
   useEffect(() => {
     // 초기 세팅(장치 목록 로드 + 장치 목록 변경 대응)
-    getDevices(setDevices, setInputId);
+    getDevices(setDevices, setInputId, inputId);
 
     async function handleDeviceChange() {
       const devices = await navigator.mediaDevices.enumerateDevices();
@@ -45,6 +45,7 @@ export function useAudioConnection() {
         "devicechange",
         handleDeviceChange
       );
+      cleanAudioConnection(audioCtxRef, streamRef);
     };
   }, []);
 
@@ -56,8 +57,9 @@ export function useAudioConnection() {
       return;
     }
 
+    cleanAudioConnection(audioCtxRef, streamRef);
+
     if (!inputId) {
-      cleanAudioConnection(audioCtxRef, streamRef);
       setChannel(0);
       setChannelCount(1);
       return;

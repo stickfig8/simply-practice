@@ -10,7 +10,8 @@ type ConnectAudioParams = {
 
 export async function getDevices(
   setDevices: (devices: MediaDeviceInfo[]) => void,
-  setInputId: (id: string) => void,
+  setInputId: (id: string | null) => void,
+  currentInputId: string | null
 ) {
   // 장치연결 함수
 
@@ -20,14 +21,24 @@ export async function getDevices(
   const inputs = devices.filter((device) => device.kind === "audioinput");
   setDevices(inputs);
 
-  const defaultDevice = devices.find((device) => device.deviceId === "default"); // 디폴트 장비 연결
-  if (defaultDevice) setInputId(defaultDevice.deviceId);
-  else if (inputs.length > 0) setInputId(inputs[0].deviceId);
+  const valid = inputs.some((device) => device.deviceId === currentInputId);
+
+  if (valid && currentInputId) {
+    setInputId(currentInputId);
+  } else if (inputs.length > 0) {
+    setInputId(inputs[0].deviceId);
+  } else {
+    setInputId(null);
+  }
+
+  // const defaultDevice = devices.find((device) => device.deviceId === "default"); // 디폴트 장비 연결
+  // if (defaultDevice) setInputId(defaultDevice.deviceId);
+  // else if (inputs.length > 0) setInputId(inputs[0].deviceId);
 }
 
 export function cleanAudioConnection( // 연결된 오디오 연결해제 & 제거
   audioCtxRef: React.RefObject<AudioContext | null>,
-  streamRef: React.RefObject<MediaStream | null>,
+  streamRef: React.RefObject<MediaStream | null>
 ) {
   if (audioCtxRef.current && audioCtxRef.current.state !== "closed") {
     audioCtxRef.current.close();
