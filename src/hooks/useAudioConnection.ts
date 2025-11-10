@@ -62,6 +62,7 @@ export function useAudioConnection() {
     if (!inputId) {
       setChannel(0);
       setChannelCount(1);
+      cleanAudioConnection(audioCtxRef, streamRef);
       return;
     }
 

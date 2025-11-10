@@ -1,9 +1,10 @@
 import { useWaveformStore } from "../../stores/waveformStore";
 import { useWaveform } from "../../hooks/useWaveform";
-import { Label } from "../ui/label";
 import CommonButton from "../common/CommonButton";
 import { Slider } from "../ui/slider";
 import { formatPosition } from "@/utils/waveformUtils";
+
+import { Play, Pause, Rewind, FastForward, File } from "lucide-react";
 
 export default function Waveform() {
   const {
@@ -36,19 +37,42 @@ export default function Waveform() {
 
   return (
     <div className={`space-y-4 item-center `}>
-      <input
-        type="file"
-        id="fileInput"
-        accept="audio/*"
-        onChange={handleFileChange}
-        className="mb-2 hidden"
-      />
-      <Label
-        htmlFor="fileInput"
-        className="w-fit h-fit border-2 cursor-pointer"
-      >
-        파일
-      </Label>
+      <div className="flex gap-1 items-center">
+        <input
+          type="file"
+          id="fileInput"
+          accept="audio/*"
+          onChange={handleFileChange}
+          className="mb-2 hidden"
+        />
+        <label htmlFor="fileInput" className="w-fit h-fit cursor-pointer">
+          <File strokeWidth={2} />
+        </label>
+        <CommonButton
+          width="60px"
+          height="40px"
+          onClick={setBackward}
+          disabled={!isReady}
+        >
+          <Rewind />
+        </CommonButton>
+        <CommonButton
+          width="60px"
+          height="40px"
+          onClick={togglePlay}
+          disabled={!isReady}
+        >
+          {isPlaying ? <Pause /> : <Play />}
+        </CommonButton>
+        <CommonButton
+          width="60px"
+          height="40px"
+          onClick={setForward}
+          disabled={!isReady}
+        >
+          <FastForward />
+        </CommonButton>
+      </div>
 
       <div className="relative w-full h-29 border-1 overflow-x-auto overflow-y-hidden">
         <div
@@ -95,30 +119,7 @@ export default function Waveform() {
       >
         {isPlaying ? "정지" : "재생"}
       </Button> */}
-      <CommonButton
-        width="60px"
-        height="40px"
-        onClick={setBackward}
-        disabled={!isReady}
-      >
-        -10
-      </CommonButton>
-      <CommonButton
-        width="60px"
-        height="40px"
-        onClick={togglePlay}
-        disabled={!isReady}
-      >
-        {isPlaying ? "정지" : "재생"}
-      </CommonButton>
-      <CommonButton
-        width="60px"
-        height="40px"
-        onClick={setForward}
-        disabled={!isReady}
-      >
-        +10
-      </CommonButton>
+
       <input
         id="playbackrate"
         type="range"

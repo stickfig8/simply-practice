@@ -1,4 +1,61 @@
 #root {
+  white-space: pre-line;
+  --header-bg: #c7c7c7;
+  --headerItems-bg: #ffffff;
+  --footer-border: #000000;
+  --text-color: #000000;
+  --card-bg: #aaaaaa;
+  --button-bg: #454545;
+
+  --search-bar-bg: #ffffff;
+  --search-element-bg: rgba(140, 140, 140, 0.16);
+  --search-element-border: rgba(191, 191, 191, 0.4);
+  --search-element-text: rgba(38, 38, 38, 0.8);
+
+  --main-color: #ee6768;
+  --main-color-sub: #ffe5e4;
+  --main-text: #ffffff;
+
+  --indicator-disabled: rgba(69, 69, 69, 0.16);
+  --deactivated-text: rgba(69, 69, 69, 0.33);
+  --sidebar: #f49fa0;
+  --sidebar-text: #262626cc;
+
+  --sidebar-active: rgba(244, 159, 160, 1);
+
+  --header-text: #ffffff;
+
+  --card-text: #ffffff;
+  --card-subText: rgba(38, 38, 38, 0.8);
+
+  --tooltip-bg: rgba(38, 38, 38, 0.8);
+  --tooltip-text: rgba(255, 255, 255, 1);
+
+  --sem-bg-elevated-alt: #f5f5f5;
+  --sem-fill-norm: rgba(140, 140, 140, 0.08);
+
+  --place-neutral: rgba(38, 38, 38, 0.8);
+
+  --label-normal: rgba(31, 31, 31, 1);
+
+  --modal-bg: rgba(0, 0, 0, 0.3);
+
+  --neutral-600: #8c8c8c;
+
+  --place-detail-heart: rgba(69, 69, 69, 0.33);
+
+  --textarea-border: rgba(191, 191, 191, 0.4);
+
+  --tab-fg: rgba(238, 103, 104, 0.45);
+  --tab-bg: rgba(238, 103, 104, 0.05);
+
+  --kakao: #fee500;
+  --naver: #03c75a;
+  --google: #ffffff;
+
+  --state-error: #ff0000;
+  --state-success: #00da07;
+  --state-warning: #ffc300;
 }
 
 @keyframes flash {

@@ -26,14 +26,14 @@ export async function getDevices(
   if (valid && currentInputId) {
     setInputId(currentInputId);
   } else if (inputs.length > 0) {
-    setInputId(inputs[0].deviceId);
+    const defaultDevice = devices.find(
+      (device) => device.deviceId === "default"
+    ); // 디폴트 장비 연결
+    if (defaultDevice) setInputId(defaultDevice.deviceId);
+    else if (inputs.length > 0) setInputId(inputs[0].deviceId);
   } else {
     setInputId(null);
   }
-
-  // const defaultDevice = devices.find((device) => device.deviceId === "default"); // 디폴트 장비 연결
-  // if (defaultDevice) setInputId(defaultDevice.deviceId);
-  // else if (inputs.length > 0) setInputId(inputs[0].deviceId);
 }
 
 export function cleanAudioConnection( // 연결된 오디오 연결해제 & 제거

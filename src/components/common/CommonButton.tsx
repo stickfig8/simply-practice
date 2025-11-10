@@ -13,9 +13,14 @@ const Styled = styled.button<Props>`
   height: ${({ height }) => height || "40px"};
   background: #ffffff;
   foreground: #000000;
-  border-radius: 4px;
+  border: 1px solid black;
+  border-radius: 8px;
   cursor: pointer;
-  transition: 0.2s;
+  transition: 0.1s;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   &:hover {
     filter: brightness(90%);
