@@ -11,11 +11,12 @@ export default function PracticePage() {
     <MainContainer>
       <PageHeader />
       <Waveform />
-      <SaveModal />
+      <Metronome />
+
       <AudioInputOutput />
 
-      <Metronome />
       <Tuner />
+      <SaveModal />
     </MainContainer>
   );
 }

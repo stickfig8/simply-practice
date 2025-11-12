@@ -13,7 +13,7 @@ const Styled = styled.button<Props>`
   height: ${({ height }) => height || "40px"};
   background: #ffffff;
   foreground: #000000;
-  border: 1px solid black;
+  
   border-radius: 8px;
   cursor: pointer;
   transition: 0.1s;
@@ -40,7 +40,13 @@ export default function CommonButton({
   disabled,
 }: Props) {
   return (
-    <Styled width={width} height={height} disabled={disabled} onClick={onClick}>
+    <Styled
+      width={width}
+      height={height}
+      disabled={disabled}
+      onClick={onClick}
+      className="shadow-sm"
+    >
       {children}
     </Styled>
   );

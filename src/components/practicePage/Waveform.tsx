@@ -36,7 +36,7 @@ export default function Waveform() {
   } = useWaveform();
 
   return (
-    <div className={`space-y-4 item-center `}>
+    <div className={`space-y-4 py-3`}>
       <div className="flex gap-1 items-center">
         <input
           type="file"
@@ -80,7 +80,11 @@ export default function Waveform() {
           className="absolute inset-0 bg-gray-100 rounded"
         />
       </div>
-      <p className="text-lg">{formatPosition(position)}</p>
+      <div className="text-lg flex justify-between items-centrer">
+        <p>{formatPosition(position)}</p>
+        <p>{formatPosition(duration)}</p>
+      </div>
+
       <Slider
         id="playPosition"
         min={0}

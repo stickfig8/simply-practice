@@ -122,16 +122,6 @@ export function useWaveform() {
 
   function spacebarToPlay(e: KeyboardEvent) {
     // 키보드 작동 제어
-
-    const tag = (e.target as HTMLElement)?.tagName.toLowerCase();
-    if (
-      tag === "input" ||
-      tag === "textarea" ||
-      tag === "select" ||
-      tag === "button"
-    ) {
-      return; // 무시
-    }
     if (e.code === "Space") {
       e.preventDefault();
       togglePlay();
