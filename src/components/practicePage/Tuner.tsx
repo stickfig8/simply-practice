@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { useTuner } from "../../hooks/useTuner";
 import CommonButton from "../common/CommonButton";
-import { X } from "lucide-react";
-import ModalBackGround from "../common/ModalBackGround";
+import ModalBackGround from "../common/modal/ModalBackGround";
+import { useModalEscapeKey } from "@/hooks/useModalEscapeKey";
+import ModalCanvas from "../common/modal/ModalCanvas";
+import { Ear } from "lucide-react";
 
 export default function Tuner() {
   const { note, freq, cents } = useTuner();
@@ -12,24 +14,16 @@ export default function Tuner() {
 
   const [isOpen, setIsOpen] = useState(false);
 
+  useModalEscapeKey(() => setIsOpen(false));
+
   return (
-    <section>
+    <article>
       <CommonButton width="60px" height="40px" onClick={() => setIsOpen(true)}>
-        {"tuner"}
+        <Ear />
       </CommonButton>
       {isOpen && (
         <ModalBackGround onClose={() => setIsOpen(false)}>
-          <div
-            className="p-6 w-md mx-auto bg-white rounded-xl shadow-md space-y-4"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <p
-              className="ml-auto w-fit cursor-pointer"
-              onClick={() => setIsOpen(false)}
-            >
-              <X />
-            </p>
-            <h2 className="text-xl font-bold text-center">Tuner</h2>
+          <ModalCanvas onClose={() => setIsOpen(false)} title="Tuner">
             <p className="text-center text-lg font-semibold">
               {note ?? ""} ({freq?.toFixed(2) ?? 0} Hz)
             </p>
@@ -55,9 +49,9 @@ export default function Tuner() {
             <p className="text-center text-sm text-gray-600">
               {cents?.toFixed(1) ?? 0} cents
             </p>
-          </div>
+          </ModalCanvas>
         </ModalBackGround>
       )}
-    </section>
+    </article>
   );
 }

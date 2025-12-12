@@ -1,6 +1,6 @@
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
-import ModalBackGround from "./ModalBackGround";
+import ModalBackGround from "./modal/ModalBackGround";
 import MobileNavButton from "./MobileNavButton";
 
 export default function MobileNav() {
