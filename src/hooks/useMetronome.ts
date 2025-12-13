@@ -94,7 +94,12 @@ export function useMetronome() {
     }).connect(masterGain.current);
 
     return () => {
-      samplerRef.current?.dispose();
+      loopRef.current?.stop();
+      loopRef.current?.dispose();
+      loopRef.current = null;
+      Tone.Transport.stop();
+      indexRef.current = 0;
+      setCurrentBeat(0);
     };
   }, []);
 

@@ -1,3 +1,4 @@
+import ModalTitle from "@/components/modals/common/ModalTitle";
 import styled from "@emotion/styled";
 import { X } from "lucide-react";
 
@@ -6,22 +7,6 @@ type Props = {
   onClose: () => void;
   title: string;
 };
-
-export default function ModalCanvas({ children, onClose, title }: Props) {
-  return (
-    <ModalWrapper onClick={(e) => e.stopPropagation()}>
-      <ModalHeader>
-        <Spacer />
-        <ModalTitle>{title}</ModalTitle>
-        <CloseButton onClick={onClose}>
-          <X />
-        </CloseButton>
-      </ModalHeader>
-      {children}
-    </ModalWrapper>
-  );
-}
-
 const ModalWrapper = styled.div`
   max-width: 562px;
   width: 90%;
@@ -51,16 +36,6 @@ const ModalHeader = styled.div`
   align-items: center;
 `;
 
-const ModalTitle = styled.p`
-  font-size: 20px;
-  font-weight: 600;
-  text-align: center;
-
-  @media (max-width: 700px) {
-    font-size: 16px;
-  }
-`;
-
 const CloseButton = styled.button`
   height: 24px;
   aspect-ratio: 1 / 1;
@@ -75,3 +50,18 @@ const Spacer = styled.div`
   width: 24px;
   height: 24px;
 `;
+
+export default function ModalCanvas({ children, onClose, title }: Props) {
+  return (
+    <ModalWrapper onClick={(e) => e.stopPropagation()}>
+      <ModalHeader>
+        <Spacer />
+        <ModalTitle title={title} />
+        <CloseButton onClick={onClose}>
+          <X />
+        </CloseButton>
+      </ModalHeader>
+      {children}
+    </ModalWrapper>
+  );
+}

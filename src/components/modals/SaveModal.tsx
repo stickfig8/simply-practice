@@ -27,6 +27,7 @@ import { getToday, readableSeconds } from "@/utils/saveModalUtils";
 import { useWaveformStore } from "@/stores/waveformStore";
 import { useMetronomeStore } from "@/stores/metronomeStore";
 import { useState } from "react";
+import SaveModalInputWrapper from "./common/SaveModalInputWrapper";
 
 export default function SaveModal() {
   const date = getToday();
@@ -66,54 +67,60 @@ export default function SaveModal() {
           <DrawerTitle>오늘의 연습일지</DrawerTitle>
           <DrawerDescription>{date}</DrawerDescription>
         </DrawerHeader>
-        <div className="flex-col mx-auto w-full max-w-120">
-          <Label className="text-lg">곡명</Label>
-          <Input defaultValue={title} placeholder="Song name" />
+        <div className="flex flex-col mx-auto w-full max-w-120 gap-3">
+          <SaveModalInputWrapper title="곡명">
+            <Input defaultValue={title} placeholder="Song name" />
+          </SaveModalInputWrapper>
 
-          <Label className="text-lg">악기</Label>
-          <Select>
-            <SelectTrigger className="w-full">
-              <SelectValue placeholder="Select a intrument"></SelectValue>
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectLabel>Band</SelectLabel>
-                {insts.map((inst) => (
-                  <SelectItem key={inst} value={inst}>
-                    {inst}
-                  </SelectItem>
-                ))}
-              </SelectGroup>
-            </SelectContent>
-          </Select>
+          <SaveModalInputWrapper title="악기">
+            <Select>
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Select a intrument"></SelectValue>
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Band</SelectLabel>
+                  {insts.map((inst) => (
+                    <SelectItem key={inst} value={inst}>
+                      {inst}
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </SaveModalInputWrapper>
 
-          <Label className="text-lg">연습 파트</Label>
-          <div className="flex items-center gap-2">
-            <Input
-              value={part}
-              onChange={(e) => setPart(e.target.value)}
-              placeholder="ex) 1절 b파트 or 00:32 ~ 01:23"
-            />
-            <div className="flex items-center space-x-2 shrink-0">
-              <Label htmlFor="use-range" className="text-sm">
-                구간
-              </Label>
-              <Checkbox
-                id="use-range"
-                checked={useRange}
-                onCheckedChange={(e) => handleRangeChecked(Boolean(e))}
+          <SaveModalInputWrapper title="연습 파트">
+            <div className="flex items-center gap-2 w-full">
+              <Input
+                value={part}
+                onChange={(e) => setPart(e.target.value)}
+                placeholder="ex) 1절 b파트 or 00:32 ~ 01:23"
+                className=""
               />
+              <div className="flex items-center space-x-2 shrink-0">
+                <Label htmlFor="use-range" className="text-sm">
+                  구간
+                </Label>
+                <Checkbox
+                  id="use-range"
+                  checked={useRange}
+                  onCheckedChange={(e) => handleRangeChecked(Boolean(e))}
+                />
+              </div>
             </div>
-          </div>
+          </SaveModalInputWrapper>
 
-          <Label className="text-lg">연습 BPM</Label>
-          <Input defaultValue={bpm} placeholder="bpm" type="number" />
+          <SaveModalInputWrapper title="연습 BPM">
+            <Input defaultValue={bpm} placeholder="bpm" type="number" />
+          </SaveModalInputWrapper>
 
-          <Label className="text-lg">메모</Label>
-          <Textarea
-            placeholder="type practice memo"
-            className="resize-none w-full whitespace-normal max-h-15 overflow-y-auto"
-          />
+          <SaveModalInputWrapper title="메모">
+            <Textarea
+              placeholder="type practice memo"
+              className="resize-none w-full whitespace-normal max-h-15 overflow-y-auto"
+            />
+          </SaveModalInputWrapper>
 
           <DrawerFooter className="px-0">
             <Button className="cursor-pointer">submit</Button>

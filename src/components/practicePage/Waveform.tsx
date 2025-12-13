@@ -155,9 +155,9 @@ export default function Waveform() {
       /> */}
 
       <div className="w-fit h-fit flex flex-col gap-2">
-        <p className="text-sm text-gray-600">제목: {title}</p>
+        <p className="text-sm text-gray-600">제목: {title ? title : "-"}</p>
         <p className="text-sm text-gray-600">
-          추정 BPM: {bpm ? Math.round(bpm) : "0"}
+          추정 BPM: {bpm ? Math.round(bpm) : "-"}
         </p>
       </div>
       <ControlWithLabel>

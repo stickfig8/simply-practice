@@ -1,7 +1,8 @@
 import styled from "@emotion/styled";
-import Metronome from "./Metronome";
-import Tuner from "./Tuner";
-import AudioInputOutput from "./AudioInputOutput";
+
+import MetronomeModal from "../modals/MetronomeModal";
+import TunerModal from "../modals/TunerModal";
+import AudioInputOutputModal from "../modals/AudioInputOutputModal";
 
 const Styled = styled.div`
   width: fit-content;
@@ -9,14 +10,18 @@ const Styled = styled.div`
   display: flex;
   gap: 12px;
   align-items: center;
+
+  @media (max-width: 500px) {
+    display: none;
+  }
 `;
 
 export default function FunctionalButtons() {
   return (
     <Styled>
-      <Metronome />
-      <Tuner />
-      <AudioInputOutput />
+      <MetronomeModal />
+      <TunerModal />
+      <AudioInputOutputModal />
     </Styled>
   );
 }
