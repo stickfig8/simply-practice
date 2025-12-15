@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import type { WaveformStoreState } from "../types/WaveformStoreState";
+import type { WaveformStoreState } from "../types/store/WaveformStoreState";
 import { devtools } from "zustand/middleware";
 
 const initialState: Omit<WaveformStoreState, keyof WaveformStoreActions> = {

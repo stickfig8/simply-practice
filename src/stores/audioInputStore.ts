@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import type { AudioInputStoreState } from "../types/AudioInputStoreState";
+import type { AudioInputStoreState } from "../types/store/AudioInputStoreState";
 import { persist, devtools } from "zustand/middleware";
 
 export const useAudioInputStore = create<AudioInputStoreState>()(

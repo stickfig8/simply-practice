@@ -1,8 +1,10 @@
 import CommonButton from "@/components/common/CommonButton";
-import ModalBackGround from "@/components/common/modal/ModalBackGround";
-import ModalCanvas from "@/components/common/modal/ModalCanvas";
+import ModalBackGround from "@/components/modals/common/ModalBackGround";
+import ModalCanvas from "@/components/modals/common/ModalCanvas";
 import { useModalEscapeKey } from "@/hooks/useModalEscapeKey";
 import { useState } from "react";
+
+import { motion, AnimatePresence } from "framer-motion";
 
 type Props = {
   title: string;
@@ -31,13 +33,15 @@ export default function ModalTrigger({
       >
         {triggerContent}
       </CommonButton>
-      {isOpen && (
-        <ModalBackGround onClose={() => setIsOpen(false)}>
-          <ModalCanvas onClose={() => setIsOpen(false)} title={title}>
-            {children}
-          </ModalCanvas>
-        </ModalBackGround>
-      )}
+      <AnimatePresence>
+        {isOpen && (
+          <ModalBackGround onClose={() => setIsOpen(false)}>
+            <ModalCanvas onClose={() => setIsOpen(false)} title={title}>
+              {children}
+            </ModalCanvas>
+          </ModalBackGround>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import type { MetronomeState } from "../types/MetronomeStoreState";
+import type { MetronomeState } from "../types/store/MetronomeStoreState";
 import { persist } from "zustand/middleware";
 
 export const useMetronomeStore = create<MetronomeState>()(
@@ -19,6 +19,6 @@ export const useMetronomeStore = create<MetronomeState>()(
     }),
     {
       name: "metronome-storage",
-    },
-  ),
+    }
+  )
 );

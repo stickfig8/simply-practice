@@ -4,6 +4,7 @@ import MainPage from "./pages/MainPage";
 import PracticePage from "./pages/PracticePage";
 import SideBar from "./components/common/SideBar";
 import MobileNav from "./components/common/MobileNav";
+import PracticeDashboardPage from "./pages/PracticeDashboardPage";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/practice" element={<PracticePage />} />
+          <Route path="/dashboard" element={<PracticeDashboardPage />} />
         </Routes>
       </div>
     </BrowserRouter>

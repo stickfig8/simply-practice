@@ -1,0 +1,443 @@
+[
+  {
+    "date": "2025-08-01",
+    "songTitle": "beat it",
+    "instrument": "guitar",
+    "practicePart": "인트로",
+    "bpm": 128,
+    "desc": "리듬 타이밍이 약간 빠름"
+  },
+  {
+    "date": "2025-08-02",
+    "songTitle": "beat it",
+    "instrument": "guitar",
+    "practicePart": "1절 A파트",
+    "bpm": 130,
+    "desc": "스트로크 강약 조절 필요"
+  },
+  {
+    "date": "2025-08-03",
+    "songTitle": "beat it",
+    "instrument": "guitar",
+    "practicePart": "솔로 초반",
+    "bpm": 138,
+    "desc": "벤딩 음정 불안정"
+  },
+  {
+    "date": "2025-08-04",
+    "songTitle": "beat it",
+    "instrument": "guitar",
+    "practicePart": "후렴",
+    "bpm": 135,
+    "desc": "리듬 안정됨"
+  },
+  {
+    "date": "2025-08-05",
+    "songTitle": "beat it",
+    "instrument": "guitar",
+    "practicePart": "2절",
+    "bpm": 132,
+    "desc": "톤 세팅 자연스러움"
+  },
+  {
+    "date": "2025-08-06",
+    "songTitle": "beat it",
+    "instrument": "guitar",
+    "practicePart": "솔로 후반",
+    "bpm": 140,
+    "desc": "완성도 높음"
+  },
+  {
+    "date": "2025-08-07",
+    "songTitle": "beat it",
+    "instrument": "guitar",
+    "practicePart": "인트로 반복",
+    "bpm": 129,
+    "desc": "마무리 정리 단계"
+  },
+
+  {
+    "date": "2025-08-08",
+    "songTitle": "lilac",
+    "instrument": "guitar",
+    "practicePart": "인트로",
+    "bpm": 115,
+    "desc": "코드 전환 부드럽게"
+  },
+  {
+    "date": "2025-08-09",
+    "songTitle": "lilac",
+    "instrument": "guitar",
+    "practicePart": "1절",
+    "bpm": 117,
+    "desc": "리듬 안정적"
+  },
+  {
+    "date": "2025-08-10",
+    "songTitle": "lilac",
+    "instrument": "guitar",
+    "practicePart": "후렴",
+    "bpm": 118,
+    "desc": "스트로크 패턴 통일"
+  },
+  {
+    "date": "2025-08-11",
+    "songTitle": "lilac",
+    "instrument": "guitar",
+    "practicePart": "브릿지",
+    "bpm": 120,
+    "desc": "톤 클린하게 유지"
+  },
+  {
+    "date": "2025-08-12",
+    "songTitle": "lilac",
+    "instrument": "guitar",
+    "practicePart": "1절 B파트",
+    "bpm": 116,
+    "desc": "리듬감 향상"
+  },
+  {
+    "date": "2025-08-13",
+    "songTitle": "lilac",
+    "instrument": "guitar",
+    "practicePart": "후렴 반복",
+    "bpm": 118,
+    "desc": "페달 타이밍 안정"
+  },
+
+  {
+    "date": "2025-08-16",
+    "songTitle": "zenzenzense",
+    "instrument": "guitar",
+    "practicePart": "인트로",
+    "bpm": 180,
+    "desc": "피킹 속도 일정"
+  },
+  {
+    "date": "2025-08-17",
+    "songTitle": "zenzenzense",
+    "instrument": "guitar",
+    "practicePart": "1절",
+    "bpm": 182,
+    "desc": "정확도 향상됨"
+  },
+  {
+    "date": "2025-08-18",
+    "songTitle": "zenzenzense",
+    "instrument": "guitar",
+    "practicePart": "후렴",
+    "bpm": 184,
+    "desc": "스트로크 세기 일정"
+  },
+  {
+    "date": "2025-08-19",
+    "songTitle": "zenzenzense",
+    "instrument": "guitar",
+    "practicePart": "브릿지",
+    "bpm": 186,
+    "desc": "리듬감 안정적"
+  },
+  {
+    "date": "2025-08-21",
+    "songTitle": "zenzenzense",
+    "instrument": "guitar",
+    "practicePart": "인트로 반복",
+    "bpm": 185,
+    "desc": "마무리 정리 단계"
+  },
+
+  {
+    "date": "2025-08-24",
+    "songTitle": "shut up and dance",
+    "instrument": "vocal",
+    "practicePart": "1절",
+    "bpm": 126,
+    "desc": "발음 명확하게 유지"
+  },
+  {
+    "date": "2025-08-25",
+    "songTitle": "shut up and dance",
+    "instrument": "vocal",
+    "practicePart": "후렴",
+    "bpm": 128,
+    "desc": "호흡 안정됨"
+  },
+  {
+    "date": "2025-08-26",
+    "songTitle": "shut up and dance",
+    "instrument": "vocal",
+    "practicePart": "2절",
+    "bpm": 125,
+    "desc": "음정 정확도 상승"
+  },
+  {
+    "date": "2025-08-27",
+    "songTitle": "shut up and dance",
+    "instrument": "vocal",
+    "practicePart": "브릿지",
+    "bpm": 127,
+    "desc": "리듬감 좋아짐"
+  },
+  {
+    "date": "2025-08-29",
+    "songTitle": "shut up and dance",
+    "instrument": "vocal",
+    "practicePart": "후렴 반복",
+    "bpm": 126,
+    "desc": "자연스러운 발음"
+  },
+
+  {
+    "date": "2025-09-01",
+    "songTitle": "pretender",
+    "instrument": "guitar",
+    "practicePart": "인트로",
+    "bpm": 90,
+    "desc": "코드 체인지 부드럽게"
+  },
+  {
+    "date": "2025-09-02",
+    "songTitle": "pretender",
+    "instrument": "guitar",
+    "practicePart": "1절",
+    "bpm": 92,
+    "desc": "박자 안정적"
+  },
+  {
+    "date": "2025-09-03",
+    "songTitle": "pretender",
+    "instrument": "guitar",
+    "practicePart": "후렴",
+    "bpm": 94,
+    "desc": "감정 표현 향상"
+  },
+  {
+    "date": "2025-09-04",
+    "songTitle": "pretender",
+    "instrument": "guitar",
+    "practicePart": "브릿지",
+    "bpm": 96,
+    "desc": "코드 연결 매끄러움"
+  },
+  {
+    "date": "2025-09-05",
+    "songTitle": "pretender",
+    "instrument": "guitar",
+    "practicePart": "2절",
+    "bpm": 93,
+    "desc": "리듬 일정하게 유지"
+  },
+  {
+    "date": "2025-09-06",
+    "songTitle": "pretender",
+    "instrument": "guitar",
+    "practicePart": "후렴 반복",
+    "bpm": 95,
+    "desc": "마무리 완성"
+  },
+
+  {
+    "date": "2025-09-09",
+    "songTitle": "밤이 깊었네",
+    "instrument": "bass",
+    "practicePart": "인트로",
+    "bpm": 95,
+    "desc": "루트음 강세 일정"
+  },
+  {
+    "date": "2025-09-10",
+    "songTitle": "밤이 깊었네",
+    "instrument": "bass",
+    "practicePart": "1절",
+    "bpm": 94,
+    "desc": "드럼과 싱크 맞춤"
+  },
+  {
+    "date": "2025-09-11",
+    "songTitle": "밤이 깊었네",
+    "instrument": "bass",
+    "practicePart": "후렴",
+    "bpm": 96,
+    "desc": "리듬 안정적"
+  },
+  {
+    "date": "2025-09-12",
+    "songTitle": "밤이 깊었네",
+    "instrument": "bass",
+    "practicePart": "브릿지",
+    "bpm": 97,
+    "desc": "연결 부드러움"
+  },
+  {
+    "date": "2025-09-14",
+    "songTitle": "밤이 깊었네",
+    "instrument": "bass",
+    "practicePart": "후렴 반복",
+    "bpm": 96,
+    "desc": "톤 안정"
+  },
+
+  {
+    "date": "2025-09-17",
+    "songTitle": "첫사랑",
+    "instrument": "keyboard",
+    "practicePart": "인트로",
+    "bpm": 76,
+    "desc": "터치 부드럽게 유지"
+  },
+  {
+    "date": "2025-09-18",
+    "songTitle": "첫사랑",
+    "instrument": "keyboard",
+    "practicePart": "1절",
+    "bpm": 78,
+    "desc": "페달 타이밍 안정"
+  },
+  {
+    "date": "2025-09-19",
+    "songTitle": "첫사랑",
+    "instrument": "keyboard",
+    "practicePart": "후렴",
+    "bpm": 80,
+    "desc": "음정 일정"
+  },
+  {
+    "date": "2025-09-21",
+    "songTitle": "첫사랑",
+    "instrument": "keyboard",
+    "practicePart": "2절",
+    "bpm": 79,
+    "desc": "터치 강약 조절"
+  },
+  {
+    "date": "2025-09-22",
+    "songTitle": "첫사랑",
+    "instrument": "keyboard",
+    "practicePart": "브릿지",
+    "bpm": 81,
+    "desc": "페달 길이 일정"
+  },
+
+  {
+    "date": "2025-09-24",
+    "songTitle": "oshakashama",
+    "instrument": "guitar",
+    "practicePart": "인트로",
+    "bpm": 200,
+    "desc": "피킹 일정 유지"
+  },
+  {
+    "date": "2025-09-25",
+    "songTitle": "oshakashama",
+    "instrument": "guitar",
+    "practicePart": "1절",
+    "bpm": 203,
+    "desc": "정확도 향상"
+  },
+  {
+    "date": "2025-09-26",
+    "songTitle": "oshakashama",
+    "instrument": "guitar",
+    "practicePart": "후렴",
+    "bpm": 205,
+    "desc": "리듬 타이트함 유지"
+  },
+  {
+    "date": "2025-09-28",
+    "songTitle": "oshakashama",
+    "instrument": "guitar",
+    "practicePart": "브릿지",
+    "bpm": 204,
+    "desc": "속도 유지됨"
+  },
+  {
+    "date": "2025-09-30",
+    "songTitle": "oshakashama",
+    "instrument": "guitar",
+    "practicePart": "후렴 반복",
+    "bpm": 206,
+    "desc": "완성도 높음"
+  },
+
+  {
+    "date": "2025-10-01",
+    "songTitle": "그대에게",
+    "instrument": "guitar",
+    "practicePart": "인트로",
+    "bpm": 130,
+    "desc": "스트로크 부드럽게"
+  },
+  {
+    "date": "2025-10-02",
+    "songTitle": "그대에게",
+    "instrument": "guitar",
+    "practicePart": "1절",
+    "bpm": 132,
+    "desc": "리듬 일정"
+  },
+  {
+    "date": "2025-10-03",
+    "songTitle": "그대에게",
+    "instrument": "guitar",
+    "practicePart": "후렴",
+    "bpm": 133,
+    "desc": "감정 표현 잘됨"
+  },
+  {
+    "date": "2025-10-04",
+    "songTitle": "그대에게",
+    "instrument": "guitar",
+    "practicePart": "브릿지",
+    "bpm": 131,
+    "desc": "톤 클린하게 유지"
+  },
+  {
+    "date": "2025-10-06",
+    "songTitle": "그대에게",
+    "instrument": "guitar",
+    "practicePart": "후렴 반복",
+    "bpm": 134,
+    "desc": "완성도 높음"
+  },
+
+  {
+    "date": "2025-10-08",
+    "songTitle": "멋진 헛간",
+    "instrument": "guitar",
+    "practicePart": "인트로",
+    "bpm": 112,
+    "desc": "톤 밝게 유지"
+  },
+  {
+    "date": "2025-10-09",
+    "songTitle": "멋진 헛간",
+    "instrument": "guitar",
+    "practicePart": "1절",
+    "bpm": 113,
+    "desc": "리듬 안정됨"
+  },
+  {
+    "date": "2025-10-10",
+    "songTitle": "멋진 헛간",
+    "instrument": "guitar",
+    "practicePart": "후렴",
+    "bpm": 115,
+    "desc": "팔 움직임 자연스러움"
+  },
+  {
+    "date": "2025-10-11",
+    "songTitle": "멋진 헛간",
+    "instrument": "guitar",
+    "practicePart": "브릿지",
+    "bpm": 114,
+    "desc": "톤 밸런스 개선"
+  },
+  {
+    "date": "2025-10-13",
+    "songTitle": "멋진 헛간",
+    "instrument": "guitar",
+    "practicePart": "후렴 반복",
+    "bpm": 116,
+    "desc": "마무리 정리 단계"
+  }
+]

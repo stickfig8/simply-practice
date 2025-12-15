@@ -1,5 +1,6 @@
 import ModalTitle from "@/components/modals/common/ModalTitle";
 import styled from "@emotion/styled";
+import { motion } from "framer-motion";
 import { X } from "lucide-react";
 
 type Props = {
@@ -7,7 +8,7 @@ type Props = {
   onClose: () => void;
   title: string;
 };
-const ModalWrapper = styled.div`
+const ModalWrapper = styled(motion.div)`
   max-width: 562px;
   width: 90%;
   max-height: 90%;
@@ -53,7 +54,13 @@ const Spacer = styled.div`
 
 export default function ModalCanvas({ children, onClose, title }: Props) {
   return (
-    <ModalWrapper onClick={(e) => e.stopPropagation()}>
+    <ModalWrapper
+      onClick={(e) => e.stopPropagation()}
+      initial={{ opacity: 0, scale: 0.8, y: 100 }}
+      animate={{ opacity: 1, scale: 1, y: 0 }}
+      exit={{ opacity: 0, scale: 0.9, y: 100 }}
+      transition={{ duration: 0.1, ease: "easeOut" }}
+    >
       <ModalHeader>
         <Spacer />
         <ModalTitle title={title} />

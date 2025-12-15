@@ -4,11 +4,14 @@ import SaveModal from "@/components/modals/SaveModal";
 import Waveform from "@/components/practicePage/Waveform";
 import FunctionalButtons from "@/components/practicePage/FunctionalButtons";
 import FunctionalCarousel from "@/components/practicePage/FunctionalCarousel";
+import { languageText } from "@/configs/languageText";
+import { useLanguageStore } from "@/stores/LanguageStore";
 
 export default function PracticePage() {
+  const { lang } = useLanguageStore();
   return (
     <MainContainer>
-      <PageHeader />
+      <PageHeader title={languageText.header.practice[lang]} />
       <Waveform />
 
       <FunctionalCarousel />
