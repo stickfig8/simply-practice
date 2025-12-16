@@ -1,5 +1,5 @@
 import { useMetronomeStore } from "../../stores/metronomeStore";
-import { useMetronome } from "../../hooks/useMetronome";
+import { useMetronome } from "@/hooks/practice/useMetronome";
 
 import {
   bpmConstants,

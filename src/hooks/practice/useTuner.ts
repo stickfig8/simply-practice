@@ -1,6 +1,6 @@
-import { useAudioInputStore } from "../stores/audioInputStore";
+import { useAudioInputStore } from "@/stores/audioInputStore";
 import { useState, useRef, useEffect } from "react";
-import { setUpTuner } from "../utils/tunerUtils";
+import { setUpTuner } from "@/utils/tunerUtils";
 
 export function useTuner() {
   const { inputId, channel } = useAudioInputStore();

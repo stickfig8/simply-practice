@@ -1,5 +1,5 @@
 import { useWaveformStore } from "../../stores/waveformStore";
-import { useWaveform } from "../../hooks/useWaveform";
+import { useWaveform } from "@/hooks/practice/useWaveform";
 import CommonButton from "../common/CommonButton";
 import ControlWithLabel from "../common/ControlWithLabel";
 import { Slider } from "../ui/slider";

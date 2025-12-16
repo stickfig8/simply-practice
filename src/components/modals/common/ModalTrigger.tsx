@@ -1,10 +1,10 @@
 import CommonButton from "@/components/common/CommonButton";
 import ModalBackGround from "@/components/modals/common/ModalBackGround";
 import ModalCanvas from "@/components/modals/common/ModalCanvas";
-import { useModalEscapeKey } from "@/hooks/useModalEscapeKey";
+import { useModalEscapeKey } from "@/hooks/common/useModalEscapeKey";
 import { useState } from "react";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 
 type Props = {
   title: string;

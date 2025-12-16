@@ -1,5 +1,5 @@
 import { useAudioInputStore } from "../../stores/audioInputStore";
-import { useAudioConnection } from "../../hooks/useAudioConnection";
+import { useAudioConnection } from "@/hooks/practice/useAudioConnection";
 import { useState } from "react";
 
 export default function AudioInputOutput() {

@@ -11,3 +11,8 @@ export type PracticeWeekData = {
   week: string;
   count: number;
 };
+
+export type CompareData = {
+  month: string;
+  count: number;
+};

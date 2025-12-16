@@ -1,7 +1,7 @@
-import { useMetronomeStore } from "../stores/metronomeStore";
+import { useMetronomeStore } from "@/stores/metronomeStore";
 import { useMemo, useRef, useState, useEffect } from "react";
 import * as Tone from "tone";
-import { setUpLoop } from "../utils/metronomeUtils";
+import { setUpLoop } from "@/utils/metronomeUtils";
 
 export function useMetronome() {
   const { bpm, beatsPerMeasure, note, subdivision, volume, setBpm } =

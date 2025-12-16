@@ -1,10 +1,10 @@
-import { useAudioInputStore } from "../stores/audioInputStore";
+import { useAudioInputStore } from "@/stores/audioInputStore";
 import { useEffect, useRef } from "react";
 import {
   getDevices,
   connectAudio,
   cleanAudioConnection,
-} from "../utils/audioConnectionUtils";
+} from "@/utils/audioConnectionUtils";
 
 export function useAudioConnection() {
   const {

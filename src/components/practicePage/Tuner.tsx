@@ -1,4 +1,4 @@
-import { useTuner } from "../../hooks/useTuner";
+import { useTuner } from "@/hooks/practice/useTuner";
 
 export default function Tuner() {
   const { note, freq, cents } = useTuner();

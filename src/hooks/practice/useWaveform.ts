@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import WaveSurfer from "wavesurfer.js";
 import RegionsPlugin from "wavesurfer.js/dist/plugins/regions.js";
-import { useWaveformStore } from "../stores/waveformStore";
+import { useWaveformStore } from "@/stores/waveformStore";
 import { analyzeBPM } from "@/utils/waveformUtils";
 
 export function useWaveform() {
