@@ -7,12 +7,17 @@ export type PracticeLog = {
   desc: string;
 };
 
-export type PracticeWeekData = {
-  week: string;
+export type CompareData = {
+  month: string;
   count: number;
 };
 
-export type CompareData = {
-  month: string;
+export type SongCount = {
+  name: string;
+  count: number;
+};
+
+export type PeriodCount = {
+  period: "week" | "month";
   count: number;
 };

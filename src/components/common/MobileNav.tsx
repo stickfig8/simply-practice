@@ -18,18 +18,30 @@ export default function MobileNav() {
       {isOpen && (
         <ModalBackGround onClose={() => setIsOpen(false)}>
           <div
-            className="w-50 h-full fixed top-0 right-0 z-100 bg-[var(--main-text)] flex flex-col gap-2 pt-5 pr-4"
+            className={`w-4 h-[calc(100%-16px)] fixed top-2 right-2 z-100 bg-[var(--main-text)] flex flex-col gap-2 pt-5 px-2 border-1 rounded-[16px] shadow-md transition-all duration-300 ease-in-out ${isOpen ? "w-50" : "w-0"}`}
             onClick={(e) => e.stopPropagation()}
           >
             <button
-              className="w-7 h-7 ml-auto"
+              className="w-6 h-6 ml-auto"
               onClick={() => setIsOpen(false)}
             >
               <X />
             </button>
-            <MobileNavButton to="/" name="Home" />
-            <MobileNavButton to="/practice" name="Practice" />
-            <MobileNavButton to="/logs" name="Logs" />
+            <MobileNavButton
+              to="/"
+              name="Home"
+              onClick={() => setIsOpen(false)}
+            />
+            <MobileNavButton
+              to="/practice"
+              name="Practice"
+              onClick={() => setIsOpen(false)}
+            />
+            <MobileNavButton
+              to="/dashboard"
+              name="Logs"
+              onClick={() => setIsOpen(false)}
+            />
           </div>
         </ModalBackGround>
       )}

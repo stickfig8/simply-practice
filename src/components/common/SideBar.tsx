@@ -22,7 +22,6 @@ export default function SideBar() {
 
   return (
     <>
-      {/* ✅ 항상 고정된 헤더 버튼 */}
       <div className="fixed top-0 left-0 h-16 w-30 bg-indigo-800 md:flex hidden items-center justify-center z-20">
         <button
           className="text-xl font-bold text-white cursor-pointer"
@@ -32,7 +31,6 @@ export default function SideBar() {
         </button>
       </div>
 
-      {/* ✅ 사이드바 본체 */}
       <nav
         className={`fixed top-0 left-0 h-screen bg-indigo-800 transition-all duration-300 ease-in-out z-15 md:block hidden ${
           isOpen ? "w-30" : "w-0"
@@ -44,7 +42,6 @@ export default function SideBar() {
             ${isOpen ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-30"}
           `}
         >
-          {/* 메뉴 섹션 */}
           <div className="flex flex-col gap-4 mt-16">
             <SideBarButton to="/" name={languageText.header.home[lang]} />
             <SideBarButton

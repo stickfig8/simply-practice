@@ -16,7 +16,7 @@ export default function DayRadarChartCard({ logData }: Props) {
         className="mx-auto aspect-square max-w-[250px] w-full"
       >
         <RadarChart data={chartData}>
-          <ChartTooltip content={<ChartTooltipContent nameKey="day" />} />
+          <ChartTooltip content={<ChartTooltipContent nameKey="count" />} />
           <PolarAngleAxis dataKey="day" />
           <PolarGrid radialLines={false} />
           <Radar

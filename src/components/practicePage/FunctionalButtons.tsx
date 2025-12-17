@@ -11,7 +11,7 @@ const Styled = styled.div`
   gap: 12px;
   align-items: center;
 
-  @media (max-width: 500px) {
+  @media (max-width: 499px) {
     display: none;
   }
 `;

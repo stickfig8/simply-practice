@@ -18,7 +18,7 @@ export const languageText = {
     dashboard: {
       kor: "대쉬보드",
       eng: "Dashboard",
-      jpn: "メイン",
+      jpn: "統計",
     },
   },
   practice: {},

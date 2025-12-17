@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 type Props = {
   to: string;
   name: string;
+  onClick?: () => void;
 };
 
 const Styled = styled(Link)`
@@ -12,10 +13,14 @@ const Styled = styled(Link)`
   justify-content: start;
   align-items: center;
   width: auto;
-  height: 50px;
+  height: 40px;
   padding: 10px;
 `;
 
-export default function MobileNavButton({ to, name }: Props) {
-  return <Styled to={to}>{name}</Styled>;
+export default function MobileNavButton({ to, name, onClick }: Props) {
+  return (
+    <Styled to={to} onClick={onClick}>
+      {name}
+    </Styled>
+  );
 }
