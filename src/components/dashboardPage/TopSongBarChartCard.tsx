@@ -10,6 +10,8 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import { useLanguageStore } from "@/stores/LanguageStore";
+import { languageText } from "@/configs/language";
 
 type Props = {
   logData: PracticeLog[];
@@ -19,8 +21,10 @@ export default function TopSongBarChartCard({ logData }: Props) {
   const { chartConfig, topSongs, recentSong } = useTopSongChartCard({
     logData,
   });
+  const { lang } = useLanguageStore();
+  const text = languageText.dashboard.topSong;
   return (
-    <DashBoardCard title="연습곡 top 5" desc={`최근 연습곡: ${recentSong}`}>
+    <DashBoardCard title={text.title[lang]} desc={text.desc[lang](recentSong)}>
       <ChartContainer config={chartConfig} className="w-full">
         <BarChart
           accessibilityLayer

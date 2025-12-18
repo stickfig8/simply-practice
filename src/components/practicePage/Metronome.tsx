@@ -10,7 +10,9 @@ import BeatTiles from "./metronome/BeatTiles";
 import CommonButton from "../common/CommonButton";
 import { Slider } from "../ui/slider";
 import ControlWithLabel from "../common/ControlWithLabel";
-import { Volume1, Volume2, VolumeX } from "lucide-react";
+import { Pause, Play, Volume1, Volume2, VolumeX } from "lucide-react";
+import { languageText } from "@/configs/language";
+import { useLanguageStore } from "@/stores/LanguageStore";
 
 export default function Metronome() {
   const {
@@ -27,7 +29,7 @@ export default function Metronome() {
   } = useMetronomeStore();
 
   const { isPlaying, currentBeat, toggleMetronome, tapTempo } = useMetronome();
-
+  const { lang } = useLanguageStore();
   return (
     <article className="p-4 space-y-4 mx-auto ">
       <div className="flex items-center gap-2">
@@ -107,15 +109,12 @@ export default function Metronome() {
       </ControlWithLabel>
 
       <div className="flex justify-between">
-        <button
-          onClick={toggleMetronome}
-          className="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700"
-        >
-          {isPlaying ? "Stop" : "Start"}
-        </button>
+        <CommonButton width="60px" height="40px" onClick={toggleMetronome}>
+          {isPlaying ? <Pause /> : <Play />}
+        </CommonButton>
 
         <CommonButton width="60px" height="40px" onClick={tapTempo}>
-          tap
+          {languageText.practice.metronome.tap[lang]}
         </CommonButton>
       </div>
 

@@ -2,10 +2,12 @@ import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import ModalBackGround from "../modals/common/ModalBackGround";
 import MobileNavButton from "./MobileNavButton";
+import { languageText } from "@/configs/language";
+import { useLanguageStore } from "@/stores/LanguageStore";
 
 export default function MobileNav() {
   const [isOpen, setIsOpen] = useState(false);
-
+  const { lang } = useLanguageStore();
   return (
     <nav className="sticky top-0 z-15 w-full h-16 flex bg-indigo-800 items-center justify-between px-4 md:hidden block">
       <p className="text-xl font-bold">MyApp</p>
@@ -29,17 +31,17 @@ export default function MobileNav() {
             </button>
             <MobileNavButton
               to="/"
-              name="Home"
+              name={languageText.common.header.main[lang]}
               onClick={() => setIsOpen(false)}
             />
             <MobileNavButton
               to="/practice"
-              name="Practice"
+              name={languageText.common.header.practice[lang]}
               onClick={() => setIsOpen(false)}
             />
             <MobileNavButton
               to="/dashboard"
-              name="Logs"
+              name={languageText.common.header.dashboard[lang]}
               onClick={() => setIsOpen(false)}
             />
           </div>

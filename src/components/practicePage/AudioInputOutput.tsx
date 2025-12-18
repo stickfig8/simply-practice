@@ -1,6 +1,11 @@
+import { useLanguageStore } from "@/stores/LanguageStore";
 import { useAudioInputStore } from "../../stores/audioInputStore";
 import { useAudioConnection } from "@/hooks/practice/useAudioConnection";
-import { useState } from "react";
+import { languageText } from "@/configs/language";
+
+import ControlWithLabel from "../common/ControlWithLabel";
+import { Volume1, Volume2, VolumeX } from "lucide-react";
+import { Slider } from "../ui/slider";
 
 export default function AudioInputOutput() {
   const {
@@ -15,13 +20,13 @@ export default function AudioInputOutput() {
   } = useAudioInputStore();
 
   useAudioConnection();
-
-  const [isOpen, setIsOpen] = useState(false);
+  const { lang } = useLanguageStore();
+  const text = languageText.practice.audio;
 
   return (
     <article className="max-w-100 mx-auto space-y-5">
       <div>
-        <label>input : </label>
+        <label>{text.input[lang]}</label>
         <select
           value={inputId ?? ""}
           onChange={(e) =>
@@ -29,7 +34,7 @@ export default function AudioInputOutput() {
           }
           className="ml-2"
         >
-          <option value={""}>장치 선택</option>
+          <option value={""}>{text.selectDevice[lang]}</option>
           {devices.map((device) => (
             <option key={device.deviceId} value={device.deviceId}>
               {device.label || "입력장치"}
@@ -39,7 +44,7 @@ export default function AudioInputOutput() {
       </div>
 
       <div>
-        <label>channel : </label>
+        <label>{text.channel[lang]}</label>
         <select
           value={channel}
           onChange={(e) => setChannel(parseInt(e.target.value))}
@@ -53,16 +58,18 @@ export default function AudioInputOutput() {
         </select>
       </div>
 
-      <input
-        type="range"
-        min="0"
-        max="1.2"
-        step="0.01"
-        value={volume}
-        onChange={(e) => {
-          setVolume(parseFloat(e.target.value));
-        }}
-      />
+      <ControlWithLabel>
+        {volume == 0 ? <VolumeX /> : volume < 0.51 ? <Volume1 /> : <Volume2 />}
+        <Slider
+          id="volume"
+          min={0}
+          max={1.0}
+          step={0.01}
+          value={[volume]}
+          onValueChange={(val) => setVolume(val[0])}
+          className="w-71"
+        />
+      </ControlWithLabel>
     </article>
   );
 }

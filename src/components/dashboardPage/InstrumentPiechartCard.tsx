@@ -3,16 +3,24 @@ import DashBoardCard from "./DashBoardCard";
 import { useInstrumentPieChartCard } from "@/hooks/dashboard/useInstrumentPieChartCard";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "../ui/chart";
 import { LabelList, Pie, PieChart } from "recharts";
+import { useLanguageStore } from "@/stores/LanguageStore";
+import { languageText } from "@/configs/language";
 
 type Props = {
   logData: PracticeLog[];
 };
 
 export default function InstrumentPieChartCard({ logData }: Props) {
-  const { chartConfig, chartData } = useInstrumentPieChartCard({ logData });
+  const { chartConfig, chartData, topInst, topPercent } =
+    useInstrumentPieChartCard({ logData });
+  const { lang } = useLanguageStore();
+  const text = languageText.dashboard.instrument;
 
   return (
-    <DashBoardCard title="악기 분포" desc="text">
+    <DashBoardCard
+      title={text.title[lang]}
+      desc={text.desc[lang](topInst, topPercent)}
+    >
       <ChartContainer
         config={chartConfig}
         className="[&_.recharts-text]:fill-background mx-auto aspect-square max-w-[250px] w-full"

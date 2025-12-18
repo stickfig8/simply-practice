@@ -10,6 +10,7 @@ import {
   differenceInCalendarDays,
 } from "date-fns";
 import { useLanguageStore } from "@/stores/LanguageStore";
+import { languageText } from "@/configs/language";
 
 type MonthData = {
   month: string;
@@ -71,7 +72,7 @@ export function usePracticeDaysCard({ logData }: Props) {
 
   const chartConfig = {
     count: {
-      label: "count",
+      label: languageText.dashboard.month.count[lang],
       color: "var(--chart-1)",
     },
   };

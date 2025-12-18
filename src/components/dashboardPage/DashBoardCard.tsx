@@ -9,7 +9,7 @@ type Props = {
 
 const CardWrapper = styled.div`
   width: 100%;
-  height: 364px;
+  height: 380px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 16px;
   padding: 16px;

@@ -9,10 +9,10 @@ import {
   RadialBar,
   RadialBarChart,
 } from "recharts";
-import { Button } from "../ui/button";
 import { ButtonGroup } from "../ui/button-group";
-import CommonButton from "../common/CommonButton";
 import OptionSelectButton from "./OptionSelectButton";
+import { useLanguageStore } from "@/stores/LanguageStore";
+import { languageText } from "@/configs/language";
 
 type Props = {
   logData: PracticeLog[];
@@ -20,21 +20,24 @@ type Props = {
 export default function ProgressRadialChartCard({ logData }: Props) {
   const { progress, setMode, mode, chartData, chartConfig } =
     useProgressRadialChartCard(logData);
+
+  const { lang } = useLanguageStore();
+  const text = languageText.dashboard.goal;
   return (
     <DashBoardCard
-      title="목표 달성 현황"
-      desc={`현재 ${progress.currentCount}/${progress.goal}`}
+      title={text.title[lang]}
+      desc={text.desc[lang](progress.currentCount, progress.goal)}
     >
       <div className="relative w-full h-full flex items-center justify-center">
         <ButtonGroup className="absolute top-0 right-1 flex z-50">
           <OptionSelectButton
             onClick={() => setMode("week")}
-            text="week"
+            text={text.week[lang]}
             isActivated={mode === "week"}
           />
           <OptionSelectButton
             onClick={() => setMode("month")}
-            text="month"
+            text={text.month[lang]}
             isActivated={mode === "month"}
           />
         </ButtonGroup>
@@ -85,7 +88,7 @@ export default function ProgressRadialChartCard({ logData }: Props) {
                           y={(viewBox.cy || 0) + 24}
                           className="fill-muted-foreground"
                         >
-                          {mode}
+                          {mode === "week" ? text.week[lang] : text.month[lang]}
                         </tspan>
                       </text>
                     );

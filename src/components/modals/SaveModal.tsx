@@ -28,6 +28,8 @@ import { useWaveformStore } from "@/stores/waveformStore";
 import { useMetronomeStore } from "@/stores/metronomeStore";
 import { useState } from "react";
 import SaveModalInputWrapper from "./common/SaveModalInputWrapper";
+import { useLanguageStore } from "@/stores/LanguageStore";
+import { languageText } from "@/configs/language";
 
 export default function SaveModal() {
   const date = getToday();
@@ -48,6 +50,9 @@ export default function SaveModal() {
     }
   }
 
+  const { lang } = useLanguageStore();
+  const text = languageText.practice.save;
+
   return (
     <Drawer
       onOpenChange={(open) => {
@@ -58,21 +63,25 @@ export default function SaveModal() {
     >
       <DrawerTrigger asChild>
         <Button variant="outline" className="cursor-pointer">
-          Save
+          {text.save[lang]}
         </Button>
       </DrawerTrigger>
 
       <DrawerContent className="px-5 w-full">
         <DrawerHeader>
-          <DrawerTitle>오늘의 연습일지</DrawerTitle>
+          <DrawerTitle>{text.modalTitle[lang]}</DrawerTitle>
           <DrawerDescription>{date}</DrawerDescription>
         </DrawerHeader>
         <div className="flex flex-col mx-auto w-full max-w-120 gap-3">
-          <SaveModalInputWrapper title="곡명">
-            <Input defaultValue={title} placeholder="Song name" />
+          <SaveModalInputWrapper title={text.songTitle[lang]}>
+            <Input
+              defaultValue={title}
+              placeholder="Song name"
+              className="placeholder:text-sm"
+            />
           </SaveModalInputWrapper>
 
-          <SaveModalInputWrapper title="악기">
+          <SaveModalInputWrapper title={text.instrument[lang]}>
             <Select>
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Select a intrument"></SelectValue>
@@ -90,17 +99,17 @@ export default function SaveModal() {
             </Select>
           </SaveModalInputWrapper>
 
-          <SaveModalInputWrapper title="연습 파트">
+          <SaveModalInputWrapper title={text.part[lang]}>
             <div className="flex items-center gap-2 w-full">
               <Input
                 value={part}
                 onChange={(e) => setPart(e.target.value)}
-                placeholder="ex) 1절 b파트 or 00:32 ~ 01:23"
-                className=""
+                placeholder="ex) 1-B part or 00:32 ~ 01:23"
+                className="placeholder:text-sm"
               />
               <div className="flex items-center space-x-2 shrink-0">
                 <Label htmlFor="use-range" className="text-sm">
-                  구간
+                  {text.section[lang]}
                 </Label>
                 <Checkbox
                   id="use-range"
@@ -111,11 +120,11 @@ export default function SaveModal() {
             </div>
           </SaveModalInputWrapper>
 
-          <SaveModalInputWrapper title="연습 BPM">
+          <SaveModalInputWrapper title={text.bpm[lang]}>
             <Input defaultValue={bpm} placeholder="bpm" type="number" />
           </SaveModalInputWrapper>
 
-          <SaveModalInputWrapper title="메모">
+          <SaveModalInputWrapper title={text.memo[lang]}>
             <Textarea
               placeholder="type practice memo"
               className="resize-none w-full whitespace-normal max-h-15 overflow-y-auto"
@@ -123,10 +132,10 @@ export default function SaveModal() {
           </SaveModalInputWrapper>
 
           <DrawerFooter className="px-0">
-            <Button className="cursor-pointer">submit</Button>
+            <Button className="cursor-pointer">{text.save[lang]}</Button>
             <DrawerClose asChild>
               <Button variant="outline" className="cursor-pointer">
-                cancel
+                {text.cancel[lang]}
               </Button>
             </DrawerClose>
           </DrawerFooter>

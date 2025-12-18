@@ -3,6 +3,8 @@ import DashBoardCard from "./DashBoardCard";
 import { useCompareBarChartCard } from "@/hooks/dashboard/useCompareBarChartCard";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "../ui/chart";
 import { Bar, BarChart, CartesianGrid, LabelList, XAxis } from "recharts";
+import { useLanguageStore } from "@/stores/LanguageStore";
+import { languageText } from "@/configs/language";
 
 type Props = {
   logData: PracticeLog[];
@@ -12,8 +14,10 @@ export default function CompareBarChartCard({ logData }: Props) {
   const { chartData, diffPercent, chartConfig } = useCompareBarChartCard({
     logData,
   });
+  const { lang } = useLanguageStore();
+  const text = languageText.dashboard.compare;
   return (
-    <DashBoardCard title="지난달 연습량 비교" desc={`증감률 ${diffPercent}%`}>
+    <DashBoardCard title={text.title[lang]} desc={text.desc[lang](diffPercent)}>
       <ChartContainer config={chartConfig} className="w-full">
         <BarChart
           accessibilityLayer

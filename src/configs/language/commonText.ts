@@ -1,4 +1,4 @@
-export const languageText = {
+export const commonText = {
   header: {
     home: {
       kor: "홈",
@@ -21,7 +21,6 @@ export const languageText = {
       jpn: "統計",
     },
   },
-  practice: {},
   etc: {
     lang: {
       kor: "언어",

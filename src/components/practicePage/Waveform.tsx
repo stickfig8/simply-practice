@@ -19,6 +19,8 @@ import {
   ZoomOut,
   Repeat,
 } from "lucide-react";
+import { useLanguageStore } from "@/stores/LanguageStore";
+import { languageText } from "@/configs/language";
 
 export default function Waveform() {
   const {
@@ -49,6 +51,8 @@ export default function Waveform() {
     containerRef,
   } = useWaveform();
 
+  const { lang } = useLanguageStore();
+  const text = languageText.practice;
   return (
     <div className={`space-y-4 py-3`}>
       {/* 상단 컨트롤 부 */}
@@ -155,13 +159,19 @@ export default function Waveform() {
       /> */}
 
       <div className="w-fit h-fit flex flex-col gap-2">
-        <p className="text-sm text-gray-600">제목: {title ? title : "-"}</p>
         <p className="text-sm text-gray-600">
-          추정 BPM: {bpm ? Math.round(bpm) : "-"}
+          {text.playback.title[lang]} {title ? title : "-"}
+        </p>
+        <p className="text-sm text-gray-600">
+          {text.playback.bpm[lang]}
+          {bpm ? Math.round(bpm) : "-"}
         </p>
       </div>
       <ControlWithLabel>
-        <p className="text-sm text-gray-600">배속: {playBackRate}X</p>
+        <p className="text-sm text-gray-600">
+          {text.playback.playSpeed[lang]}
+          {playBackRate}X
+        </p>
         <Slider
           id="playbackrate"
           min={0.5}

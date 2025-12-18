@@ -1,7 +1,7 @@
 import { useSideBarStore } from "@/stores/sideBarStore";
 import SideBarButton from "./SideBarButton";
 import { useLanguageStore } from "@/stores/LanguageStore";
-import { languageText } from "@/configs/language/commonText";
+import { languageText } from "@/configs/language";
 import { Languages } from "lucide-react";
 import {
   DropdownMenu,
@@ -22,12 +22,12 @@ export default function SideBar() {
 
   return (
     <>
-      <div className="fixed top-0 left-0 h-16 w-30 bg-indigo-800 md:flex hidden items-center justify-center z-20">
+      <div className="fixed top-0 left-0 h-16 w-30 md:flex hidden items-center justify-center z-20">
         <button
-          className="text-xl font-bold text-white cursor-pointer"
+          className="text-xl font-bold text-white cursor-pointer px-2"
           onClick={() => setIsOpen(!isOpen)}
         >
-          MyApp
+          <img className="h-full" src="/images/logo.png" />
         </button>
       </div>
 
@@ -43,14 +43,17 @@ export default function SideBar() {
           `}
         >
           <div className="flex flex-col gap-4 mt-16">
-            <SideBarButton to="/" name={languageText.header.home[lang]} />
+            <SideBarButton
+              to="/"
+              name={languageText.common.header.home[lang]}
+            />
             <SideBarButton
               to="/practice"
-              name={languageText.header.practice[lang]}
+              name={languageText.common.header.practice[lang]}
             />
             <SideBarButton
               to="/dashboard"
-              name={languageText.header.dashboard[lang]}
+              name={languageText.common.header.dashboard[lang]}
             />
           </div>
 
