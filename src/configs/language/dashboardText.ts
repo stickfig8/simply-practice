@@ -1,6 +1,13 @@
 import { format, parse } from "date-fns";
 
 export const dashboardText = {
+  common: {
+    count: {
+      kor: "연습 횟수",
+      eng: "Count",
+      jpn: "練習回数",
+    },
+  },
   month: {
     title: {
       kor: "연습 일수 현황",
@@ -17,22 +24,12 @@ export const dashboardText = {
       eng: "Last consecutive practice days: ",
       jpn: "直近連続練習日数: ",
     },
-    count: {
-      kor: "횟수",
-      eng: "count",
-      jpn: "回数",
-    },
   },
   instrument: {
     title: {
       kor: "악기 분포",
       eng: "Instrument distribution",
       jpn: "楽器分布",
-    },
-    count: {
-      kor: "연습 횟수",
-      eng: "Practice count",
-      jpn: "練習回数",
     },
     desc: {
       kor: (instrument: string, percent: number) =>

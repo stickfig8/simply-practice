@@ -45,10 +45,7 @@ export default function TopSongBarChartCard({ logData }: Props) {
             hide
           />
           <XAxis dataKey="count" type="number" hide />
-          <ChartTooltip
-            cursor={false}
-            content={<ChartTooltipContent indicator="line" />}
-          />
+          <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
           <Bar
             dataKey="count"
             layout="vertical"

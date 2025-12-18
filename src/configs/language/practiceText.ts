@@ -15,6 +15,11 @@ export const practiceText = {
       eng: "Play speed: ",
       jpn: "倍速: ",
     },
+    loadMessage: {
+      kor: "오디오를 로드해주세요.",
+      eng: "Please load the audio.",
+      jpn: "オーディオのロードをお願いします。",
+    },
   },
   metronome: {
     metronome: {

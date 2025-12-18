@@ -7,7 +7,7 @@ type Props = {
 
 export default function SideBarButton({ to, name }: Props) {
   return (
-    <Link to={to} className="block hover:text-indigo-300">
+    <Link to={to} className="block hover:text-indigo-300 text-gray-200">
       {name}
     </Link>
   );

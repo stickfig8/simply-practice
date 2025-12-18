@@ -1,3 +1,4 @@
+import { languageText } from "@/configs/language";
 import { useLanguageStore } from "@/stores/LanguageStore";
 import type { PracticeLog } from "@/types/practiceDataTypes";
 import { getDay, parseISO } from "date-fns";
@@ -45,7 +46,7 @@ export function useDayRadarChartCard({ logData }: Props) {
 
   const chartConfig = {
     count: {
-      label: "Count",
+      label: languageText.dashboard.common.count[lang],
       color: "var(--chart-1)",
     },
   };

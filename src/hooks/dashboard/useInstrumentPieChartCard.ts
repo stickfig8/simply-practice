@@ -1,3 +1,5 @@
+import { languageText } from "@/configs/language";
+import { useLanguageStore } from "@/stores/LanguageStore";
 import type { PracticeLog } from "@/types/practiceDataTypes";
 import { useMemo } from "react";
 
@@ -6,6 +8,7 @@ type Props = {
 };
 
 export function useInstrumentPieChartCard({ logData }: Props) {
+  const { lang } = useLanguageStore();
   const { chartData, topInst, topPercent } = useMemo(() => {
     if (!logData || logData.length === 0)
       return { chartData: [], topInst: "-", topPercent: 0 };
@@ -44,7 +47,7 @@ export function useInstrumentPieChartCard({ logData }: Props) {
 
   const chartConfig = {
     count: {
-      label: "연습 횟수",
+      label: languageText.dashboard.common.count[lang],
     },
     guitar: {
       label: "Guitar",

@@ -31,8 +31,8 @@ export default function Waveform() {
     position,
     isLooping,
     isPlaying,
-    loopStart,
-    loopEnd,
+    //loopStart,
+    //loopEnd,
     volume,
     playBackRate,
     isReady,
@@ -47,7 +47,7 @@ export default function Waveform() {
     togglePlay,
     setForward,
     setBackward,
-    setTimeSlider,
+    //setTimeSlider,
     containerRef,
   } = useWaveform();
 
@@ -65,7 +65,10 @@ export default function Waveform() {
             onChange={handleFileChange}
             className="mb-2 hidden"
           />
-          <label htmlFor="fileInput" className="w-fit h-fit cursor-pointer">
+          <label
+            htmlFor="fileInput"
+            className="w-[50px] h-[36px] cursor-pointer border-1 rounded-[8px] shadow-md flex items-center justify-center"
+          >
             <File strokeWidth={2} />
           </label>
           <CommonButton
@@ -142,6 +145,11 @@ export default function Waveform() {
           ref={containerRef}
           className="absolute inset-0 bg-gray-100 rounded"
         />
+        {!isReady && (
+          <div className="absolute inset-0 w-full h-full bg-gray-300 flex justify-center items-center text-xs">
+            {text.playback.loadMessage[lang]}
+          </div>
+        )}
       </div>
       <div className="text-sm flex justify-between items-centrer">
         <p>{formatPosition(position)}</p>

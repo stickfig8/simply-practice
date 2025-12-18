@@ -1,3 +1,5 @@
+import { languageText } from "@/configs/language";
+import { useLanguageStore } from "@/stores/LanguageStore";
 import type { PracticeLog, SongCount } from "@/types/practiceDataTypes";
 import { compareDesc, parseISO } from "date-fns";
 import { useMemo } from "react";
@@ -6,9 +8,10 @@ type Props = {
   logData: PracticeLog[];
 };
 export function useTopSongChartCard({ logData }: Props) {
+  const { lang } = useLanguageStore();
   const chartConfig = {
     count: {
-      label: "Count",
+      label: languageText.dashboard.common.count[lang],
       color: "var(--chart-1)",
     },
   };

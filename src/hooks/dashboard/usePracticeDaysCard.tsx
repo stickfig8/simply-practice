@@ -72,7 +72,7 @@ export function usePracticeDaysCard({ logData }: Props) {
 
   const chartConfig = {
     count: {
-      label: languageText.dashboard.month.count[lang],
+      label: languageText.dashboard.common.count[lang],
       color: "var(--chart-1)",
     },
   };
