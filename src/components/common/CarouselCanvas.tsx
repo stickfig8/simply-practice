@@ -10,7 +10,7 @@ type Props = {
 export default function CarouselCanvas({ title, children }: Props) {
   return (
     <CarouselItem>
-      <div className="h-110 w-full flex flex-col gap-2 border-1 rounded-[16px] pt-3">
+      <div className="h-110 w-full flex flex-col gap-2 border-1 rounded-[16px] pt-3 shadow-md">
         <ModalTitle title={title} />
         <div className="flex items-center h-full justify-center px-3">
           {children}

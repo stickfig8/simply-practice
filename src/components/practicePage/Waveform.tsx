@@ -19,7 +19,7 @@ import {
   ZoomOut,
   Repeat,
 } from "lucide-react";
-import { useLanguageStore } from "@/stores/LanguageStore";
+import { useLanguageStore } from "@/stores/languageStore";
 import { languageText } from "@/configs/language";
 
 export default function Waveform() {
@@ -54,7 +54,7 @@ export default function Waveform() {
   const { lang } = useLanguageStore();
   const text = languageText.practice;
   return (
-    <div className={`space-y-4 py-3`}>
+    <div className={`space-y-4 py-3 border-1 px-2 rounded-[16px] shadow-md`}>
       {/* 상단 컨트롤 부 */}
       <div className="flex gap-5 items-center flex-wrap">
         <div className="flex gap-1 items-center">

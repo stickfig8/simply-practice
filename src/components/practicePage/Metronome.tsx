@@ -12,7 +12,7 @@ import { Slider } from "../ui/slider";
 import ControlWithLabel from "../common/ControlWithLabel";
 import { Pause, Play, Volume1, Volume2, VolumeX } from "lucide-react";
 import { languageText } from "@/configs/language";
-import { useLanguageStore } from "@/stores/LanguageStore";
+import { useLanguageStore } from "@/stores/languageStore";
 
 export default function Metronome() {
   const {

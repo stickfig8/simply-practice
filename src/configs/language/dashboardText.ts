@@ -50,7 +50,7 @@ export const dashboardText = {
       kor: (most: string, percent: number) =>
         `가장 많이 연습한 요일은 ${most}요일로, 전체의 ${percent}%를 차지합니다.`,
       eng: (most: string, percent: number) =>
-        `The most practiced day of the week is ${format(parse(most, "EEE", new Date()), "EEEE")}, which accounts for ${percent}% of the total.`,
+        `The most practiced day of the week is ${most === "-" ? "-" : format(parse(most, "EEE", new Date()), "EEEE")}, which accounts for ${percent}% of the total.`,
       jpn: (most: string, percent: number) =>
         `最も練習した曜日は${most}曜日で、全体の ${percent}% を占めています。`,
     },

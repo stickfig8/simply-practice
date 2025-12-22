@@ -1,7 +1,7 @@
 import { Drum } from "lucide-react";
 import Metronome from "../practicePage/Metronome";
 import ModalTrigger from "./common/ModalTrigger";
-import { useLanguageStore } from "@/stores/LanguageStore";
+import { useLanguageStore } from "@/stores/languageStore";
 import { languageText } from "@/configs/language";
 
 export default function MetronomeModal() {

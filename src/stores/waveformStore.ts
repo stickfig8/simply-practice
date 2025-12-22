@@ -1,6 +1,7 @@
 import { create } from "zustand";
-import type { WaveformStoreState } from "../types/store/WaveformStoreState";
 import { devtools } from "zustand/middleware";
+import type { WaveformStoreState } from "../types/store/WaveformStoreState";
+import type { WaveformStoreActions } from "@/types/store/WaveformStoreActions";
 
 const initialState: Omit<WaveformStoreState, keyof WaveformStoreActions> = {
   title: "",
@@ -17,25 +18,7 @@ const initialState: Omit<WaveformStoreState, keyof WaveformStoreActions> = {
   isReady: false,
 };
 
-type WaveformStoreActions = {
-  setTitle: (name: string) => void;
-  setBpm: (bpm: number) => void;
-  setVolume: (volume: number) => void;
-  setDuration: (duration: number) => void;
-  setPosition: (position: number) => void;
-  setPlayBackRate: (rate: number) => void;
-  setLoopStart: (start: number) => void;
-  setLoopEnd: (end: number) => void;
-  setZoomLevel: (level: number) => void;
-  setIsLooping: (loop: boolean) => void;
-  setIsPlaying: (isPlaying: boolean) => void;
-  setIsReady: (isReady: boolean) => void;
-  reset: () => void;
-};
-
-export const useWaveformStore = create<
-  WaveformStoreState & WaveformStoreActions
->()(
+export const useWaveformStore = create<WaveformStoreState>()(
   devtools((set) => ({
     ...initialState,
 

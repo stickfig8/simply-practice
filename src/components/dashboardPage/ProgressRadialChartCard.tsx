@@ -11,7 +11,7 @@ import {
 } from "recharts";
 import { ButtonGroup } from "../ui/button-group";
 import OptionSelectButton from "./OptionSelectButton";
-import { useLanguageStore } from "@/stores/LanguageStore";
+import { useLanguageStore } from "@/stores/languageStore";
 import { languageText } from "@/configs/language";
 
 type Props = {

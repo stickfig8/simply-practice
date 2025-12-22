@@ -1,17 +1,4 @@
-export type WaveformStoreState = {
-  title: string;
-  bpm: number | null;
-  volume: number;
-  duration: number;
-  position: number;
-  playBackRate: number;
-  loopStart: number;
-  loopEnd: number;
-  zoomLevel: number;
-  isLooping: boolean;
-  isPlaying: boolean;
-  isReady: boolean;
-
+export type WaveformStoreActions = {
   setTitle: (name: string) => void;
   setBpm: (bpm: number) => void;
   setVolume: (volume: number) => void;

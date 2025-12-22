@@ -1,4 +1,4 @@
-import { useLanguageStore } from "@/stores/LanguageStore";
+import { useLanguageStore } from "@/stores/languageStore";
 import { useAudioInputStore } from "../../stores/audioInputStore";
 import { useAudioConnection } from "@/hooks/practice/useAudioConnection";
 import { languageText } from "@/configs/language";

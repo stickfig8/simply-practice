@@ -1,4 +1,4 @@
-import { useLanguageStore } from "@/stores/LanguageStore";
+import { useLanguageStore } from "@/stores/languageStore";
 import CarouselCanvas from "../common/CarouselCanvas";
 import { Carousel, CarouselContent } from "../ui/carousel";
 import AudioInputOutput from "./AudioInputOutput";
@@ -10,7 +10,7 @@ export default function FunctionalCarousel() {
   const { lang } = useLanguageStore();
   const text = languageText.practice;
   return (
-    <Carousel className="w-full hidden my-10 max-[500px]:block">
+    <Carousel className="w-full hidden my-10 max-[600px]:block">
       <CarouselContent>
         <CarouselCanvas title={text.metronome.metronome[lang]}>
           <Metronome />

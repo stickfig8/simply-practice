@@ -108,5 +108,15 @@ export const practiceText = {
       eng: "Cancel",
       jpn: "キャンセル",
     },
+    saveErrAlert: {
+      kor: "곡 제목과 악기를 입력해주세요.",
+      eng: "Please enter the song title and instrument.",
+      jpn: "曲のタイトルと楽器の入力をお願いします。",
+    },
+    saveConfirmAlert: {
+      kor: "연습 로그가 저장되었습니다.",
+      eng: "Your exercise log has been saved.",
+      jpn: "練習ログが保存されました。",
+    },
   },
 };

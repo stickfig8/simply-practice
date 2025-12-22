@@ -5,7 +5,7 @@ import Waveform from "@/components/practicePage/Waveform";
 import FunctionalButtons from "@/components/practicePage/FunctionalButtons";
 import FunctionalCarousel from "@/components/practicePage/FunctionalCarousel";
 import { languageText } from "@/configs/language";
-import { useLanguageStore } from "@/stores/LanguageStore";
+import { useLanguageStore } from "@/stores/languageStore";
 
 export default function PracticePage() {
   const { lang } = useLanguageStore();
@@ -15,7 +15,7 @@ export default function PracticePage() {
       <Waveform />
 
       <FunctionalCarousel />
-      <div className="flex w-full justify-between items-center max-[500px]:justify-center">
+      <div className="flex w-full justify-between items-center max-[600px]:justify-center">
         <FunctionalButtons />
         <SaveModal />
       </div>

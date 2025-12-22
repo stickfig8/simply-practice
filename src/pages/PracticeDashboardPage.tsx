@@ -4,7 +4,7 @@ import MainContainer from "@/components/layout/MainContainer";
 import PageHeader from "@/components/layout/PageHeader";
 import { languageText } from "@/configs/language";
 import { useDashboardSection } from "@/hooks/dashboard/useDashboardSection";
-import { useLanguageStore } from "@/stores/LanguageStore";
+import { useLanguageStore } from "@/stores/languageStore";
 
 export default function PracticeDashboardPage() {
   const { lang } = useLanguageStore();

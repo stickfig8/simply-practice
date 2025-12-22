@@ -1,5 +1,5 @@
 import { languageText } from "@/configs/language";
-import { useLanguageStore } from "@/stores/LanguageStore";
+import { useLanguageStore } from "@/stores/languageStore";
 import type { PracticeLog } from "@/types/practiceDataTypes";
 import { getDay, parseISO } from "date-fns";
 import { useMemo } from "react";

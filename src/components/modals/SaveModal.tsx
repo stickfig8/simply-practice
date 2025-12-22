@@ -22,45 +22,37 @@ import {
   SelectValue,
 } from "../ui/select";
 import { Checkbox } from "../ui/checkbox";
-
-import { getToday, readableSeconds } from "@/utils/saveModalUtils";
-import { useWaveformStore } from "@/stores/waveformStore";
-import { useMetronomeStore } from "@/stores/metronomeStore";
-import { useState } from "react";
 import SaveModalInputWrapper from "./common/SaveModalInputWrapper";
-import { useLanguageStore } from "@/stores/LanguageStore";
+import { useLanguageStore } from "@/stores/languageStore";
 import { languageText } from "@/configs/language";
+import { useSaveModal } from "@/hooks/practice/useSaveModal";
 
 export default function SaveModal() {
-  const date = getToday();
-  const { title, loopStart, loopEnd } = useWaveformStore();
-  const { bpm } = useMetronomeStore();
-
-  const insts = ["guitar", "bass", "drum", "keyboard", "vocal", "etc"];
-
-  const [part, setPart] = useState("");
-  const [useRange, setUseRange] = useState(false);
-
-  function handleRangeChecked(checked: boolean) {
-    setUseRange(checked);
-    if (checked) {
-      setPart(`${readableSeconds(loopStart)} ~ ${readableSeconds(loopEnd)}`);
-    } else {
-      setPart("");
-    }
-  }
-
   const { lang } = useLanguageStore();
   const text = languageText.practice.save;
 
+  const {
+    isOpen,
+    insts,
+    date,
+    songTitle,
+    practicePart,
+    logBpm,
+    desc,
+    useRange,
+
+    setInstrument,
+    setSongTitle,
+    setPracticePart,
+    setLogBpm,
+    setDesc,
+    handleDrawerOpenChange,
+    handleRangeChecked,
+    handleSave,
+  } = useSaveModal();
+
   return (
-    <Drawer
-      onOpenChange={(open) => {
-        if (!open) return;
-        setUseRange(false);
-        setPart("");
-      }}
-    >
+    <Drawer open={isOpen} onOpenChange={handleDrawerOpenChange}>
       <DrawerTrigger asChild>
         <Button variant="outline" className="cursor-pointer">
           {text.save[lang]}
@@ -75,14 +67,15 @@ export default function SaveModal() {
         <div className="flex flex-col mx-auto w-full max-w-120 gap-3">
           <SaveModalInputWrapper title={text.songTitle[lang]}>
             <Input
-              defaultValue={title}
+              value={songTitle}
               placeholder="Song name"
               className="placeholder:text-sm"
+              onChange={(e) => setSongTitle(e.target.value)}
             />
           </SaveModalInputWrapper>
 
           <SaveModalInputWrapper title={text.instrument[lang]}>
-            <Select>
+            <Select onValueChange={(val) => setInstrument(val)}>
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Select a intrument"></SelectValue>
               </SelectTrigger>
@@ -102,8 +95,8 @@ export default function SaveModal() {
           <SaveModalInputWrapper title={text.part[lang]}>
             <div className="flex items-center gap-2 w-full">
               <Input
-                value={part}
-                onChange={(e) => setPart(e.target.value)}
+                value={practicePart}
+                onChange={(e) => setPracticePart(e.target.value)}
                 placeholder="ex) 1-B part or 00:32 ~ 01:23"
                 className="placeholder:text-sm"
               />
@@ -121,18 +114,27 @@ export default function SaveModal() {
           </SaveModalInputWrapper>
 
           <SaveModalInputWrapper title={text.bpm[lang]}>
-            <Input defaultValue={bpm} placeholder="bpm" type="number" />
+            <Input
+              value={logBpm}
+              placeholder="bpm"
+              type="number"
+              onChange={(e) => setLogBpm(Number(e.target.value))}
+            />
           </SaveModalInputWrapper>
 
           <SaveModalInputWrapper title={text.memo[lang]}>
             <Textarea
+              value={desc}
               placeholder="type practice memo"
               className="resize-none w-full whitespace-normal max-h-15 overflow-y-auto"
+              onChange={(e) => setDesc(e.target.value)}
             />
           </SaveModalInputWrapper>
 
           <DrawerFooter className="px-0">
-            <Button className="cursor-pointer">{text.save[lang]}</Button>
+            <Button className="cursor-pointer" onClick={handleSave}>
+              {text.save[lang]}
+            </Button>
             <DrawerClose asChild>
               <Button variant="outline" className="cursor-pointer">
                 {text.cancel[lang]}
