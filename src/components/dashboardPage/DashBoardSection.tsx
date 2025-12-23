@@ -13,7 +13,7 @@ export default function DashBoardSection({ logData }: Props) {
   return (
     <section className="w-full h-fit flex flex-col gap-10 max-[600px]:hidden">
       <PracticeDaysCard logData={logData} />
-      <div className="grid grid-cols-3 gap-8 max-[1000px]:grid-cols-2 max-[500px]:hidden">
+      <div className="grid grid-cols-4 gap-8 max-[2000px]:grid-cols-3 max-[1000px]:grid-cols-2 max-[500px]:hidden">
         <InstrumentPieChartCard logData={logData} />
         <DayRadarChartCard logData={logData} />
         <CompareBarChartCard logData={logData} />

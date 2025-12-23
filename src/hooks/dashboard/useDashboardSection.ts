@@ -1,6 +1,6 @@
 import { useDummyLogStore } from "@/stores/dummyDataStore";
-import type { PracticeLog } from "@/types/practiceDataTypes";
-import { useEffect, useState } from "react";
+//import type { PracticeLog } from "@/types/practiceDataTypes";
+//import { useEffect, useState } from "react";
 
 export function useDashboardSection() {
   // 실 사용

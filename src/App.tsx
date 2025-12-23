@@ -6,8 +6,10 @@ import SideBar from "./components/layout/SideBar";
 import MobileNav from "./components/layout/MobileNav";
 import PracticeDashboardPage from "./pages/PracticeDashboardPage";
 import Footer from "./components/layout/Footer";
+import { useBrowserLanguage } from "./hooks/common/useBrowserLanguage";
 
 function App() {
+  useBrowserLanguage();
   return (
     <BrowserRouter>
       <div className="App">
