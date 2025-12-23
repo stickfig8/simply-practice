@@ -67,6 +67,7 @@ export default function SaveModal() {
         <div className="flex flex-col mx-auto w-full max-w-120 gap-3">
           <SaveModalInputWrapper title={text.songTitle[lang]}>
             <Input
+              onKeyDown={(e) => e.stopPropagation()}
               value={songTitle}
               placeholder="Song name"
               className="placeholder:text-sm"
@@ -95,6 +96,7 @@ export default function SaveModal() {
           <SaveModalInputWrapper title={text.part[lang]}>
             <div className="flex items-center gap-2 w-full">
               <Input
+                onKeyDown={(e) => e.stopPropagation()}
                 value={practicePart}
                 onChange={(e) => setPracticePart(e.target.value)}
                 placeholder="ex) 1-B part or 00:32 ~ 01:23"
@@ -124,6 +126,7 @@ export default function SaveModal() {
 
           <SaveModalInputWrapper title={text.memo[lang]}>
             <Textarea
+              onKeyDown={(e) => e.stopPropagation()}
               value={desc}
               placeholder="type practice memo"
               className="resize-none w-full whitespace-normal max-h-15 overflow-y-auto"
