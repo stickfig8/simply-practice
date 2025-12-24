@@ -49,6 +49,7 @@ export default function Waveform() {
     setBackward,
     //setTimeSlider,
     containerRef,
+    isDragging,
   } = useWaveform();
 
   const { lang } = useLanguageStore();
@@ -145,7 +146,8 @@ export default function Waveform() {
           ref={containerRef}
           className="absolute inset-0 bg-gray-100 rounded"
         />
-        {!isReady && (
+
+        {!isReady && !isDragging && (
           <div className="absolute inset-0 w-full h-full bg-gray-300 flex justify-center items-center text-xs">
             {text.playback.loadMessage[lang]}
           </div>

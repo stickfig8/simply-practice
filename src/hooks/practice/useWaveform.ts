@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import WaveSurfer from "wavesurfer.js";
 import RegionsPlugin from "wavesurfer.js/dist/plugins/regions.js";
 import { useWaveformStore } from "@/stores/waveformStore";
@@ -11,6 +11,7 @@ export function useWaveform() {
     playBackRate,
     zoomLevel,
     isLooping,
+    setVolume,
     setLoopStart,
     setLoopEnd,
     setIsPlaying,
@@ -29,6 +30,10 @@ export function useWaveform() {
   const waveSurferRef = useRef<WaveSurfer | null>(null);
   const regionsRef = useRef<RegionsPlugin | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
+
+  const [isDragging, setIsDragging] = useState(false);
+
+  const togglePlayRef = useRef(togglePlay);
 
   async function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
     // 파일 변경 제어
@@ -120,11 +125,25 @@ export function useWaveform() {
     waveSurferRef.current.setTime(time);
   }
 
-  function spacebarToPlay(e: KeyboardEvent) {
+  function keyboardControl(e: KeyboardEvent) {
     // 키보드 작동 제어
     if (e.code === "Space") {
       e.preventDefault();
-      togglePlay();
+      togglePlayRef.current();
+    } else if (e.code === "ArrowLeft") {
+      e.preventDefault();
+      setBackward();
+    } else if (e.code === "ArrowRight") {
+      e.preventDefault();
+      setForward();
+    } else if (e.code === "ArrowUp") {
+      e.preventDefault();
+      const currentVolume = useWaveformStore.getState().volume;
+      useWaveformStore.getState().setVolume(Math.min(currentVolume + 0.02, 1));
+    } else if (e.code === "ArrowDown") {
+      e.preventDefault();
+      const currentVolume = useWaveformStore.getState().volume;
+      useWaveformStore.getState().setVolume(Math.max(currentVolume - 0.02, 0));
     }
   }
 
@@ -137,7 +156,7 @@ export function useWaveform() {
     const wavesurfer = WaveSurfer.create({
       container: containerRef.current!,
       waveColor: "#999",
-      progressColor: "#4f46e5",
+      progressColor: "oklch(0.646 0.222 41.116)",
       height: 100,
       plugins: [regions],
       barWidth: 2,
@@ -145,7 +164,7 @@ export function useWaveform() {
       barRadius: 2,
     });
 
-    regions.enableDragSelection({ color: "rgba(255, 0, 0, 0.1)" });
+    regions.enableDragSelection({ color: "rgba(40, 53, 147, 0.4)" });
 
     wavesurfer.on("finish", () => {
       if (!isLoopingRef.current) {
@@ -183,13 +202,13 @@ export function useWaveform() {
       setLoopEnd(region.end);
     });
 
-    window.addEventListener("keydown", spacebarToPlay);
+    window.addEventListener("keydown", keyboardControl);
 
     waveSurferRef.current = wavesurfer;
 
     return () => {
       wavesurfer.destroy();
-      window.removeEventListener("keydown", spacebarToPlay);
+      window.removeEventListener("keydown", keyboardControl);
       reset();
     };
   }, []);
@@ -220,6 +239,48 @@ export function useWaveform() {
     isLoopingRef.current = isLooping;
   }, [isLooping]);
 
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    function handleDragOver(e: DragEvent) {
+      e.preventDefault();
+      setIsDragging(true);
+    }
+
+    function handleDragLeave(e: DragEvent) {
+      e.preventDefault();
+      setIsDragging(false);
+    }
+
+    function handleDrop(e: DragEvent) {
+      e.preventDefault();
+      setIsDragging(false);
+
+      const file = e.dataTransfer?.files?.[0];
+      if (file && file.type.startsWith("audio/")) {
+        const fakeEvent = {
+          target: { files: [file] },
+        } as unknown as React.ChangeEvent<HTMLInputElement>;
+        handleFileChange(fakeEvent);
+      }
+    }
+
+    container.addEventListener("dragover", handleDragOver);
+    container.addEventListener("dragleave", handleDragLeave);
+    container.addEventListener("drop", handleDrop);
+
+    return () => {
+      container.removeEventListener("dragover", handleDragOver);
+      container.removeEventListener("dragleave", handleDragLeave);
+      container.removeEventListener("drop", handleDrop);
+    };
+  }, [containerRef]);
+
+  useEffect(() => {
+    togglePlayRef.current = togglePlay;
+  }, [togglePlay]);
+
   return {
     handleFileChange,
     togglePlay,
@@ -228,5 +289,6 @@ export function useWaveform() {
     setTimeSlider,
     containerRef,
     waveSurferRef,
+    isDragging,
   };
 }

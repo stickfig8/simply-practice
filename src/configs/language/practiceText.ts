@@ -20,6 +20,11 @@ export const practiceText = {
       eng: "Please load the audio.",
       jpn: "オーディオのロードをお願いします。",
     },
+    drag: {
+      kor: "파일을 여기로 드래그 해주세요.",
+      eng: "Please drag the file here.",
+      jpn: "ファイルをここにドラッグしていただけます。",
+    },
   },
   metronome: {
     metronome: {

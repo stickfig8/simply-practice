@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useLanguageStore } from "@/stores/languageStore";
 import { languageText } from "@/configs/language";
 import { useDummyLogStore } from "@/stores/dummyDataStore";
+import { useNavigate } from "react-router-dom";
 
 export function useSaveModal() {
   const date = getToday();
@@ -26,6 +27,8 @@ export function useSaveModal() {
 
   const { lang } = useLanguageStore();
   const text = languageText.practice.save;
+
+  const navigate = useNavigate();
 
   function handleDrawerOpenChange(open: boolean) {
     setIsOpen(open);
@@ -65,7 +68,12 @@ export function useSaveModal() {
       desc,
     });
 
-    alert(text.saveConfirmAlert[lang]);
+    const confirmed = window.confirm(text.saveConfirmAlert[lang]);
+
+    if (confirmed) {
+      navigate("/dashboard");
+    }
+
     setIsOpen(false);
   }
 
