@@ -27,5 +27,10 @@ export const commonText = {
       eng: "lang",
       jpn: "言語",
     },
+    loading: {
+      kor: "불러오는 중...",
+      eng: "loading...",
+      jpn: "ローディング中...",
+    },
   },
 } as const;
