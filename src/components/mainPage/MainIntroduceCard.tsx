@@ -1,0 +1,70 @@
+import { motion } from "framer-motion";
+import { Button } from "../ui/button";
+import { useNavigate } from "react-router-dom";
+
+export default function MainIntroduceCard({
+  index,
+  current,
+  title,
+  desc,
+  img,
+}: {
+  index: number;
+  current: number;
+  title: string;
+  desc: string;
+  img: string;
+}) {
+  // 카드별 애니메이션 정의
+  const variants = [
+    {
+      // 1: 좌우 슬라이드
+      image: { x: -200, opacity: 0 },
+      text: { x: 200, opacity: 0 },
+    },
+    {
+      // 2: 상하 슬라이드
+      image: { y: -200, opacity: 0 },
+      text: { y: 200, opacity: 0 },
+    },
+    {
+      // 3: 페이드 인
+      image: { opacity: 0, scale: 0.95 },
+      text: { opacity: 0, scale: 0.95 },
+    },
+  ];
+
+  const isActive = current === index;
+  const anim = variants[index] || variants[0];
+
+  const navigate = useNavigate();
+
+  return (
+    <div className="relative flex flex-col md:flex-row items-center justify-center gap-10 px-10">
+      <motion.img
+        src={img}
+        initial={anim.image}
+        animate={isActive ? { x: 0, y: 0, opacity: 1, scale: 1 } : anim.image}
+        transition={{ duration: 1 }}
+        className="w-80 h-80 object-cover rounded-xl shadow-lg border-1"
+      />
+      <motion.div
+        initial={anim.text}
+        animate={isActive ? { x: 0, y: 0, opacity: 1, scale: 1 } : anim.text}
+        transition={{ duration: 1, delay: 0.2 }}
+        className="text-center md:text-left max-w-md"
+      >
+        <h2 className="text-4xl font-bold mb-4">{title}</h2>
+        <p className="text-lg text-gray-500 mb-6">{desc}</p>
+        {index === 3 && (
+          <Button
+            onClick={() => navigate("/practice")}
+            className="px-6 py-3 text-lg cursor-pointer"
+          >
+            연습하러 가기 →
+          </Button>
+        )}
+      </motion.div>
+    </div>
+  );
+}

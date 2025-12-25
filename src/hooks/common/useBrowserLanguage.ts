@@ -2,9 +2,10 @@ import { useLanguageStore } from "@/stores/languageStore";
 import { useEffect } from "react";
 
 export function useBrowserLanguage() {
-  const { setLang } = useLanguageStore();
+  const { setLang, initialized, setInitialized } = useLanguageStore();
 
   useEffect(() => {
+    if (initialized) return;
     const browserLang = navigator.language.toLowerCase();
 
     if (browserLang.startsWith("ko")) {
@@ -14,5 +15,6 @@ export function useBrowserLanguage() {
     } else {
       setLang("eng");
     }
+    setInitialized();
   }, [setLang]);
 }

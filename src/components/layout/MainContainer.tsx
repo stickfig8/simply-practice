@@ -1,11 +1,16 @@
 import { useSideBarStore } from "@/stores/sideBarStore";
 import styled from "@emotion/styled";
 
-const Styled = styled.main<{ isOpen: boolean }>`
+type Props = {
+  children: React.ReactNode;
+  isMain?: boolean;
+};
+
+const Styled = styled.main<{ isOpen: boolean; isMain: boolean }>`
   position: relative;
   width: 100%;
   min-height: 100vh;
-  padding: 20px 12px;
+  padding: ${({ isMain }) => (isMain ? "" : "20px 12px")};
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -13,7 +18,7 @@ const Styled = styled.main<{ isOpen: boolean }>`
 
   padding-top: 24px;
   @media (min-width: 768px) {
-    padding-top: 80px;
+    padding-top: ${({ isMain }) => (isMain ? "0px" : "80px")};
   }
 
   margin-left: 0;
@@ -26,10 +31,14 @@ const Styled = styled.main<{ isOpen: boolean }>`
   `}
 `;
 
-const MainContainer = ({ children }: { children: React.ReactNode }) => {
+const MainContainer = ({ children, isMain = false }: Props) => {
   const { isOpen } = useSideBarStore();
 
-  return <Styled isOpen={isOpen}>{children}</Styled>;
+  return (
+    <Styled isOpen={isOpen} isMain={isMain}>
+      {children}
+    </Styled>
+  );
 };
 
 export default MainContainer;

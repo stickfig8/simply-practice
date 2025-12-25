@@ -51,7 +51,6 @@
 }
 
 body {
-
 }
 
 @theme inline {
@@ -135,3 +134,19 @@ body {
   }
 }
 
+@layer base {
+  html,
+  body {
+    font-family: "Inter", "Noto Sans KR", "Noto Sans JP", sans-serif;
+    @apply text-gray-900 bg-white;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    font-family: "Inter", "Noto Sans KR", "Noto Sans JP", sans-serif;
+    @apply font-bold;
+  }
+}
