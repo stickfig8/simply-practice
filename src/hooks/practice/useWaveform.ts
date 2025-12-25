@@ -11,7 +11,6 @@ export function useWaveform() {
     playBackRate,
     zoomLevel,
     isLooping,
-    setVolume,
     setLoopStart,
     setLoopEnd,
     setIsPlaying,

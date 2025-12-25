@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { Button } from "../ui/button";
 import { useNavigate } from "react-router-dom";
+import { languageText } from "@/configs/language";
+import { useLanguageStore } from "@/stores/languageStore";
 
 export default function MainIntroduceCard({
   index,
@@ -38,6 +40,7 @@ export default function MainIntroduceCard({
   const anim = variants[index] || variants[0];
 
   const navigate = useNavigate();
+  const { lang } = useLanguageStore();
 
   return (
     <div className="relative flex flex-col md:flex-row items-center justify-center gap-10 px-10">
@@ -46,7 +49,7 @@ export default function MainIntroduceCard({
         initial={anim.image}
         animate={isActive ? { x: 0, y: 0, opacity: 1, scale: 1 } : anim.image}
         transition={{ duration: 1 }}
-        className="w-80 h-80 object-cover rounded-xl shadow-lg border-1"
+        className="w-80 aspect-square object-cover rounded-xl shadow-lg border-1 max-[700px]:w-60"
       />
       <motion.div
         initial={anim.text}
@@ -54,14 +57,18 @@ export default function MainIntroduceCard({
         transition={{ duration: 1, delay: 0.2 }}
         className="text-center md:text-left max-w-md"
       >
-        <h2 className="text-4xl font-bold mb-4">{title}</h2>
-        <p className="text-lg text-gray-500 mb-6">{desc}</p>
+        <h2 className="text-4xl font-bold mb-4 max-[700px]:text-3xl">
+          {title}
+        </h2>
+        <p className="text-lg text-gray-500 mb-6 max-[700px]:text-base">
+          {desc}
+        </p>
         {index === 3 && (
           <Button
             onClick={() => navigate("/practice")}
             className="px-6 py-3 text-lg cursor-pointer"
           >
-            연습하러 가기 →
+            {languageText.main.button[lang]}
           </Button>
         )}
       </motion.div>

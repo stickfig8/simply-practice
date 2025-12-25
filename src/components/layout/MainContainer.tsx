@@ -18,7 +18,7 @@ const Styled = styled.main<{ isOpen: boolean; isMain: boolean }>`
 
   padding-top: 24px;
   @media (min-width: 768px) {
-    padding-top: ${({ isMain }) => (isMain ? "0px" : "80px")};
+    padding-top: ${({ isMain }) => (isMain ? "" : "80px")};
   }
 
   margin-left: 0;
