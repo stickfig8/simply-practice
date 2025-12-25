@@ -1,5 +1,5 @@
 import { languageText } from "@/configs/language";
-import { useLanguageStore } from "@/stores/languageStore";
+import { useLanguageStore } from "@/stores/languageSettingStore";
 import { Loader2 } from "lucide-react";
 
 export default function LoadingWheel() {

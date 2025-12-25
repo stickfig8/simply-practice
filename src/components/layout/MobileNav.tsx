@@ -3,7 +3,7 @@ import { useState } from "react";
 import ModalBackGround from "../modals/common/ModalBackGround";
 import MobileNavButton from "./MobileNavButton";
 import { languageText } from "@/configs/language";
-import { useLanguageStore } from "@/stores/languageStore";
+import { useLanguageStore } from "@/stores/languageSettingStore";
 import LanguageButton from "./LanguageButton";
 
 export default function MobileNav() {

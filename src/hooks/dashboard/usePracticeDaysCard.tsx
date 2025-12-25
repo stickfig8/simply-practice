@@ -9,7 +9,7 @@ import {
   isBefore,
   differenceInCalendarDays,
 } from "date-fns";
-import { useLanguageStore } from "@/stores/languageStore";
+import { useLanguageStore } from "@/stores/languageSettingStore";
 import { languageText } from "@/configs/language";
 
 type MonthData = {

@@ -10,7 +10,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { useLanguageStore } from "@/stores/languageStore";
+import { useLanguageStore } from "@/stores/languageSettingStore";
 import { languageText } from "@/configs/language";
 
 type Props = {

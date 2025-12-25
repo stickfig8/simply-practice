@@ -1,5 +1,5 @@
 import { languageText } from "@/configs/language";
-import { useLanguageStore } from "@/stores/languageStore";
+import { useLanguageStore } from "@/stores/languageSettingStore";
 import { useEffect, useRef, useState } from "react";
 
 export function useIntroduceSection() {

@@ -23,7 +23,7 @@ import {
 } from "../ui/select";
 import { Checkbox } from "../ui/checkbox";
 import SaveModalInputWrapper from "./common/SaveModalInputWrapper";
-import { useLanguageStore } from "@/stores/languageStore";
+import { useLanguageStore } from "@/stores/languageSettingStore";
 import { languageText } from "@/configs/language";
 import { useSaveModal } from "@/hooks/practice/useSaveModal";
 

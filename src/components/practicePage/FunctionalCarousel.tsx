@@ -1,4 +1,4 @@
-import { useLanguageStore } from "@/stores/languageStore";
+import { useLanguageStore } from "@/stores/languageSettingStore";
 import CarouselCanvas from "../common/CarouselCanvas";
 import { Carousel, CarouselContent } from "../ui/carousel";
 import AudioInputOutput from "./AudioInputOutput";

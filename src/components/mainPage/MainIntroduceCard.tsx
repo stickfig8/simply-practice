@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Button } from "../ui/button";
 import { useNavigate } from "react-router-dom";
 import { languageText } from "@/configs/language";
-import { useLanguageStore } from "@/stores/languageStore";
+import { useLanguageStore } from "@/stores/languageSettingStore";
 
 export default function MainIntroduceCard({
   index,

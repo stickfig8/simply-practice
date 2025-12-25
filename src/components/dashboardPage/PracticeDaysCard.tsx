@@ -2,7 +2,7 @@ import type { PracticeLog } from "@/types/practiceDataTypes";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "../ui/chart";
 import { usePracticeDaysCard } from "@/hooks/dashboard/usePracticeDaysCard";
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
-import { useLanguageStore } from "@/stores/languageStore";
+import { useLanguageStore } from "@/stores/languageSettingStore";
 import { languageText } from "@/configs/language";
 
 type Props = { logData: PracticeLog[] };

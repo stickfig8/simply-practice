@@ -1,7 +1,7 @@
 import { Ear } from "lucide-react";
 import Tuner from "../practicePage/Tuner";
 import ModalTrigger from "./common/ModalTrigger";
-import { useLanguageStore } from "@/stores/languageStore";
+import { useLanguageStore } from "@/stores/languageSettingStore";
 import { languageText } from "@/configs/language";
 
 export default function TunerModal() {

@@ -5,7 +5,7 @@ import Waveform from "@/components/practicePage/Waveform";
 import FunctionalButtons from "@/components/practicePage/FunctionalButtons";
 import FunctionalCarousel from "@/components/practicePage/FunctionalCarousel";
 import { languageText } from "@/configs/language";
-import { useLanguageStore } from "@/stores/languageStore";
+import { useLanguageStore } from "@/stores/languageSettingStore";
 
 export default function PracticePage() {
   const { lang } = useLanguageStore();

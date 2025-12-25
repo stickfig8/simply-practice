@@ -3,7 +3,7 @@ import DashBoardCard from "./DashBoardCard";
 import { useInstrumentPieChartCard } from "@/hooks/dashboard/useInstrumentPieChartCard";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "../ui/chart";
 import { LabelList, Pie, PieChart } from "recharts";
-import { useLanguageStore } from "@/stores/languageStore";
+import { useLanguageStore } from "@/stores/languageSettingStore";
 import { languageText } from "@/configs/language";
 
 type Props = {

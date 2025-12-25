@@ -19,7 +19,7 @@ import {
   ZoomOut,
   Repeat,
 } from "lucide-react";
-import { useLanguageStore } from "@/stores/languageStore";
+import { useLanguageStore } from "@/stores/languageSettingStore";
 import { languageText } from "@/configs/language";
 
 export default function Waveform() {

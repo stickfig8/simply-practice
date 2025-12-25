@@ -3,7 +3,7 @@ import DashBoardCard from "./DashBoardCard";
 import { useCompareBarChartCard } from "@/hooks/dashboard/useCompareBarChartCard";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "../ui/chart";
 import { Bar, BarChart, CartesianGrid, LabelList, XAxis } from "recharts";
-import { useLanguageStore } from "@/stores/languageStore";
+import { useLanguageStore } from "@/stores/languageSettingStore";
 import { languageText } from "@/configs/language";
 
 type Props = {

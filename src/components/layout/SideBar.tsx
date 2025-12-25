@@ -1,6 +1,6 @@
 import { useSideBarStore } from "@/stores/sideBarStore";
 import SideBarButton from "./SideBarButton";
-import { useLanguageStore } from "@/stores/languageStore";
+import { useLanguageStore } from "@/stores/languageSettingStore";
 import { languageText } from "@/configs/language";
 
 import LanguageButton from "./LanguageButton";

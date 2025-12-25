@@ -1,7 +1,7 @@
 import { Settings } from "lucide-react";
 import ModalTrigger from "./common/ModalTrigger";
 import AudioInputOutput from "../practicePage/AudioInputOutput";
-import { useLanguageStore } from "@/stores/languageStore";
+import { useLanguageStore } from "@/stores/languageSettingStore";
 import { languageText } from "@/configs/language";
 
 export default function AudioInputOutputModal() {

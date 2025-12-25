@@ -1,4 +1,4 @@
-import { useLanguageStore } from "@/stores/languageStore";
+import { useLanguageStore } from "@/stores/languageSettingStore";
 import {
   DropdownMenu,
   DropdownMenuContent,

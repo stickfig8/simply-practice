@@ -2,7 +2,7 @@ import { getToday, readableSeconds } from "@/utils/saveModalUtils";
 import { useWaveformStore } from "@/stores/waveformStore";
 import { useMetronomeStore } from "@/stores/metronomeStore";
 import { useState } from "react";
-import { useLanguageStore } from "@/stores/languageStore";
+import { useLanguageStore } from "@/stores/languageSettingStore";
 import { languageText } from "@/configs/language";
 import { useDummyLogStore } from "@/stores/dummyDataStore";
 import { useNavigate } from "react-router-dom";

@@ -3,7 +3,7 @@ import DashBoardCard from "./DashBoardCard";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "../ui/chart";
 import { useDayRadarChartCard } from "@/hooks/dashboard/useDayRadarChartCard";
 import { PolarAngleAxis, PolarGrid, Radar, RadarChart } from "recharts";
-import { useLanguageStore } from "@/stores/languageStore";
+import { useLanguageStore } from "@/stores/languageSettingStore";
 import { languageText } from "@/configs/language";
 
 type Props = {
