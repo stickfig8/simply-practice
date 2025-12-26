@@ -68,6 +68,8 @@ export default function AudioInputOutput() {
           value={[volume]}
           onValueChange={(val) => setVolume(val[0])}
           className="w-71"
+          onPointerDown={(e) => e.stopPropagation()}
+          onTouchStart={(e) => e.stopPropagation()}
         />
       </ControlWithLabel>
     </article>

@@ -105,6 +105,8 @@ export default function Metronome() {
           value={[volume]}
           onValueChange={(val) => setVolume(val[0])}
           className="w-54"
+          onPointerDown={(e) => e.stopPropagation()}
+          onTouchStart={(e) => e.stopPropagation()}
         />
       </ControlWithLabel>
 

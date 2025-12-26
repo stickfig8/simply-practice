@@ -62,7 +62,7 @@ export default function Waveform() {
           <input
             type="file"
             id="fileInput"
-            accept="audio/*,application/octet-stream"
+            accept=".mp3,.wav,.m4a,.aac,.flac,audio/*"
             onChange={handleFileChange}
             className="mb-2 hidden"
           />
@@ -97,26 +97,28 @@ export default function Waveform() {
             <FastForward />
           </CommonButton>
         </div>
-        <ControlWithLabel>
-          {!isReady || volume == 0 ? (
-            <VolumeX />
-          ) : volume < 0.51 ? (
-            <Volume1 />
-          ) : (
-            <Volume2 />
-          )}
+        <div className="w-fit h-fit max-[500px]:hidden">
+          <ControlWithLabel>
+            {!isReady || volume == 0 ? (
+              <VolumeX />
+            ) : volume < 0.51 ? (
+              <Volume1 />
+            ) : (
+              <Volume2 />
+            )}
 
-          <Slider
-            id="volume"
-            min={0}
-            max={1.0}
-            step={0.01}
-            value={[volume]}
-            onValueChange={(val) => setVolume(val[0])}
-            disabled={!isReady}
-            className="w-30"
-          />
-        </ControlWithLabel>
+            <Slider
+              id="volume"
+              min={0}
+              max={1.0}
+              step={0.01}
+              value={[volume]}
+              onValueChange={(val) => setVolume(val[0])}
+              disabled={!isReady}
+              className="w-30"
+            />
+          </ControlWithLabel>
+        </div>
 
         <ControlWithLabel>
           {zoomLevel < 25 ? <ZoomIn /> : <ZoomOut />}
