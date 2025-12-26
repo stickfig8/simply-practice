@@ -42,4 +42,7 @@ Web Audio API & wavesurfer.js 기반의 개인 악기 연습 플랫폼입니다.
 - [Render](https://render.com/)
 - [npm](https://www.npmjs.com/)
 
+---
+
 이동: [Simply-Practice](https://simply-practice.onrender.com/)
+_본 프로젝트는 백엔드 API 연동 전 단계의 프론트엔드 프로토타입으로, Mock Data를 통해 주요 기능 및 UI 흐름을 구현하였습니다._
