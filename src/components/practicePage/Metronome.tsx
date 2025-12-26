@@ -14,7 +14,15 @@ import { Pause, Play, Volume1, Volume2, VolumeX } from "lucide-react";
 import { languageText } from "@/configs/language";
 import { useLanguageStore } from "@/stores/languageSettingStore";
 
-export default function Metronome() {
+type Props = {
+  handleSliderStart?: () => void;
+  handleSliderEnd?: () => void;
+};
+
+export default function Metronome({
+  handleSliderStart,
+  handleSliderEnd,
+}: Props) {
   const {
     bpm,
     beatsPerMeasure,
@@ -104,9 +112,11 @@ export default function Metronome() {
           step={0.01}
           value={[volume]}
           onValueChange={(val) => setVolume(val[0])}
+          onPointerDown={handleSliderStart}
+          onPointerUp={handleSliderEnd}
+          onTouchStart={handleSliderStart}
+          onTouchEnd={handleSliderEnd}
           className="w-54"
-          onPointerDown={(e) => e.stopPropagation()}
-          onTouchStart={(e) => e.stopPropagation()}
         />
       </ControlWithLabel>
 

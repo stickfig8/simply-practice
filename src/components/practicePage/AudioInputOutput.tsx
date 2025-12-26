@@ -7,7 +7,15 @@ import ControlWithLabel from "../common/ControlWithLabel";
 import { Volume1, Volume2, VolumeX } from "lucide-react";
 import { Slider } from "../ui/slider";
 
-export default function AudioInputOutput() {
+type Props = {
+  handleSliderStart?: () => void;
+  handleSliderEnd?: () => void;
+};
+
+export default function AudioInputOutput({
+  handleSliderStart,
+  handleSliderEnd,
+}: Props) {
   const {
     devices,
     inputId,
@@ -68,8 +76,10 @@ export default function AudioInputOutput() {
           value={[volume]}
           onValueChange={(val) => setVolume(val[0])}
           className="w-71"
-          onPointerDown={(e) => e.stopPropagation()}
-          onTouchStart={(e) => e.stopPropagation()}
+          onPointerDown={handleSliderStart}
+          onPointerUp={handleSliderEnd}
+          onTouchStart={handleSliderStart}
+          onTouchEnd={handleSliderEnd}
         />
       </ControlWithLabel>
     </article>

@@ -13,8 +13,8 @@ const Styled = styled(Link)`
   justify-content: start;
   align-items: center;
   width: auto;
-  height: 40px;
-  padding: 10px;
+  height: 36px;
+  padding: 8px;
 `;
 
 export default function MobileNavButton({ to, name, onClick }: Props) {

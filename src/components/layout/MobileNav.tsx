@@ -5,6 +5,7 @@ import MobileNavButton from "./MobileNavButton";
 import { languageText } from "@/configs/language";
 import { useLanguageStore } from "@/stores/languageSettingStore";
 import LanguageButton from "./LanguageButton";
+import { AnimatePresence, motion } from "framer-motion";
 
 export default function MobileNav() {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,41 +23,49 @@ export default function MobileNav() {
       >
         <Menu />
       </button>
-      {isOpen && (
-        <ModalBackGround onClose={() => setIsOpen(false)}>
-          <div
-            className={`w-38 h-[calc(100%-16px)] fixed top-2 right-2 z-100 bg-[var(--main-text)] flex flex-col gap-2 pt-5 px-2 border-1 border-indigo-500 rounded-[16px] shadow-md`}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              className="w-6 h-6 ml-auto"
-              onClick={() => setIsOpen(false)}
+
+      <AnimatePresence>
+        {isOpen && (
+          <ModalBackGround onClose={() => setIsOpen(false)}>
+            <motion.div
+              className={`w-38 h-[calc(100%-16px)] fixed top-2 right-2 z-100 bg-[var(--main-text)] flex flex-col gap-2 pt-5 px-2 border-1 border-indigo-500 rounded-[16px] shadow-md`}
+              key="mobile-nav"
+              initial={{ x: "100%", opacity: 1 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: "100%", opacity: 1 }}
+              transition={{ type: "tween", duration: 0.2 }}
+              onClick={(e) => e.stopPropagation()}
             >
-              <X />
-            </button>
-            <div className="w-full h-full flex flex-col justify-between pb-3">
-              <div className="flex flex-col gap-2">
-                <MobileNavButton
-                  to="/"
-                  name={languageText.common.header.main[lang]}
-                  onClick={() => setIsOpen(false)}
-                />
-                <MobileNavButton
-                  to="/practice"
-                  name={languageText.common.header.practice[lang]}
-                  onClick={() => setIsOpen(false)}
-                />
-                <MobileNavButton
-                  to="/dashboard"
-                  name={languageText.common.header.dashboard[lang]}
-                  onClick={() => setIsOpen(false)}
-                />
+              <button
+                className="w-6 h-6 ml-auto"
+                onClick={() => setIsOpen(false)}
+              >
+                <X />
+              </button>
+              <div className="w-full h-full flex flex-col justify-between pb-3">
+                <div className="flex flex-col gap-2">
+                  <MobileNavButton
+                    to="/"
+                    name={languageText.common.header.main[lang]}
+                    onClick={() => setIsOpen(false)}
+                  />
+                  <MobileNavButton
+                    to="/practice"
+                    name={languageText.common.header.practice[lang]}
+                    onClick={() => setIsOpen(false)}
+                  />
+                  <MobileNavButton
+                    to="/dashboard"
+                    name={languageText.common.header.dashboard[lang]}
+                    onClick={() => setIsOpen(false)}
+                  />
+                </div>
+                <LanguageButton isMobile={true} />
               </div>
-              <LanguageButton isMobile={true} />
-            </div>
-          </div>
-        </ModalBackGround>
-      )}
+            </motion.div>
+          </ModalBackGround>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }
