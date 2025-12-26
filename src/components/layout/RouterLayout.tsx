@@ -1,4 +1,4 @@
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import MobileNav from "./MobileNav";
 import SideBar from "./SideBar";
 
@@ -24,6 +24,9 @@ export default function RouterLayout() {
             <Route path="/" element={<MainPage />} />
             <Route path="/practice" element={<PracticePage />} />
             <Route path="/dashboard" element={<PracticeDashboardPage />} />
+
+            {/* 404 */}
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </Suspense>
       </div>
