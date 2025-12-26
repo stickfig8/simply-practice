@@ -11,6 +11,8 @@ export default function PracticePage() {
   const { lang } = useLanguageStore();
   return (
     <MainContainer>
+      <title>Simply Practice | Practice</title>
+
       <PageHeader title={languageText.common.header.practice[lang]} />
       <Waveform />
 

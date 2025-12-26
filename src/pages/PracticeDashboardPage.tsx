@@ -11,6 +11,7 @@ export default function PracticeDashboardPage() {
   const { logData } = useDashboardSection();
   return (
     <MainContainer>
+      <title>Simply Practice | DashBoard</title>
       <PageHeader title={languageText.common.header.dashboard[lang]} />
       <DashBoardSection logData={logData} />
       <DashBoardSectionMobile logData={logData} />
