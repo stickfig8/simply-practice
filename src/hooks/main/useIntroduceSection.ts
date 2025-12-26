@@ -11,6 +11,13 @@ export function useIntroduceSection() {
 
   const sections = [
     {
+      id: 0,
+      title: "simply practice",
+      desc: text.hero[lang],
+      img: "/images/logo.png",
+      isHero: true, // hero 구분용
+    },
+    {
       id: 1,
       title: "Practice",
       desc: text.card1[lang],

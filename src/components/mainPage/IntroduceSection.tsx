@@ -22,7 +22,7 @@ export default function IntroduceSection() {
             />
           )}
           <MainIntroduceCard index={i} current={current} {...sec} />
-          {current < 3 && (
+          {current < 4 && (
             <ChevronDown
               onClick={() => setCurrent((prev) => prev + 1)}
               className="cursor-pointer"

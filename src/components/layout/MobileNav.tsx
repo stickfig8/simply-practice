@@ -25,7 +25,7 @@ export default function MobileNav() {
       {isOpen && (
         <ModalBackGround onClose={() => setIsOpen(false)}>
           <div
-            className={`w-40 h-[calc(100%-16px)] fixed top-2 right-2 z-100 bg-[var(--main-text)] flex flex-col gap-2 pt-5 px-2 border-1 rounded-[16px] shadow-md`}
+            className={`w-38 h-[calc(100%-16px)] fixed top-2 right-2 z-100 bg-[var(--main-text)] flex flex-col gap-2 pt-5 px-2 border-1 border-indigo-500 rounded-[16px] shadow-md`}
             onClick={(e) => e.stopPropagation()}
           >
             <button

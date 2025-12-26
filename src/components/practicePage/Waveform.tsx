@@ -62,7 +62,7 @@ export default function Waveform() {
           <input
             type="file"
             id="fileInput"
-            accept="audio/*"
+            accept="audio/*,application/octet-stream"
             onChange={handleFileChange}
             className="mb-2 hidden"
           />

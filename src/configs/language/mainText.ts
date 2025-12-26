@@ -24,4 +24,14 @@ export const mainText = {
     eng: "Going to practice →",
     jpn: "練習に行きます →",
   },
+  quickButton: {
+    kor: "빠른 연습 시작하기 →",
+    eng: "Get started with quick practice →",
+    jpn: "早めの練習を始めます →",
+  },
+  hero: {
+    kor: "단순함으로 시작하는 꾸준한 연습",
+    eng: "Steady stream of practice that begins with simplicity",
+    jpn: "シンプルから始めるコツコツ練習",
+  },
 };
