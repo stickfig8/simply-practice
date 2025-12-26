@@ -25,7 +25,7 @@ export default function TopSongBarChartCard({ logData }: Props) {
   const text = languageText.dashboard.topSong;
   return (
     <DashBoardCard title={text.title[lang]} desc={text.desc[lang](recentSong)}>
-      <ChartContainer config={chartConfig} className="w-full">
+      <ChartContainer config={chartConfig} className="w-full h-full">
         <BarChart
           accessibilityLayer
           data={topSongs}
@@ -51,6 +51,7 @@ export default function TopSongBarChartCard({ logData }: Props) {
             layout="vertical"
             fill="var(--color-count)"
             radius={4}
+            fillOpacity={0.8}
           >
             <LabelList
               dataKey="name"

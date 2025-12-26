@@ -73,3 +73,16 @@
 .animation-flash {
   animation: flash 0.3s ease-in-out;
 }
+
+#smooth-scroll {
+  scroll-behavior: smooth;
+}
+
+#smooth-scroll {
+  scroll-behavior: smooth;
+  scrollbar-width: none; /* Firefox */
+}
+
+#smooth-scroll::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}

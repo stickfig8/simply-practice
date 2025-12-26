@@ -45,6 +45,10 @@ export default function MainIntroduceCard({
   return (
     <div className="relative flex flex-col md:flex-row items-center justify-center gap-10 px-10">
       <motion.img
+        style={{ willChange: "transform, opacity" }}
+        key={
+          current === index ? `active-img-${index}` : `inactive-img-${index}`
+        }
         src={img}
         initial={anim.image}
         animate={isActive ? { x: 0, y: 0, opacity: 1, scale: 1 } : anim.image}
@@ -52,6 +56,10 @@ export default function MainIntroduceCard({
         className="w-80 aspect-square object-cover rounded-xl shadow-lg border-1 max-[700px]:w-60"
       />
       <motion.div
+        style={{ willChange: "transform, opacity" }}
+        key={
+          current === index ? `active-div-${index}` : `inactive-div-${index}`
+        }
         initial={anim.text}
         animate={isActive ? { x: 0, y: 0, opacity: 1, scale: 1 } : anim.text}
         transition={{ duration: 1, delay: 0.2 }}

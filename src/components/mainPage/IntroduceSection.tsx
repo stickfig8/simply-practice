@@ -7,7 +7,8 @@ export default function IntroduceSection() {
   return (
     <div
       ref={containerRef}
-      className="h-screen w-full overflow-hidden snap-y snap-mandatory"
+      className="h-screen w-full overflow-y-scroll snap-y snap-mandatory"
+      id="smooth-scroll"
     >
       {sections.map((sec, i) => (
         <section

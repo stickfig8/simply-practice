@@ -18,7 +18,7 @@ export default function CompareBarChartCard({ logData }: Props) {
   const text = languageText.dashboard.compare;
   return (
     <DashBoardCard title={text.title[lang]} desc={text.desc[lang](diffPercent)}>
-      <ChartContainer config={chartConfig} className="w-full">
+      <ChartContainer config={chartConfig} className="w-full h-full">
         <BarChart
           accessibilityLayer
           data={chartData}
@@ -39,6 +39,7 @@ export default function CompareBarChartCard({ logData }: Props) {
             fill="var(--color-count)"
             radius={8}
             barSize={40}
+            fillOpacity={0.8}
           >
             <LabelList
               position="top"

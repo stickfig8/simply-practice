@@ -50,10 +50,7 @@ export function useIntroduceSection() {
   }, [current]);
 
   useEffect(() => {
-    containerRef.current?.scrollTo({
-      top: window.innerHeight * current,
-      behavior: "smooth",
-    });
+    containerRef.current!.scrollTop = window.innerHeight * current;
   }, [current]);
 
   return { containerRef, current, setCurrent, sections };

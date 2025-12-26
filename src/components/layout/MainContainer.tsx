@@ -16,7 +16,6 @@ const Styled = styled.main<{ isOpen: boolean; isMain: boolean }>`
   gap: 16px;
   transition: all 0.3s ease-in-out;
 
-  padding-top: 24px;
   @media (min-width: 768px) {
     padding-top: ${({ isMain }) => (isMain ? "" : "80px")};
   }
