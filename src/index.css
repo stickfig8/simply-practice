@@ -125,6 +125,24 @@ body {
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+@font-face {
+  font-family: "Pretendard";
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/woff2/PretendardVariable.woff2")
+    format("woff2-variations");
+  unicode-range: U+0020-007E, U+AC00-D7A3;
+}
+
+@font-face {
+  font-family: "Pretendard JP";
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard-jp/dist/web/variable/woff2/PretendardJPVariable.woff2")
+    format("woff2-variations");
+  unicode-range: U+3000-30FF, U+31F0-31FF, U+4E00-9FFF;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -137,7 +155,7 @@ body {
 @layer base {
   html,
   body {
-    font-family: "Inter", "Noto Sans KR", "Noto Sans JP", sans-serif;
+    font-family: "Pretendard", "Pretendard JP", sans-serif;
     @apply text-gray-900 bg-white;
   }
 
@@ -146,7 +164,7 @@ body {
   h3,
   h4,
   h5 {
-    font-family: "Inter", "Noto Sans KR", "Noto Sans JP", sans-serif;
+    font-family: "Pretendard", "Pretendard JP", sans-serif;
     @apply font-bold;
   }
 }

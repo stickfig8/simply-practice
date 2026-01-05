@@ -13,7 +13,7 @@ export default function IntroduceSection() {
       {sections.map((sec, i) => (
         <section
           key={sec.id}
-          className="h-screen w-full flex items-center justify-center flex-col snap-start relative gap-15 max-[700px]:gap-5"
+          className="h-screen w-full flex items-center justify-center flex-col snap-start relative gap-15 overflow-x-hidden max-[700px]:gap-5 max-[700px]:overflow-y-hidden"
         >
           {current > 0 && (
             <ChevronUp

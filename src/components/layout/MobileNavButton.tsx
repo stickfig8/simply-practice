@@ -15,6 +15,7 @@ const Styled = styled(Link)`
   width: auto;
   height: 36px;
   padding: 8px;
+  font-weight: 600;
 `;
 
 export default function MobileNavButton({ to, name, onClick }: Props) {

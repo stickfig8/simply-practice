@@ -43,6 +43,23 @@ export function useIntroduceSection() {
     },
   ];
 
+  // 모바일에서 세로 스크롤 막기
+  useEffect(() => {
+    const handleTouchMove = (e: TouchEvent) => {
+      if (window.innerWidth <= 700) {
+        e.preventDefault();
+      }
+    };
+
+    document.body.addEventListener("touchmove", handleTouchMove, {
+      passive: false,
+    });
+
+    return () => {
+      document.body.removeEventListener("touchmove", handleTouchMove);
+    };
+  }, []);
+
   // wheel로 섹션 이동
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
